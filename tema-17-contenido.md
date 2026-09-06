@@ -28,7 +28,7 @@ Los términos técnicos se mantienen en su nomenclatura habitual (clave primaria
 
 ---
 
-## 1. Diseño de bases de datos: concepto y objetivos
+## 1. Diseño de bases de datos
 
 ### 1.1. Qué es diseñar una base de datos y por qué importa
 
@@ -69,7 +69,7 @@ Esta correspondencia entronca con la **arquitectura ANSI/SPARC de tres esquemas*
 Un buen diseño relacional busca [ELMASRI, cap. 14; DATE, cap. 12]:
 
 - **Integridad**: los datos cumplen las reglas del dominio (un DNI tiene un formato, una fecha de nacimiento no puede ser futura, un habitante pertenece a un distrito existente).
-- **Mínima redundancia controlada**: cada hecho se almacena, idealmente, **una sola vez**. La redundancia no controlada provoca inconsistencias y anomalías (§2.6).
+- **Mínima redundancia controlada**: cada hecho se almacena, idealmente, **una sola vez**. La redundancia no controlada provoca inconsistencias y anomalías (§4.1).
 - **Rendimiento**: las operaciones más frecuentes deben resolverse con el menor coste posible (de ahí los índices y, a veces, la desnormalización controlada).
 - **Independencia de datos** física y lógica.
 - **Facilidad de mantenimiento y comprensión**: un esquema claro, con nombres significativos y restricciones declaradas, reduce errores.
@@ -100,22 +100,24 @@ Los **atributos** se clasifican además en: **simples** vs **compuestos** (la di
 
 El modelo **E-R extendido (EER)** añade generalización/especialización (jerarquías «es-un»), agregación y entidades débiles. Una **entidad débil** no tiene clave propia y depende de otra (p. ej., LÍNEA_DE_LIQUIDACIÓN depende de LIQUIDACIÓN).
 
-> **[REFERENCIA CRUZADA]** El modelo entidad-relación se desarrolla a fondo en el **Tema 16** (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder **transformarlo** en tablas (§1.6).
+> **[REFERENCIA CRUZADA]** El modelo entidad-relación se desarrolla a fondo en el **Tema 16** (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder **transformarlo** en tablas (§2.2).
 
 > **[EJEMPLO AYTO MADRID]** Un esquema conceptual del Padrón podría tener las entidades **HABITANTE** (DNI, nombre, fecha_nacimiento), **DISTRITO** (código, nombre) y **VÍA** (código de vía, nombre del callejero), con relaciones «HABITANTE reside en VÍA» (N:1) y «VÍA pertenece a DISTRITO» (N:1). Madrid tiene 21 distritos, lo que da una idea de las cardinalidades reales.
 
-### 1.5. Diseño lógico
+## 2. Diseño lógico y físico
 
-El **diseño lógico** convierte el esquema conceptual en el modelo de datos del SGBD elegido. Como el estándar de hecho es el **modelo relacional**, el diseño lógico consiste en obtener el **conjunto de tablas (relaciones)** con sus columnas, claves primarias y claves ajenas, y después **normalizarlas** (§2.6 y siguientes). El resultado es un **esquema relacional** correcto e independiente del producto.
+### 2.1. Diseño lógico
+
+El **diseño lógico** convierte el esquema conceptual en el modelo de datos del SGBD elegido. Como el estándar de hecho es el **modelo relacional**, el diseño lógico consiste en obtener el **conjunto de tablas (relaciones)** con sus columnas, claves primarias y claves ajenas, y después **normalizarlas** (§4.1 y siguientes). El resultado es un **esquema relacional** correcto e independiente del producto.
 
 Las tareas del diseño lógico son, en orden [ELMASRI, cap. 9]:
 
-1. **Transformar** entidades y relaciones del modelo E-R en tablas (§1.6).
-2. **Eliminar redundancias** y verificar que el esquema soporta las consultas requeridas (§1.7).
-3. **Declarar las restricciones de integridad**: clave primaria, claves ajenas, unicidad, dominios y reglas de negocio (§1.8).
-4. **Normalizar** hasta el grado adecuado (típicamente 3FN o BCNF) y decidir, si procede, una desnormalización controlada (§2.13).
+1. **Transformar** entidades y relaciones del modelo E-R en tablas (§2.2).
+2. **Eliminar redundancias** y verificar que el esquema soporta las consultas requeridas (§2.3).
+3. **Declarar las restricciones de integridad**: clave primaria, claves ajenas, unicidad, dominios y reglas de negocio (§2.4).
+4. **Normalizar** hasta el grado adecuado (típicamente 3FN o BCNF) y decidir, si procede, una desnormalización controlada (§4.8).
 
-### 1.6. Transformación de entidades y relaciones al modelo relacional
+### 2.2. Transformación de entidades y relaciones al modelo relacional
 
 Las **reglas de transformación** del modelo E-R al relacional son un clásico de examen [ELMASRI, cap. 9; SILBER, cap. 6]:
 
@@ -153,17 +155,17 @@ El caso de la **relación 1:1** tiene un matiz: se propaga la clave hacia el lad
 > **[EJERCICIO RESUELTO]** *Transformar una jerarquía: EMPLEADO_MUNICIPAL se especializa en FUNCIONARIO y LABORAL.*
 > Estrategia «una tabla por subclase»: `EMPLEADO(id PK, nombre, fecha_alta)`, `FUNCIONARIO(id PK→EMPLEADO, cuerpo, grupo)` y `LABORAL(id PK→EMPLEADO, categoria, convenio)`. La clave de cada subclase es a la vez **clave primaria y clave ajena** hacia la superclase. Alternativa «una sola tabla»: `EMPLEADO(id, nombre, tipo, cuerpo, grupo, categoria, convenio)` con muchos nulos pero sin joins. La elección depende de cuántos atributos específicos haya y de la frecuencia de consulta conjunta.
 
-### 1.7. Eliminación de redundancias
+### 2.3. Eliminación de redundancias
 
 Tras la transformación, el esquema puede contener **redundancias**: datos derivables o repetidos que conviene eliminar para evitar inconsistencias [ELMASRI, cap. 14]. Ejemplos:
 
 - **Datos derivados** almacenados que pueden recalcularse (la edad si ya guardamos la fecha de nacimiento; el importe total si guardamos las líneas).
 - **Dependencias redundantes** entre tablas que duplican información (guardar el nombre del distrito en HABITANTE además del código que apunta a DISTRITO).
-- **Atributos transitivos** que la normalización detecta y separa (§2.10).
+- **Atributos transitivos** que la normalización detecta y separa (§4.5).
 
-La herramienta sistemática para eliminar redundancia perjudicial es la **normalización** (§2.6). No obstante, cierta redundancia se conserva **deliberadamente** (clave ajena = redundancia controlada que da integridad referencial) y, a veces, se reintroduce de forma consciente con la **desnormalización** (§2.13).
+La herramienta sistemática para eliminar redundancia perjudicial es la **normalización** (§4.1). No obstante, cierta redundancia se conserva **deliberadamente** (clave ajena = redundancia controlada que da integridad referencial) y, a veces, se reintroduce de forma consciente con la **desnormalización** (§4.8).
 
-### 1.8. Integridad de entidad e integridad referencial
+### 2.4. Integridad de entidad e integridad referencial
 
 El modelo relacional impone **dos reglas de integridad fundamentales** [CODD70; DATE, cap. 9]:
 
@@ -185,7 +187,7 @@ Además existen las **restricciones de dominio** (un atributo solo admite valore
 
 > **[REFERENCIA CRUZADA]** La integridad y la trazabilidad de los datos en la Administración están además sujetas al **ENS** (RD 311/2022) y al **RGPD** (exactitud y minimización de datos), tratados en los **Temas 32 y 39**.
 
-### 1.9. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)
+### 2.5. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)
 
 El lenguaje **SQL** (norma ISO/IEC 9075 [ISO9075]) se organiza en cuatro sublenguajes que es obligatorio distinguir:
 
@@ -218,7 +220,7 @@ CREATE TABLE HABITANTE (
 
 Además de las tablas, el DDL define **otros objetos del esquema** que pertenecen al diseño:
 
-- **Vistas (`CREATE VIEW`)**: tablas virtuales definidas por una consulta. Aportan **independencia lógica** (la aplicación ve la vista aunque cambie la tabla subyacente), seguridad (exponer solo ciertas columnas/filas) y simplificación de consultas complejas. La **vista materializada** sí almacena el resultado (§1.13).
+- **Vistas (`CREATE VIEW`)**: tablas virtuales definidas por una consulta. Aportan **independencia lógica** (la aplicación ve la vista aunque cambie la tabla subyacente), seguridad (exponer solo ciertas columnas/filas) y simplificación de consultas complejas. La **vista materializada** sí almacena el resultado (§2.9).
 - **Secuencias / autonuméricos**: generadores de claves primarias artificiales (subrogadas).
 - **Restricciones**: pueden ser **declarativas** (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `NOT NULL`, `CHECK` — el SGBD las impone automáticamente, es lo preferible) o **procedimentales** (disparadores/*triggers* que ejecutan código ante eventos, para reglas que no caben en una restricción declarativa).
 
@@ -226,15 +228,15 @@ Además de las tablas, el DDL define **otros objetos del esquema** que pertenece
 
 > **[REFERENCIA CRUZADA]** El estándar SQL, los procedimientos almacenados y los disparadores se desarrollan en el **Tema 19** (lenguajes de interrogación de bases de datos).
 
-### 1.10. Diseño físico
+### 2.6. Diseño físico
 
 El **diseño físico** es la última etapa: traduce el esquema lógico normalizado a las **estructuras de almacenamiento y acceso** del SGBD concreto, optimizando para las cargas de trabajo reales [RAMAKRISHNAN, cap. 8; ELMASRI, cap. 16]. Sus decisiones típicas:
 
 - Elegir **tipos de datos físicos** y tamaños (no es lo mismo `CHAR(9)` que `VARCHAR(9)`).
-- Definir **índices** sobre las columnas más consultadas (§1.12).
-- Decidir **particionamiento** de tablas grandes (§1.13).
-- Configurar **tablespaces, ficheros y bloques/páginas** (§1.11).
-- Considerar **desnormalización** puntual para consultas críticas (§2.13).
+- Definir **índices** sobre las columnas más consultadas (§2.8).
+- Decidir **particionamiento** de tablas grandes (§2.9).
+- Configurar **tablespaces, ficheros y bloques/páginas** (§2.7).
+- Considerar **desnormalización** puntual para consultas críticas (§4.8).
 
 El diseño físico depende del **producto** y de la **carga**: una base de datos transaccional (OLTP) con muchas escrituras se diseña distinto que una analítica (OLAP) con consultas masivas de lectura.
 
@@ -252,7 +254,7 @@ Una decisión física de primer orden es la **elección de tipos de datos**, que
 
 Elegir `CHAR(9)` para un DNI de longitud fija ahorra y valida; usar `DECIMAL` (no `FLOAT`) para importes evita errores de redondeo en la recaudación.
 
-### 1.11. Estructuras de datos y de almacenamiento
+### 2.7. Estructuras de datos y de almacenamiento
 
 A nivel físico, los datos se guardan en **ficheros** que el SGBD organiza en unidades lógicas y físicas [ORA-CONCEPTS; PG-DOC]:
 
@@ -270,11 +272,11 @@ Las **organizaciones de fichero** clásicas (que se estudian con más detalle en
 | **Hash** | Rápida | Muy rápida | No soportada |
 | **Indexada (B+tree)** | Media (mantener índice) | Rápida | Rápida |
 
-En un SGBD relacional típico, los datos se guardan en un *heap* (o en una tabla organizada por índice) y el rendimiento de acceso se consigue con **índices** (§1.12) montados encima, no cambiando la organización base.
+En un SGBD relacional típico, los datos se guardan en un *heap* (o en una tabla organizada por índice) y el rendimiento de acceso se consigue con **índices** (§2.8) montados encima, no cambiando la organización base.
 
 > **[REFERENCIA CRUZADA]** Las organizaciones de ficheros, los árboles B/B+ y las funciones de dispersión (hash) se tratan en el **Tema 13** (estructuras de datos y organizaciones de ficheros). El almacenamiento y su virtualización, en el **Tema 26**.
 
-### 1.12. Índices
+### 2.8. Índices
 
 Un **índice** es una **estructura auxiliar** que acelera la localización de filas a costa de espacio extra y de un coste de mantenimiento en cada escritura [RAMAKRISHNAN, cap. 8; SILBER, cap. 14]. Es la herramienta de rendimiento más importante del diseño físico.
 
@@ -308,7 +310,7 @@ Otra clasificación clave:
 
 > **[DATO CLAVE EXAMEN]** El **B+tree** mantiene todas las hojas al mismo nivel (equilibrado) y enlazadas, por eso sirve para igualdad **y** rango. Un índice solo compensa sobre columnas **selectivas** y para consultas que recuperan **pocas** filas. En un índice compuesto rige el **prefijo izquierdo**: `(A, B)` sirve para `A` y para `A,B`, pero no para `B` solo.
 
-### 1.13. Rendimiento y optimización
+### 2.9. Rendimiento y optimización
 
 El **optimizador de consultas** del SGBD decide **cómo ejecutar** cada sentencia SQL: qué índices usar, en qué orden hacer los joins y qué algoritmo aplicar. Su decisión se materializa en un **plan de ejecución** [SILBER, cap. 16; ORA-CONCEPTS].
 
@@ -316,7 +318,7 @@ El **optimizador de consultas** del SGBD decide **cómo ejecutar** cada sentenci
 - **Optimización basada en costes (CBO)**: el optimizador estima el coste de cada plan usando **estadísticas** (número de filas, distribución de valores, cardinalidad) y elige el más barato. Mantener las estadísticas actualizadas es esencial.
 - **Particionamiento**: dividir una tabla grande en fragmentos por un criterio —**por rango** (fechas), **por lista** (distrito), **por hash**— para que las consultas accedan solo a la partición relevante (*partition pruning*) y para facilitar el mantenimiento.
 - **Clustering**: agrupar físicamente filas relacionadas (p. ej., por el índice agrupado) para reducir lecturas de disco.
-- **Desnormalización controlada** (§2.13) y **vistas materializadas**: precalcular resultados costosos.
+- **Desnormalización controlada** (§4.8) y **vistas materializadas**: precalcular resultados costosos.
 
 > **[DATO CLAVE EXAMEN]** El **plan de ejecución** es el «cómo» que elige el **optimizador** para resolver el «qué» de la consulta SQL. Un *full table scan* sobre una tabla enorme suele ser síntoma de un índice ausente; pero en tablas pequeñas puede ser lo más rápido. Las **estadísticas** son la materia prima del optimizador de costes.
 
@@ -338,9 +340,9 @@ El **optimizador de consultas** del SGBD decide **cómo ejecutar** cada sentenci
 
 ---
 
-## 2. El modelo lógico relacional
+## 3. El modelo lógico relacional
 
-### 2.1. Conceptos básicos
+### 3.1. Conceptos básicos
 
 El **modelo relacional**, formulado por E. F. Codd en 1970 [CODD70], representa los datos como **relaciones** (tablas) y se apoya en la teoría de conjuntos y la lógica de predicados. Su terminología formal y su equivalente coloquial:
 
@@ -360,28 +362,28 @@ Propiedades de una **relación** «pura» en el modelo de Codd [DATE, cap. 6]:
 - **No hay tuplas duplicadas** (una relación es un conjunto): por eso siempre existe una clave.
 - **El orden de las tuplas es irrelevante** (es un conjunto, no una lista).
 - **El orden de los atributos es irrelevante** (se identifican por nombre).
-- **Cada valor es atómico** (indivisible): esto es exactamente la **1FN** (§2.8).
+- **Cada valor es atómico** (indivisible): esto es exactamente la **1FN** (§4.3).
 
 > **[DATO CLAVE EXAMEN]** **Grado = nº de columnas; cardinalidad = nº de filas.** Es una pregunta clásica y se confunden con frecuencia. Una relación de grado 3 y cardinalidad 100 tiene 3 atributos y 100 tuplas.
 
 **Relación teórica frente a tabla SQL.** Hay un matiz importante: en el modelo **teórico** de Codd una relación es un **conjunto** y, por tanto, no admite tuplas duplicadas. Pero una **tabla SQL** es en realidad un **multiconjunto (bag)**: **sí** permite filas repetidas salvo que una clave o restricción `UNIQUE` lo impida, y por eso `SELECT` puede devolver duplicados a menos que se use `DISTINCT`. Esta es una de las diferencias entre el modelo relacional puro y su materialización en SQL, junto con el tratamiento de los nulos y el orden de las filas (`ORDER BY`).
 
-### 2.2. Claves: candidata, primaria, alternativa, superclave y ajena
+### 3.2. Claves: candidata, primaria, alternativa, superclave y ajena
 
 Las **claves** son el mecanismo de identificación del modelo relacional [DATE, cap. 9; ELMASRI, cap. 5]:
 
 - **Superclave**: cualquier conjunto de atributos que identifica unívocamente una tupla (puede contener atributos «de más»).
 - **Clave candidata**: superclave **mínima** (si se le quita un atributo, deja de identificar). Una relación puede tener varias.
-- **Clave primaria (PK)**: la clave candidata **elegida** por el diseñador para identificar la tabla. No admite nulos (integridad de entidad, §1.8).
+- **Clave primaria (PK)**: la clave candidata **elegida** por el diseñador para identificar la tabla. No admite nulos (integridad de entidad, §2.4).
 - **Clave alternativa**: las claves candidatas **no** elegidas como primaria.
 - **Clave ajena o foránea (FK)**: atributo(s) de una tabla que referencia(n) la clave primaria de otra (o de la misma), dando lugar a la integridad referencial.
 
 > **[EJERCICIO RESUELTO]** *En `HABITANTE(dni, nss, nombre, distrito)`, el DNI y el número de la Seguridad Social (NSS) identifican a la persona. ¿Cuáles son las claves?*
 > Solución: `{dni}` y `{nss}` son **claves candidatas** (ambas identifican y son mínimas). Si elegimos `{dni}` como **primaria**, entonces `{nss}` es **clave alternativa**. `{dni, nombre}` sería una **superclave** (identifica, pero no es mínima porque sobra `nombre`). `distrito` es una **clave ajena** hacia `DISTRITO`.
 
-### 2.3. Reglas de integridad del modelo relacional
+### 3.3. Reglas de integridad del modelo relacional
 
-Recapitulando las reglas de integridad que el modelo impone (ya introducidas en §1.8) [CODD70; DATE, cap. 9]:
+Recapitulando las reglas de integridad que el modelo impone (ya introducidas en §2.4) [CODD70; DATE, cap. 9]:
 
 1. **Integridad de entidad**: la clave primaria no puede contener nulos.
 2. **Integridad referencial**: toda clave ajena referencia una fila existente o es nula.
@@ -390,7 +392,7 @@ Recapitulando las reglas de integridad que el modelo impone (ya introducidas en 
 
 El **valor nulo (NULL)** merece atención: representa información **ausente o desconocida**, **no** es cero ni cadena vacía. En la lógica relacional introduce una **lógica de tres valores** (verdadero, falso, desconocido), lo que complica comparaciones y agregaciones (`NULL = NULL` no es verdadero, sino desconocido).
 
-### 2.4. Álgebra relacional
+### 3.4. Álgebra relacional
 
 El **álgebra relacional** es un lenguaje **procedimental** (indica *cómo* obtener el resultado mediante una secuencia de operaciones) cuyo resultado es siempre una nueva relación; por eso las operaciones se **componen** [CODD70; DATE, cap. 7; ELMASRI, cap. 8]. Es la base teórica del optimizador y de SQL.
 
@@ -445,7 +447,7 @@ El **álgebra relacional** es un lenguaje **procedimental** (indica *cómo* obte
 > **[EJERCICIO RESUELTO — la división]** *Tenemos `PAGO(dni, id_tributo)` (qué tributos ha pagado cada habitante) y `TRIBUTO_OBLIGATORIO(id_tributo)` (los tributos que todos deben pagar). ¿Qué habitantes han pagado **todos** los tributos obligatorios?*
 > Esto es justo lo que resuelve la **división**: `π_{dni, id_tributo}(PAGO) ÷ TRIBUTO_OBLIGATORIO`. Devuelve los `dni` cuyo conjunto de tributos pagados **incluye todos** los de la tabla divisor. El cuantificador «para todo» se traduce en álgebra como una división y, en SQL, con una doble negación (`NOT EXISTS … NOT EXISTS`) o contando coincidencias. Es el operador más difícil del álgebra y aparece siempre asociado a la idea de «todos los».
 
-### 2.5. Cálculo relacional
+### 3.5. Cálculo relacional
 
 El **cálculo relacional** es un lenguaje **declarativo**: describe **qué** se quiere obtener mediante una fórmula lógica, **sin** indicar el procedimiento [DATE, cap. 8; ELMASRI, cap. 8]. Se basa en el cálculo de predicados de primer orden. Hay dos variantes:
 
@@ -458,9 +460,11 @@ Ejemplo en **cálculo de dominios**: «nombres de habitantes del distrito 1» se
 
 > **[DATO CLAVE EXAMEN]** **Álgebra = procedimental (cómo); cálculo = declarativo (qué).** Ambos son **equivalentes en poder expresivo** (teorema de equivalencia de Codd). SQL es esencialmente **declarativo**.
 
-### 2.6. Normalización: objetivos, redundancia y anomalías
+## 4. Normalización
 
-La **normalización** es un proceso formal, propuesto por Codd [CODD72], que descompone las relaciones para **eliminar la redundancia** y las **anomalías**, garantizando que cada hecho se almacene una sola vez. Se basa en el análisis de las **dependencias funcionales** (§2.7) y avanza por **formas normales** sucesivas (1FN ⊂ 2FN ⊂ 3FN ⊂ BCNF ⊂ 4FN ⊂ 5FN), cada una más estricta.
+### 4.1. Normalización: objetivos, redundancia y anomalías
+
+La **normalización** es un proceso formal, propuesto por Codd [CODD72], que descompone las relaciones para **eliminar la redundancia** y las **anomalías**, garantizando que cada hecho se almacene una sola vez. Se basa en el análisis de las **dependencias funcionales** (§4.2) y avanza por **formas normales** sucesivas (1FN ⊂ 2FN ⊂ 3FN ⊂ BCNF ⊂ 4FN ⊂ 5FN), cada una más estricta.
 
 La normalización fue introducida por Codd en 1970-1972 (1FN, 2FN, 3FN), reforzada por Boyce y Codd en 1974 (BCNF) y extendida por Fagin (4FN en 1977 y 5FN). Conviene tener claro **qué resuelve y qué no**: elimina la **redundancia derivada de dependencias funcionales** y sus anomalías, pero **no** garantiza por sí sola el rendimiento (a veces lo penaliza, de ahí la desnormalización), **no** modela las reglas de negocio complejas (eso son restricciones y disparadores) y **no** sustituye a un buen diseño conceptual de partida: normalizar un modelo conceptualmente erróneo solo produce un error bien estructurado.
 
@@ -484,7 +488,7 @@ El dato «Centro» está duplicado: esa **redundancia** es la raíz de las tres 
 
 > **[DATO CLAVE EXAMEN]** Las **tres anomalías** —inserción, borrado y actualización— son **la justificación** de la normalización. Memoriza un ejemplo de cada una; es pregunta recurrente.
 
-### 2.7. Dependencias funcionales y axiomas de Armstrong
+### 4.2. Dependencias funcionales y axiomas de Armstrong
 
 Una **dependencia funcional (DF)** `X → Y` significa que el valor de los atributos `X` **determina** unívocamente el valor de los atributos `Y`: dos tuplas con igual `X` tienen igual `Y` [ELMASRI, cap. 14; DATE, cap. 11]. `X` es el **determinante**.
 
@@ -520,7 +524,7 @@ De ellos se derivan reglas útiles: **unión** (`X→Y, X→Z ⟹ X→YZ`), **de
 
 > **[DATO CLAVE EXAMEN]** El **cierre `X⁺`** es la herramienta universal: con él se comprueba si una DF se cumple y se hallan las **claves candidatas** (`X` superclave ⟺ `X⁺` = todos los atributos). El **recubrimiento mínimo** elimina DF y atributos redundantes y es la base de la descomposición en 3FN.
 
-### 2.8. Primera Forma Normal (1FN)
+### 4.3. Primera Forma Normal (1FN)
 
 Una relación está en **1FN** si **todos sus atributos son atómicos** (indivisibles): no hay **grupos repetitivos**, **atributos multivaluados** ni **atributos compuestos** sin descomponer [CODD70; DATE, cap. 12]. En la práctica, equivale a que cada celda contiene **un único valor** del dominio.
 
@@ -533,7 +537,7 @@ Solución: extraer los valores multivaluados a una **tabla aparte** relacionada 
 
 > **[DATO CLAVE EXAMEN]** **1FN = valores atómicos**, una sola valor por celda, sin grupos repetitivos. Es el requisito mínimo para ser una relación «verdadera» en el modelo de Codd.
 
-### 2.9. Segunda Forma Normal (2FN)
+### 4.4. Segunda Forma Normal (2FN)
 
 Una relación está en **2FN** si está en **1FN** y, además, **todo atributo no clave depende de la clave primaria completa**, no de una parte de ella. Es decir, **no hay dependencias funcionales parciales** de la clave [CODD72; ELMASRI, cap. 14].
 
@@ -545,7 +549,7 @@ La 2FN **solo tiene riesgo cuando la clave primaria es compuesta** (formada por 
 
 > **[DATO CLAVE EXAMEN]** **2FN = 1FN + sin dependencias parciales** de la clave. Solo aplica si la **clave es compuesta**. Si la clave primaria es un solo atributo, 1FN ⟹ 2FN automáticamente.
 
-### 2.10. Tercera Forma Normal (3FN)
+### 4.5. Tercera Forma Normal (3FN)
 
 Una relación está en **3FN** si está en **2FN** y, además, **ningún atributo no clave depende transitivamente de la clave**; es decir, **no hay dependencias entre atributos no clave** [CODD72; DATE, cap. 12]. Equivalente: todo atributo no clave depende de la clave «directamente», y solo de la clave.
 
@@ -553,11 +557,11 @@ Formulación clásica: para toda DF `X → A` no trivial, o bien **X es supercla
 
 > **[EJERCICIO RESUELTO]** *Relación `HABITANTE(dni PK, nombre, cod_distrito, nombre_distrito)`.*
 > Análisis: `dni → cod_distrito` y `cod_distrito → nombre_distrito`, luego por transitividad `dni → nombre_distrito` a través de un atributo **no clave** (`cod_distrito`) → **dependencia transitiva** → viola 3FN.
-> Solución 3FN: `HABITANTE(dni PK, nombre, cod_distrito)` y `DISTRITO(cod_distrito PK, nombre_distrito)`. El nombre del distrito se guarda **una sola vez**; desaparecen las anomalías de §2.6.
+> Solución 3FN: `HABITANTE(dni PK, nombre, cod_distrito)` y `DISTRITO(cod_distrito PK, nombre_distrito)`. El nombre del distrito se guarda **una sola vez**; desaparecen las anomalías de §4.1.
 
 > **[DATO CLAVE EXAMEN]** **3FN = 2FN + sin dependencias transitivas** entre atributos no clave. Mnemotecnia (Kent): cada atributo no clave depende de *«la clave, toda la clave y nada más que la clave»*. La 3FN es el **objetivo práctico habitual** del diseño relacional.
 
-### 2.11. Forma Normal de Boyce-Codd (BCNF)
+### 4.6. Forma Normal de Boyce-Codd (BCNF)
 
 La **BCNF** (Boyce-Codd, 1974) [CODD74BCNF] es una versión **más estricta** de la 3FN: una relación está en BCNF si **para toda dependencia funcional no trivial `X → Y`, `X` es superclave** (clave candidata). Es decir, **todo determinante es clave candidata**.
 
@@ -577,7 +581,7 @@ El compromiso clásico: la descomposición en **3FN** siempre puede lograr **amb
 
 > **[DATO CLAVE EXAMEN]** Una descomposición **sin pérdida** es obligatoria (se garantiza si el atributo común es clave de una tabla); la **preservación de dependencias** es deseable. **3FN** consigue ambas; **BCNF** garantiza la ausencia de pérdida pero puede no preservar dependencias.
 
-### 2.12. Formas normales superiores (4FN y 5FN)
+### 4.7. Formas normales superiores (4FN y 5FN)
 
 Más allá de la BCNF existen formas normales que tratan dependencias distintas de las funcionales [FAGIN77; DATE, cap. 13]:
 
@@ -611,7 +615,7 @@ En la práctica administrativa, **llegar a 3FN o BCNF es suficiente** en la inme
 >
 > **Paso 4 — comprobar BCNF.** En cada tabla resultante, el único determinante es la clave primaria → **todas están ya en BCNF**. Resultado final: cuatro tablas (`LICENCIA`, `ASIGNACION`, `DISTRITO` y, si procede, `TECNICO`), sin redundancia ni anomalías, recomponibles sin pérdida.
 
-### 2.13. Desnormalización controlada
+### 4.8. Desnormalización controlada
 
 La **desnormalización** consiste en **reintroducir redundancia de forma deliberada y controlada** en un esquema ya normalizado, para **mejorar el rendimiento** de consultas críticas, asumiendo el coste de mantener la coherencia [RAMAKRISHNAN, cap. 21; SILBER, cap. 16]. No es «diseñar mal»: es una decisión consciente y documentada tras medir.
 
@@ -630,7 +634,7 @@ El precio es la **gestión de la consistencia**: cada dato redundante debe actua
 
 > **[REFERENCIA CRUZADA]** Los modelos OLTP frente a OLAP, los almacenes de datos y NoSQL se tratan en el **Tema 15** (SGBD y administración). La seguridad y la protección de los datos diseñados, en los **Temas 32 y 39**.
 
-### 2.14. Buenas prácticas y errores típicos de diseño
+### 4.9. Buenas prácticas y errores típicos de diseño
 
 Cierre práctico que reúne los criterios del tema [DATE, cap. 14; ELMASRI, cap. 14]:
 

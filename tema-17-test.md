@@ -98,7 +98,7 @@ C) El código fuente de la aplicación cliente
 
 **Correcta: A) El conjunto de tablas con sus claves, normalizadas, independiente del producto** Transforma el modelo conceptual en el modelo del tipo de SGBD elegido (relacional).
 
-*Referencia: §1.5 [ELMASRI]*
+*Referencia: §2.1 [ELMASRI]*
 </details>
 
 ---
@@ -132,7 +132,7 @@ C) Análisis de requisitos
 
 **Correcta: B) Diseño físico** El diseño físico decide el almacenamiento y las estructuras de acceso en el producto concreto.
 
-*Referencia: §1.10 [RAMAKRISHNAN]*
+*Referencia: §2.6 [RAMAKRISHNAN]*
 </details>
 
 ---
@@ -200,7 +200,7 @@ C) Fusionando ambas entidades en una sola tabla siempre
 
 **Correcta: B) Propagando la clave de DISTRITO como clave ajena en HABITANTE** En 1:N la clave del lado «1» va al lado «N»; no se crea tabla nueva.
 
-*Referencia: §1.6 [ELMASRI]*
+*Referencia: §2.2 [ELMASRI]*
 </details>
 
 ---
@@ -217,7 +217,7 @@ C) Creando una tabla intermedia con clave compuesta y dos claves ajenas
 
 **Correcta: C) Creando una tabla intermedia con clave compuesta y dos claves ajenas** La tabla puente almacena además los atributos propios de la relación (p. ej. porcentaje de titularidad).
 
-*Referencia: §1.6 [ELMASRI]*
+*Referencia: §2.2 [ELMASRI]*
 </details>
 
 ---
@@ -234,7 +234,7 @@ C) Tres columnas fijas: telefono1, telefono2, telefono3
 
 **Correcta: A) Una tabla aparte relacionada por clave ajena** Guardar varios valores en una celda violaría la 1FN; las columnas fijas limitan artificialmente el número.
 
-*Referencia: §1.6 [ELMASRI]*
+*Referencia: §2.2 [ELMASRI]*
 </details>
 
 ---
@@ -285,7 +285,7 @@ C) Obliga a crear una tabla intermedia
 
 **Correcta: A) En principio no se almacena, se calcula** Almacenarlo introduce redundancia; solo se hace por desnormalización justificada.
 
-*Referencia: §1.6 [ELMASRI]*
+*Referencia: §2.2 [ELMASRI]*
 </details>
 
 ---
@@ -319,7 +319,7 @@ C) Una clave formada por todos los atributos de la tabla
 
 **Correcta: B) Un identificador artificial sin significado de negocio (p. ej. autonumérico)** Aporta estabilidad frente a las claves naturales, que pueden cambiar.
 
-*Referencia: §1.9 [DATE]*
+*Referencia: §2.5 [DATE]*
 </details>
 
 ---
@@ -336,7 +336,7 @@ C) Ningún atributo de la clave primaria puede ser nulo
 
 **Correcta: C) Ningún atributo de la clave primaria puede ser nulo** Si lo fuera, no podría identificar unívocamente la fila.
 
-*Referencia: §1.8 [CODD70]*
+*Referencia: §2.4 [CODD70]*
 </details>
 
 ---
@@ -353,7 +353,7 @@ C) Sea único en toda la base de datos
 
 **Correcta: A) Coincida con un valor existente de la clave primaria referenciada o sea nulo** Evita las «referencias colgantes».
 
-*Referencia: §1.8 [DATE]*
+*Referencia: §2.4 [DATE]*
 </details>
 
 ---
@@ -370,7 +370,7 @@ C) SET DEFAULT
 
 **Correcta: B) CASCADE** Propaga el borrado o la actualización a las filas que referencian la fila padre.
 
-*Referencia: §1.8 [ISO9075]*
+*Referencia: §2.4 [ISO9075]*
 </details>
 
 ---
@@ -387,7 +387,7 @@ C) DDL
 
 **Correcta: C) DDL** El DDL (Data Definition Language) define la estructura: tablas, índices, vistas y restricciones.
 
-*Referencia: §1.9 [ISO9075]*
+*Referencia: §2.5 [ISO9075]*
 </details>
 
 ---
@@ -404,7 +404,7 @@ C) TCL
 
 **Correcta: A) DCL (control de acceso/permisos)** El DCL controla los privilegios de usuarios y roles.
 
-*Referencia: §1.9 [ISO9075]*
+*Referencia: §2.5 [ISO9075]*
 </details>
 
 ---
@@ -421,7 +421,7 @@ C) DELETE es DML (transaccional, con WHERE) y TRUNCATE es DDL (vacía la tabla)
 
 **Correcta: C) DELETE es DML (transaccional, con WHERE) y TRUNCATE es DDL (vacía la tabla)** TRUNCATE es rápida y normalmente no transaccional ni filtrable.
 
-*Referencia: §1.9 [ISO9075]*
+*Referencia: §2.5 [ISO9075]*
 </details>
 
 ---
@@ -438,7 +438,7 @@ C) Ordenar el resultado con ORDER BY
 
 **Correcta: B) Búsquedas por igualdad exacta** El hash no soporta rangos ni orden; para eso se usa el B+tree.
 
-*Referencia: §1.12 [RAMAKRISHNAN]*
+*Referencia: §2.8 [RAMAKRISHNAN]*
 </details>
 
 ---
@@ -455,7 +455,7 @@ C) No necesita mantenerse al insertar
 
 **Correcta: A) Sirve para búsquedas por igualdad y también por rango y orden** Sus hojas están al mismo nivel y enlazadas, lo que facilita los recorridos por rango.
 
-*Referencia: §1.12 [RAMAKRISHNAN]*
+*Referencia: §2.8 [RAMAKRISHNAN]*
 </details>
 
 ---
@@ -472,7 +472,7 @@ C) Acelera lecturas pero penaliza escrituras y consume espacio
 
 **Correcta: C) Acelera lecturas pero penaliza escrituras y consume espacio** Cada índice debe mantenerse en cada INSERT/UPDATE/DELETE.
 
-*Referencia: §1.12 [RAMAKRISHNAN]*
+*Referencia: §2.8 [RAMAKRISHNAN]*
 </details>
 
 ---
@@ -489,7 +489,7 @@ C) De tipo BLOB
 
 **Correcta: B) De baja cardinalidad (como el sexo o el distrito) en entornos analíticos** Penaliza la concurrencia de escrituras, por eso es típico de OLAP.
 
-*Referencia: §1.12 [ORA-CONCEPTS]*
+*Referencia: §2.8 [ORA-CONCEPTS]*
 </details>
 
 ---
@@ -506,7 +506,7 @@ C) No tiene relación con el orden de las filas
 
 **Correcta: B) Determina el orden físico de las filas y solo puede haber uno por tabla** A menudo coincide con la clave primaria.
 
-*Referencia: §1.12 [MS-SQL-INDEX]*
+*Referencia: §2.8 [MS-SQL-INDEX]*
 </details>
 
 ---
@@ -523,7 +523,7 @@ C) La lista de usuarios con permiso sobre la tabla
 
 **Correcta: A) La ruta de operaciones físicas que el optimizador elige para resolverla** Se inspecciona con EXPLAIN y depende de las estadísticas.
 
-*Referencia: §1.13 [SILBER]*
+*Referencia: §2.9 [SILBER]*
 </details>
 
 ---
@@ -540,7 +540,7 @@ C) El número de claves ajenas
 
 **Correcta: B) El número de atributos (columnas)** La cardinalidad, en cambio, es el número de filas.
 
-*Referencia: §2.1 [DATE]*
+*Referencia: §3.1 [DATE]*
 </details>
 
 ---
@@ -557,7 +557,7 @@ C) El número de dominios definidos
 
 **Correcta: A) El número de tuplas (filas)** Grado = columnas; cardinalidad = filas.
 
-*Referencia: §2.1 [DATE]*
+*Referencia: §3.1 [DATE]*
 </details>
 
 ---
@@ -574,7 +574,7 @@ C) El conjunto de valores válidos que puede tomar el atributo
 
 **Correcta: C) El conjunto de valores válidos que puede tomar el atributo** Por ejemplo, el dominio de «distrito» son los códigos 1..21.
 
-*Referencia: §2.1 [DATE]*
+*Referencia: §3.1 [DATE]*
 </details>
 
 ---
@@ -591,7 +591,7 @@ C) La relación teórica es un conjunto (sin duplicados); la tabla SQL es un mul
 
 **Correcta: C) La relación teórica es un conjunto (sin duplicados); la tabla SQL es un multiconjunto (permite filas repetidas salvo restricción)** Por eso SELECT puede devolver duplicados salvo DISTINCT.
 
-*Referencia: §2.1 [DATE]*
+*Referencia: §3.1 [DATE]*
 </details>
 
 ---
@@ -608,7 +608,7 @@ C) Una clave que apunta a otra tabla
 
 **Correcta: A) Un conjunto de atributos que identifica unívocamente una tupla (puede no ser mínimo)** La clave candidata es la superclave mínima.
 
-*Referencia: §2.2 [DATE]*
+*Referencia: §3.2 [DATE]*
 </details>
 
 ---
@@ -625,7 +625,7 @@ C) La clave que se descarta del diseño
 
 **Correcta: B) Una superclave mínima (si se le quita un atributo deja de identificar)** De entre las candidatas, la elegida es la primaria; las demás, alternativas.
 
-*Referencia: §2.2 [ELMASRI]*
+*Referencia: §3.2 [ELMASRI]*
 </details>
 
 ---
@@ -642,7 +642,7 @@ C) Superclaves
 
 **Correcta: A) Claves alternativas** Suelen implementarse con una restricción UNIQUE.
 
-*Referencia: §2.2 [DATE]*
+*Referencia: §3.2 [DATE]*
 </details>
 
 ---
@@ -659,7 +659,7 @@ C) Una clave alternativa (candidata no elegida)
 
 **Correcta: C) Una clave alternativa (candidata no elegida)** El NSS también identifica unívocamente, pero no fue elegido como primaria.
 
-*Referencia: §2.2 [DATE]*
+*Referencia: §3.2 [DATE]*
 </details>
 
 ---
@@ -676,7 +676,7 @@ C) Una cadena vacía
 
 **Correcta: B) Información ausente o desconocida** No es cero ni cadena vacía, e introduce una lógica de tres valores.
 
-*Referencia: §2.3 [DATE]*
+*Referencia: §3.3 [DATE]*
 </details>
 
 ---
@@ -693,7 +693,7 @@ C) La integridad referencial: toda clave ajena referencia una fila existente o e
 
 **Correcta: C) La integridad referencial: toda clave ajena referencia una fila existente o es nula** Junto con la integridad de entidad, de dominio y las reglas de negocio.
 
-*Referencia: §2.3 [CODD70]*
+*Referencia: §3.3 [CODD70]*
 </details>
 
 ---
@@ -710,7 +710,7 @@ C) De definición de estructura (DDL)
 
 **Correcta: A) Procedimental (indica cómo obtener el resultado paso a paso)** El cálculo relacional, en cambio, es declarativo.
 
-*Referencia: §2.4 [DATE]*
+*Referencia: §3.4 [DATE]*
 </details>
 
 ---
@@ -727,7 +727,7 @@ C) Une dos tablas
 
 **Correcta: B) Filtra las filas que cumplen una condición** La proyección (π) es la que elige columnas.
 
-*Referencia: §2.4 [ELMASRI]*
+*Referencia: §3.4 [ELMASRI]*
 </details>
 
 ---
@@ -744,7 +744,7 @@ C) Calcula el producto cartesiano
 
 **Correcta: A) Selecciona columnas (atributos), eliminando duplicados** No confundir con la selección σ, que filtra filas.
 
-*Referencia: §2.4 [ELMASRI]*
+*Referencia: §3.4 [ELMASRI]*
 </details>
 
 ---
@@ -761,7 +761,7 @@ C) Selección, proyección, join, división y renombrado
 
 **Correcta: B) Selección, proyección, unión, diferencia y producto cartesiano** El join, la intersección y la división se derivan de estos cinco.
 
-*Referencia: §2.4 [CODD70]*
+*Referencia: §3.4 [CODD70]*
 </details>
 
 ---
@@ -778,7 +778,7 @@ C) «qué elementos están relacionados con TODOS los de otro conjunto»
 
 **Correcta: C) «qué elementos están relacionados con TODOS los de otro conjunto»** Por ejemplo, qué habitantes han pagado todos los tributos obligatorios.
 
-*Referencia: §2.4 [DATE]*
+*Referencia: §3.4 [DATE]*
 </details>
 
 ---
@@ -795,7 +795,7 @@ C) De control de transacciones
 
 **Correcta: A) Declarativo (describe qué se quiere, no cómo obtenerlo)** Tiene dos variantes: de tuplas y de dominios.
 
-*Referencia: §2.5 [DATE]*
+*Referencia: §3.5 [DATE]*
 </details>
 
 ---
@@ -812,7 +812,7 @@ C) Son equivalentes (mismo poder expresivo)
 
 **Correcta: C) Son equivalentes (mismo poder expresivo)** Es el teorema de equivalencia de Codd; SQL se inspira en ambos.
 
-*Referencia: §2.5 [DATE]*
+*Referencia: §3.5 [DATE]*
 </details>
 
 ---
@@ -829,7 +829,7 @@ C) Reducir el número de tablas al mínimo
 
 **Correcta: B) Eliminar la redundancia y las anomalías de actualización** Se basa en el análisis de las dependencias funcionales.
 
-*Referencia: §2.6 [CODD72]*
+*Referencia: §4.1 [CODD72]*
 </details>
 
 ---
@@ -846,7 +846,7 @@ C) De red, de disco y de memoria
 
 **Correcta: B) De inserción, de borrado y de actualización** Las tres derivan de la redundancia de datos.
 
-*Referencia: §2.6 [ELMASRI]*
+*Referencia: §4.1 [ELMASRI]*
 </details>
 
 ---
@@ -863,7 +863,7 @@ C) El valor de X determina unívocamente el valor de Y
 
 **Correcta: C) El valor de X determina unívocamente el valor de Y** X es el determinante; dos tuplas con igual X tienen igual Y.
 
-*Referencia: §2.7 [ELMASRI]*
+*Referencia: §4.2 [ELMASRI]*
 </details>
 
 ---
@@ -880,7 +880,7 @@ C) Inserción, borrado y actualización
 
 **Correcta: A) Reflexividad, aumento y transitividad** Son correctos y completos; las demás reglas se derivan de ellos.
 
-*Referencia: §2.7 [ARMSTRONG74]*
+*Referencia: §4.2 [ARMSTRONG74]*
 </details>
 
 ---
@@ -897,7 +897,7 @@ C) Calcular el tamaño físico de la tabla
 
 **Correcta: B) Determinar si X es superclave y hallar las claves candidatas** Si X⁺ contiene todos los atributos, X es superclave.
 
-*Referencia: §2.7 [ELMASRI]*
+*Referencia: §4.2 [ELMASRI]*
 </details>
 
 ---
@@ -914,7 +914,7 @@ C) Tiene menos de cinco columnas
 
 **Correcta: B) Todos sus atributos son atómicos (un solo valor por celda)** Sin grupos repetitivos ni valores multivaluados.
 
-*Referencia: §2.8 [CODD70]*
+*Referencia: §4.3 [CODD70]*
 </details>
 
 ---
@@ -931,7 +931,7 @@ C) Las dependencias funcionales parciales de la clave
 
 **Correcta: C) Las dependencias funcionales parciales de la clave** Solo tiene riesgo cuando la clave primaria es compuesta.
 
-*Referencia: §2.9 [CODD72]*
+*Referencia: §4.4 [CODD72]*
 </details>
 
 ---
@@ -948,7 +948,7 @@ C) No puede tener claves ajenas
 
 **Correcta: A) Está automáticamente en 2FN** Sin clave compuesta no puede haber dependencias parciales.
 
-*Referencia: §2.9 [CODD72]*
+*Referencia: §4.4 [CODD72]*
 </details>
 
 ---
@@ -965,7 +965,7 @@ C) Valores nulos en ninguna columna
 
 **Correcta: A) Dependencias transitivas entre atributos no clave** Mnemotecnia: cada atributo depende de la clave, toda la clave y nada más que la clave.
 
-*Referencia: §2.10 [CODD72]*
+*Referencia: §4.5 [CODD72]*
 </details>
 
 ---
@@ -982,7 +982,7 @@ C) No existan claves ajenas
 
 **Correcta: B) Todo determinante de una dependencia funcional no trivial sea clave candidata** Es una 3FN reforzada; toda relación en BCNF está en 3FN.
 
-*Referencia: §2.11 [CODD74BCNF]*
+*Referencia: §4.6 [CODD74BCNF]*
 </details>
 
 ---
@@ -999,7 +999,7 @@ C) Que elimine todas las claves ajenas
 
 **Correcta: B) La descomposición sin pérdida de información (lossless join)** Se garantiza si el atributo común es clave de al menos una de las tablas resultantes.
 
-*Referencia: §2.11 [SILBER]*
+*Referencia: §4.6 [SILBER]*
 </details>
 
 ---
@@ -1016,7 +1016,7 @@ C) Multivaluadas
 
 **Correcta: C) Multivaluadas** La 5FN, por su parte, trata las dependencias de reunión (join).
 
-*Referencia: §2.12 [FAGIN77]*
+*Referencia: §4.7 [FAGIN77]*
 </details>
 
 ---
@@ -1033,5 +1033,5 @@ C) Volver siempre a la 1FN
 
 **Correcta: A) Reintroducir redundancia de forma deliberada para mejorar el rendimiento, asumiendo el coste de mantener la coherencia** Se aplica al final, sobre cuellos de botella medidos, típica en entornos OLAP.
 
-*Referencia: §2.13 [RAMAKRISHNAN]*
+*Referencia: §4.8 [RAMAKRISHNAN]*
 </details>

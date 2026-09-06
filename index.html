@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tema 17 v1.1 — ETRIVIUM IAM</title>
+<title>Tema 17 v1.2 — ETRIVIUM IAM</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--azul:#0055a0;--azul-dark:#003d73;--azul-deep:#002a52;--azul-light:#e8f0f8;--azul-05:rgba(0,85,160,.05);--azul-10:rgba(0,85,160,.10);--verde:#2d8659;--verde-bg:#e8f5ee;--rojo:#d13c3c;--rojo-bg:#fbeeed;--amber:#e89822;--amber-bg:#fdf4e4;--g100:#f5f7fa;--g200:#e8ecf0;--g300:#d1d7df;--g600:#4a5568;--g800:#2d3748;--font:'DM Sans',-apple-system,system-ui,sans-serif;--rad:8px;--sh:0 1px 3px rgba(0,0,0,.08);--shl:0 4px 16px rgba(0,0,0,.08)}
@@ -80,12 +80,12 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 </head>
 <body>
 <div class="wrap">
-<nav class="tabs"><button class="tab-btn active" data-tab="inicio">Inicio <span class='version-badge'>v1.1</span></button><button class="tab-btn" data-tab="contenido">Contenido</button><button class="tab-btn" data-tab="indice">Índice</button><button class="tab-btn" data-tab="diagramas">Diagramas</button><button class="tab-btn" data-tab="test">Test</button><button class="tab-btn" data-tab="casos">Casos</button><button class="tab-btn" data-tab="validacion">Validación</button><button class="tab-btn" data-tab="fuentes">Fuentes</button></nav>
+<nav class="tabs"><button class="tab-btn active" data-tab="inicio">Inicio <span class='version-badge'>v1.2</span></button><button class="tab-btn" data-tab="contenido">Contenido</button><button class="tab-btn" data-tab="indice">Índice</button><button class="tab-btn" data-tab="diagramas">Diagramas</button><button class="tab-btn" data-tab="test">Test</button><button class="tab-btn" data-tab="casos">Casos</button><button class="tab-btn" data-tab="validacion">Validación</button><button class="tab-btn" data-tab="fuentes">Fuentes</button></nav>
 <section id="tab-inicio" class="tab-content active"><div class="hero">
-  <span class="vbadge">v1.1</span>
+  <span class="vbadge">v1.2</span>
   <h1>Tema 17 — Diseño de bases de datos y normalización</h1>
   <div class="sub">Diseño lógico y físico · El modelo lógico relacional · Normalización (1FN-BCNF)</div>
-  <div class="banner"><strong>Parte II — Técnico · C1 Ayuntamiento de Madrid</strong> · Piloto v1.1 · 2026-06-20 · Pendiente de validación</div>
+  <div class="banner"><strong>Parte II — Técnico · C1 Ayuntamiento de Madrid</strong> · Piloto v1.2 · 2026-06-20 · Pendiente de validación</div>
 </div><!-- ficha-estudio:ini --><div class="ficha-estudio"><div class="fe-item"><span class="fe-k">Extensi&oacute;n</span><span class="fe-v">~10.000 palabras &middot; 12 diagramas &middot; 60 preguntas de test</span></div><div class="fe-item"><span class="fe-k">Tiempo estimado de estudio</span><span class="fe-v">11-13 horas <span class="fe-n">(primera vuelta completa, sin contar repasos)</span></span></div></div><!-- ficha-estudio:fin -->
 <h2>Qué incluye este tema</h2>
 <table><thead><tr><th>Entregable</th><th>Cantidad</th></tr></thead><tbody>
@@ -106,7 +106,7 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 <div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>Enlace conceptual a otros temas del temario oficial.</div>
 <p>Los términos técnicos se mantienen en su nomenclatura habitual (clave primaria, join, dependencia funcional, índice B-tree…). Las fuentes se referencian con etiquetas breves tipo <code>[CODD70]</code> o <code>[ELMASRI, cap. 14]</code> — el registro completo está en <code>tema-17-fuentes.md</code>. Los símbolos del álgebra relacional (σ, π, ⋈, ∪, −, ×, ÷) se glosan la primera vez que aparecen.</p>
 <hr>
-<h2>1. Diseño de bases de datos: concepto y objetivos</h2>
+<h2>1. Diseño de bases de datos</h2>
 <h3>1.1. Qué es diseñar una base de datos y por qué importa</h3>
 <p><strong>Diseñar una base de datos</strong> es decidir qué datos se van a almacenar, cómo se estructuran y cómo se relacionan entre sí, de forma que la información sea <strong>correcta, no redundante, fácil de consultar y eficiente</strong> [ELMASRI, cap. 3]. No es un paso decorativo: la estructura que se elija condiciona durante años la integridad de los datos, el rendimiento de las consultas y el coste de mantener el sistema. Un mal diseño se paga con datos duplicados, incoherencias, consultas lentas y modificaciones que rompen la aplicación.</p>
 <p>El diseño parte de un <strong>análisis de requisitos</strong>: qué información necesita gestionar la organización y qué operaciones realizará con ella. En el Ayuntamiento, esos requisitos provienen de los procedimientos administrativos: dar de alta a un habitante en el Padrón, liquidar un tributo, tramitar un expediente o registrar una multa. El diseñador traduce esas necesidades en una <strong>estructura de datos</strong> que el SGBD podrá implementar.</p>
@@ -123,7 +123,7 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 <p>Esta correspondencia entronca con la <strong>arquitectura ANSI/SPARC de tres esquemas</strong> (interno, conceptual y externo), que formaliza la <strong>independencia de datos</strong> y se trata en el Tema 15: el diseño físico se corresponde con el esquema interno; el lógico, con el conceptual de ANSI/SPARC; y las vistas de usuario, con los esquemas externos.</p>
 <h3>1.3. Objetivos del diseño</h3>
 <p>Un buen diseño relacional busca [ELMASRI, cap. 14; DATE, cap. 12]:</p>
-<ul><li><strong>Integridad</strong>: los datos cumplen las reglas del dominio (un DNI tiene un formato, una fecha de nacimiento no puede ser futura, un habitante pertenece a un distrito existente).</li><li><strong>Mínima redundancia controlada</strong>: cada hecho se almacena, idealmente, <strong>una sola vez</strong>. La redundancia no controlada provoca inconsistencias y anomalías (§2.6).</li><li><strong>Rendimiento</strong>: las operaciones más frecuentes deben resolverse con el menor coste posible (de ahí los índices y, a veces, la desnormalización controlada).</li><li><strong>Independencia de datos</strong> física y lógica.</li><li><strong>Facilidad de mantenimiento y comprensión</strong>: un esquema claro, con nombres significativos y restricciones declaradas, reduce errores.</li></ul>
+<ul><li><strong>Integridad</strong>: los datos cumplen las reglas del dominio (un DNI tiene un formato, una fecha de nacimiento no puede ser futura, un habitante pertenece a un distrito existente).</li><li><strong>Mínima redundancia controlada</strong>: cada hecho se almacena, idealmente, <strong>una sola vez</strong>. La redundancia no controlada provoca inconsistencias y anomalías (§4.1).</li><li><strong>Rendimiento</strong>: las operaciones más frecuentes deben resolverse con el menor coste posible (de ahí los índices y, a veces, la desnormalización controlada).</li><li><strong>Independencia de datos</strong> física y lógica.</li><li><strong>Facilidad de mantenimiento y comprensión</strong>: un esquema claro, con nombres significativos y restricciones declaradas, reduce errores.</li></ul>
 <p>Estos objetivos a veces <strong>entran en conflicto</strong>: la normalización elimina redundancia pero puede penalizar el rendimiento de ciertas consultas; la desnormalización mejora el rendimiento pero reintroduce redundancia. El diseño es, en buena medida, el arte de equilibrar estas fuerzas.</p>
 <p>La <strong>independencia de datos</strong> merece detalle porque es objetivo y consecuencia del diseño en niveles:</p>
 <ul><li><strong>Independencia física</strong>: se puede cambiar el <strong>almacenamiento</strong> (añadir un índice, reorganizar ficheros, particionar) <strong>sin</strong> modificar el esquema lógico ni las aplicaciones. Es la más fácil de conseguir.</li><li><strong>Independencia lógica</strong>: se puede cambiar el <strong>esquema lógico</strong> (añadir una columna o una tabla) afectando lo mínimo a las aplicaciones, normalmente gracias a las <strong>vistas</strong>. Es más difícil, porque las aplicaciones dependen de la estructura lógica que consultan.</li></ul>
@@ -134,13 +134,14 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 <ul><li><strong>Grado de la relación</strong>: número de entidades que participan. <strong>Binaria</strong> (lo normal, dos entidades), <strong>ternaria</strong> (tres) o <strong>reflexiva/recursiva</strong> (una entidad consigo misma: un EMPLEADO «es jefe de» otro EMPLEADO).</li><li><strong>Participación</strong>: <strong>total (obligatoria)</strong> si toda ocurrencia de la entidad debe participar en la relación (todo habitante debe residir en un distrito), o <strong>parcial (opcional)</strong> si puede no hacerlo. La participación total se traduce en el modelo lógico en una clave ajena <code>NOT NULL</code>.</li></ul>
 <p>Los <strong>atributos</strong> se clasifican además en: <strong>simples</strong> vs <strong>compuestos</strong> (la dirección), <strong>monovaluados</strong> vs <strong>multivaluados</strong> (teléfonos), <strong>almacenados</strong> vs <strong>derivados</strong> (la edad a partir de la fecha de nacimiento) y <strong>clave</strong> (identificadores).</p>
 <p>El modelo <strong>E-R extendido (EER)</strong> añade generalización/especialización (jerarquías «es-un»), agregación y entidades débiles. Una <strong>entidad débil</strong> no tiene clave propia y depende de otra (p. ej., LÍNEA_DE_LIQUIDACIÓN depende de LIQUIDACIÓN).</p>
-<div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>El modelo entidad-relación se desarrolla a fondo en el <strong>Tema 16</strong> (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder <strong>transformarlo</strong> en tablas (§1.6).</div>
+<div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>El modelo entidad-relación se desarrolla a fondo en el <strong>Tema 16</strong> (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder <strong>transformarlo</strong> en tablas (§2.2).</div>
 <div class="callout ayto"><span class="kicker">EJEMPLO AYTO MADRID</span>Un esquema conceptual del Padrón podría tener las entidades <strong>HABITANTE</strong> (DNI, nombre, fecha_nacimiento), <strong>DISTRITO</strong> (código, nombre) y <strong>VÍA</strong> (código de vía, nombre del callejero), con relaciones «HABITANTE reside en VÍA» (N:1) y «VÍA pertenece a DISTRITO» (N:1). Madrid tiene 21 distritos, lo que da una idea de las cardinalidades reales.</div>
-<h3>1.5. Diseño lógico</h3>
-<p>El <strong>diseño lógico</strong> convierte el esquema conceptual en el modelo de datos del SGBD elegido. Como el estándar de hecho es el <strong>modelo relacional</strong>, el diseño lógico consiste en obtener el <strong>conjunto de tablas (relaciones)</strong> con sus columnas, claves primarias y claves ajenas, y después <strong>normalizarlas</strong> (§2.6 y siguientes). El resultado es un <strong>esquema relacional</strong> correcto e independiente del producto.</p>
+<h2>2. Diseño lógico y físico</h2>
+<h3>2.1. Diseño lógico</h3>
+<p>El <strong>diseño lógico</strong> convierte el esquema conceptual en el modelo de datos del SGBD elegido. Como el estándar de hecho es el <strong>modelo relacional</strong>, el diseño lógico consiste en obtener el <strong>conjunto de tablas (relaciones)</strong> con sus columnas, claves primarias y claves ajenas, y después <strong>normalizarlas</strong> (§4.1 y siguientes). El resultado es un <strong>esquema relacional</strong> correcto e independiente del producto.</p>
 <p>Las tareas del diseño lógico son, en orden [ELMASRI, cap. 9]:</p>
-<ol><li><strong>Transformar</strong> entidades y relaciones del modelo E-R en tablas (§1.6).</li><li><strong>Eliminar redundancias</strong> y verificar que el esquema soporta las consultas requeridas (§1.7).</li><li><strong>Declarar las restricciones de integridad</strong>: clave primaria, claves ajenas, unicidad, dominios y reglas de negocio (§1.8).</li><li><strong>Normalizar</strong> hasta el grado adecuado (típicamente 3FN o BCNF) y decidir, si procede, una desnormalización controlada (§2.13).</li></ol>
-<h3>1.6. Transformación de entidades y relaciones al modelo relacional</h3>
+<ol><li><strong>Transformar</strong> entidades y relaciones del modelo E-R en tablas (§2.2).</li><li><strong>Eliminar redundancias</strong> y verificar que el esquema soporta las consultas requeridas (§2.3).</li><li><strong>Declarar las restricciones de integridad</strong>: clave primaria, claves ajenas, unicidad, dominios y reglas de negocio (§2.4).</li><li><strong>Normalizar</strong> hasta el grado adecuado (típicamente 3FN o BCNF) y decidir, si procede, una desnormalización controlada (§4.8).</li></ol>
+<h3>2.2. Transformación de entidades y relaciones al modelo relacional</h3>
 <p>Las <strong>reglas de transformación</strong> del modelo E-R al relacional son un clásico de examen [ELMASRI, cap. 9; SILBER, cap. 6]:</p>
 <ul><li><strong>Cada entidad fuerte → una tabla</strong>. Sus atributos simples son columnas; su clave pasa a ser <strong>clave primaria</strong>.</li><li><strong>Atributo compuesto</strong> → se descompone en sus componentes simples (la dirección se parte en vía, número, código postal).</li><li><strong>Atributo multivaluado</strong> → genera <strong>una tabla aparte</strong> cuya clave combina la clave de la entidad y el propio atributo (los teléfonos de un habitante).</li><li><strong>Relación 1:N</strong> → la clave de la entidad del lado «1» se propaga como <strong>clave ajena</strong> en la tabla del lado «N». No se crea tabla nueva. (HABITANTE.distrito ← DISTRITO.codigo.)</li><li><strong>Relación N:M</strong> → se crea <strong>una tabla intermedia</strong> cuya clave primaria es la combinación de las claves de ambas entidades, más los atributos propios de la relación. (Un EXPEDIENTE puede tener varios INTERESADOS y un interesado figura en varios expedientes → tabla EXPEDIENTE_INTERESADO.)</li><li><strong>Relación 1:1</strong> → se propaga la clave de una entidad como clave ajena (con restricción de unicidad) en la otra, o se fusionan ambas si su existencia es dependiente.</li><li><strong>Jerarquía (generalización/especialización)</strong> → varias estrategias: una tabla por toda la jerarquía, una tabla por subclase, o una tabla por cada clase con claves compartidas.</li><li><strong>Entidad débil</strong> → tabla cuya clave primaria incluye la clave de la entidad fuerte de la que depende.</li></ul>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Transformar la relación N:M «un HABITANTE puede ser titular de varios TRIBUTOS y un tributo puede tener varios titulares».</em> Solución: se crean las tablas <code>HABITANTE(dni PK, nombre)</code> y <code>TRIBUTO(id PK, concepto, importe)</code>, y una <strong>tabla intermedia</strong> <code>TITULARIDAD(dni, id_tributo, porcentaje, PK(dni, id_tributo))</code> con dos <strong>claves ajenas</strong>: <code>dni → HABITANTE.dni</code> e <code>id_tributo → TRIBUTO.id</code>. El atributo <code>porcentaje</code> (cuota de titularidad) es propio de la relación y vive en la tabla intermedia, no en las entidades.</div>
@@ -149,11 +150,11 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 <table><thead><tr><th>Elemento E-R</th><th>Resultado en el modelo relacional</th></tr></thead><tbody><tr><td>Entidad fuerte</td><td>Una tabla; su clave → clave primaria</td></tr><tr><td>Entidad débil</td><td>Una tabla; clave primaria = clave de la fuerte + discriminante propio</td></tr><tr><td>Atributo simple</td><td>Columna</td></tr><tr><td>Atributo compuesto</td><td>Se descompone en columnas simples</td></tr><tr><td>Atributo multivaluado</td><td>Tabla aparte con clave (clave entidad + valor)</td></tr><tr><td>Atributo derivado</td><td>No se almacena (se calcula) o se desnormaliza si interesa</td></tr><tr><td>Relación 1:1</td><td>Clave ajena (con <code>UNIQUE</code>) en una de las dos tablas, o fusión</td></tr><tr><td>Relación 1:N</td><td>Clave ajena en la tabla del lado «N»</td></tr><tr><td>Relación N:M</td><td>Tabla intermedia con clave compuesta + 2 claves ajenas</td></tr><tr><td>Generalización</td><td>Una tabla por jerarquía / por subclase / por clase</td></tr></tbody></table>
 <p>El caso de la <strong>relación 1:1</strong> tiene un matiz: se propaga la clave hacia el lado de <strong>participación obligatoria</strong> (para evitar nulos). Si ambos lados son opcionales, se elige el que minimice los nulos; si la dependencia es total, suele fusionarse en una sola tabla.</p>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Transformar una jerarquía: EMPLEADO_MUNICIPAL se especializa en FUNCIONARIO y LABORAL.</em> Estrategia «una tabla por subclase»: <code>EMPLEADO(id PK, nombre, fecha_alta)</code>, <code>FUNCIONARIO(id PK→EMPLEADO, cuerpo, grupo)</code> y <code>LABORAL(id PK→EMPLEADO, categoria, convenio)</code>. La clave de cada subclase es a la vez <strong>clave primaria y clave ajena</strong> hacia la superclase. Alternativa «una sola tabla»: <code>EMPLEADO(id, nombre, tipo, cuerpo, grupo, categoria, convenio)</code> con muchos nulos pero sin joins. La elección depende de cuántos atributos específicos haya y de la frecuencia de consulta conjunta.</div>
-<h3>1.7. Eliminación de redundancias</h3>
+<h3>2.3. Eliminación de redundancias</h3>
 <p>Tras la transformación, el esquema puede contener <strong>redundancias</strong>: datos derivables o repetidos que conviene eliminar para evitar inconsistencias [ELMASRI, cap. 14]. Ejemplos:</p>
-<ul><li><strong>Datos derivados</strong> almacenados que pueden recalcularse (la edad si ya guardamos la fecha de nacimiento; el importe total si guardamos las líneas).</li><li><strong>Dependencias redundantes</strong> entre tablas que duplican información (guardar el nombre del distrito en HABITANTE además del código que apunta a DISTRITO).</li><li><strong>Atributos transitivos</strong> que la normalización detecta y separa (§2.10).</li></ul>
-<p>La herramienta sistemática para eliminar redundancia perjudicial es la <strong>normalización</strong> (§2.6). No obstante, cierta redundancia se conserva <strong>deliberadamente</strong> (clave ajena = redundancia controlada que da integridad referencial) y, a veces, se reintroduce de forma consciente con la <strong>desnormalización</strong> (§2.13).</p>
-<h3>1.8. Integridad de entidad e integridad referencial</h3>
+<ul><li><strong>Datos derivados</strong> almacenados que pueden recalcularse (la edad si ya guardamos la fecha de nacimiento; el importe total si guardamos las líneas).</li><li><strong>Dependencias redundantes</strong> entre tablas que duplican información (guardar el nombre del distrito en HABITANTE además del código que apunta a DISTRITO).</li><li><strong>Atributos transitivos</strong> que la normalización detecta y separa (§4.5).</li></ul>
+<p>La herramienta sistemática para eliminar redundancia perjudicial es la <strong>normalización</strong> (§4.1). No obstante, cierta redundancia se conserva <strong>deliberadamente</strong> (clave ajena = redundancia controlada que da integridad referencial) y, a veces, se reintroduce de forma consciente con la <strong>desnormalización</strong> (§4.8).</p>
+<h3>2.4. Integridad de entidad e integridad referencial</h3>
 <p>El modelo relacional impone <strong>dos reglas de integridad fundamentales</strong> [CODD70; DATE, cap. 9]:</p>
 <ul><li><strong>Integridad de entidad</strong>: ningún atributo que forme parte de la <strong>clave primaria</strong> puede tomar valor <strong>nulo</strong>. Razón: la clave primaria identifica la fila; si fuese nula, no podría identificarla.</li><li><strong>Integridad referencial</strong>: el valor de una <strong>clave ajena</strong> debe <strong>coincidir con un valor existente</strong> de la clave primaria referenciada <strong>o ser totalmente nulo</strong> (si la columna lo admite). Garantiza que no haya «referencias colgantes» (un habitante asignado a un distrito que no existe).</li></ul>
 <p>Cuando se borra o modifica la fila referenciada, el SGBD aplica una <strong>política referencial</strong> definida en el diseño:</p>
@@ -161,7 +162,7 @@ svg{max-width:100%;height:auto;display:block;margin:14px auto;background:#fff;bo
 <p>Además existen las <strong>restricciones de dominio</strong> (un atributo solo admite valores de su dominio: un CP es numérico de 5 dígitos), de <strong>unicidad</strong> (<code>UNIQUE</code>), de <strong>obligatoriedad</strong> (<code>NOT NULL</code>) y las <strong>reglas de negocio</strong> (<code>CHECK</code>, disparadores).</p>
 <div class="callout ayto"><span class="kicker">EJEMPLO AYTO MADRID</span>En la base del Padrón, <code>HABITANTE.distrito</code> es una clave ajena hacia <code>DISTRITO.codigo</code> con política <code>RESTRICT</code>: no se puede borrar un distrito mientras tenga habitantes asignados. En cambio, en una tabla de tramitación, al anular un expediente puede interesar <code>CASCADE</code> sobre sus documentos asociados.</div>
 <div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>La integridad y la trazabilidad de los datos en la Administración están además sujetas al <strong>ENS</strong> (RD 311/2022) y al <strong>RGPD</strong> (exactitud y minimización de datos), tratados en los <strong>Temas 32 y 39</strong>.</div>
-<h3>1.9. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)</h3>
+<h3>2.5. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)</h3>
 <p>El lenguaje <strong>SQL</strong> (norma ISO/IEC 9075 [ISO9075]) se organiza en cuatro sublenguajes que es obligatorio distinguir:</p>
 <table><thead><tr><th>Sublenguaje</th><th>Significado</th><th>Sentencias típicas</th><th>Para qué</th></tr></thead><tbody><tr><td><strong>DDL</strong></td><td><em>Data Definition Language</em></td><td><code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>, <code>TRUNCATE</code></td><td>Definir y modificar la <strong>estructura</strong> (tablas, índices, vistas, restricciones)</td></tr><tr><td><strong>DML</strong></td><td><em>Data Manipulation Language</em></td><td><code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></td><td>Consultar y modificar los <strong>datos</strong></td></tr><tr><td><strong>DCL</strong></td><td><em>Data Control Language</em></td><td><code>GRANT</code>, <code>REVOKE</code></td><td>Controlar <strong>permisos</strong> y privilegios</td></tr><tr><td><strong>TCL</strong></td><td><em>Transaction Control Language</em></td><td><code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code></td><td>Controlar las <strong>transacciones</strong></td></tr></tbody></table>
 <p>El <strong>DDL</strong> es la herramienta del diseño físico y lógico: con <code>CREATE TABLE</code> se declaran columnas, tipos, clave primaria, claves ajenas y restricciones <code>CHECK</code>. Ejemplo:</p>
@@ -180,24 +181,24 @@ CREATE TABLE HABITANTE (
 );</code></pre>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>No confundir: <strong>DDL = estructura</strong>, <strong>DML = datos</strong>, <strong>DCL = permisos</strong>, <strong>TCL = transacciones</strong>. <code>TRUNCATE</code> es DDL (vacía la tabla y suele ser irreversible y rápida), mientras que <code>DELETE</code> es DML (borra filas, transaccional, con <code>WHERE</code>).</div>
 <p>Además de las tablas, el DDL define <strong>otros objetos del esquema</strong> que pertenecen al diseño:</p>
-<ul><li><strong>Vistas (<code>CREATE VIEW</code>)</strong>: tablas virtuales definidas por una consulta. Aportan <strong>independencia lógica</strong> (la aplicación ve la vista aunque cambie la tabla subyacente), seguridad (exponer solo ciertas columnas/filas) y simplificación de consultas complejas. La <strong>vista materializada</strong> sí almacena el resultado (§1.13).</li><li><strong>Secuencias / autonuméricos</strong>: generadores de claves primarias artificiales (subrogadas).</li><li><strong>Restricciones</strong>: pueden ser <strong>declarativas</strong> (<code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>, <code>UNIQUE</code>, <code>NOT NULL</code>, <code>CHECK</code> — el SGBD las impone automáticamente, es lo preferible) o <strong>procedimentales</strong> (disparadores/<em>triggers</em> que ejecutan código ante eventos, para reglas que no caben en una restricción declarativa).</li></ul>
+<ul><li><strong>Vistas (<code>CREATE VIEW</code>)</strong>: tablas virtuales definidas por una consulta. Aportan <strong>independencia lógica</strong> (la aplicación ve la vista aunque cambie la tabla subyacente), seguridad (exponer solo ciertas columnas/filas) y simplificación de consultas complejas. La <strong>vista materializada</strong> sí almacena el resultado (§2.9).</li><li><strong>Secuencias / autonuméricos</strong>: generadores de claves primarias artificiales (subrogadas).</li><li><strong>Restricciones</strong>: pueden ser <strong>declarativas</strong> (<code>PRIMARY KEY</code>, <code>FOREIGN KEY</code>, <code>UNIQUE</code>, <code>NOT NULL</code>, <code>CHECK</code> — el SGBD las impone automáticamente, es lo preferible) o <strong>procedimentales</strong> (disparadores/<em>triggers</em> que ejecutan código ante eventos, para reglas que no caben en una restricción declarativa).</li></ul>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>Una <strong>clave subrogada (surrogate)</strong> es un identificador artificial (autonumérico) sin significado de negocio; una <strong>clave natural</strong> usa datos reales (DNI). La subrogada da estabilidad (no cambia) y eficiencia; la natural evita una columna extra pero puede cambiar y propagar el cambio por las claves ajenas.</div>
 <div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>El estándar SQL, los procedimientos almacenados y los disparadores se desarrollan en el <strong>Tema 19</strong> (lenguajes de interrogación de bases de datos).</div>
-<h3>1.10. Diseño físico</h3>
+<h3>2.6. Diseño físico</h3>
 <p>El <strong>diseño físico</strong> es la última etapa: traduce el esquema lógico normalizado a las <strong>estructuras de almacenamiento y acceso</strong> del SGBD concreto, optimizando para las cargas de trabajo reales [RAMAKRISHNAN, cap. 8; ELMASRI, cap. 16]. Sus decisiones típicas:</p>
-<ul><li>Elegir <strong>tipos de datos físicos</strong> y tamaños (no es lo mismo <code>CHAR(9)</code> que <code>VARCHAR(9)</code>).</li><li>Definir <strong>índices</strong> sobre las columnas más consultadas (§1.12).</li><li>Decidir <strong>particionamiento</strong> de tablas grandes (§1.13).</li><li>Configurar <strong>tablespaces, ficheros y bloques/páginas</strong> (§1.11).</li><li>Considerar <strong>desnormalización</strong> puntual para consultas críticas (§2.13).</li></ul>
+<ul><li>Elegir <strong>tipos de datos físicos</strong> y tamaños (no es lo mismo <code>CHAR(9)</code> que <code>VARCHAR(9)</code>).</li><li>Definir <strong>índices</strong> sobre las columnas más consultadas (§2.8).</li><li>Decidir <strong>particionamiento</strong> de tablas grandes (§2.9).</li><li>Configurar <strong>tablespaces, ficheros y bloques/páginas</strong> (§2.7).</li><li>Considerar <strong>desnormalización</strong> puntual para consultas críticas (§4.8).</li></ul>
 <p>El diseño físico depende del <strong>producto</strong> y de la <strong>carga</strong>: una base de datos transaccional (OLTP) con muchas escrituras se diseña distinto que una analítica (OLAP) con consultas masivas de lectura.</p>
 <p>Una decisión física de primer orden es la <strong>elección de tipos de datos</strong>, que afecta a espacio, integridad y rendimiento:</p>
 <table><thead><tr><th>Familia</th><th>Ejemplos</th><th>Uso en el Ayuntamiento</th></tr></thead><tbody><tr><td>Numéricos exactos</td><td><code>INTEGER</code>, <code>DECIMAL/NUMERIC</code></td><td>Códigos, importes tributarios (siempre <code>DECIMAL</code>, nunca <code>FLOAT</code>, para dinero)</td></tr><tr><td>Numéricos aproximados</td><td><code>REAL</code>, <code>FLOAT</code></td><td>Mediciones, no para importes</td></tr><tr><td>Cadenas</td><td><code>CHAR(n)</code>, <code>VARCHAR(n)</code></td><td>DNI (<code>CHAR(9)</code>), nombres (<code>VARCHAR</code>)</td></tr><tr><td>Fecha/hora</td><td><code>DATE</code>, <code>TIMESTAMP</code></td><td>Fecha de alta, fecha de denuncia</td></tr><tr><td>Booleano</td><td><code>BOOLEAN</code></td><td>Marcas (sí/no)</td></tr><tr><td>Grandes objetos</td><td><code>BLOB</code>, <code>CLOB</code>/<code>TEXT</code></td><td>Documentos del expediente, PDF escaneados</td></tr><tr><td>Estructurados</td><td><code>JSON</code>, <code>XML</code></td><td>Datos semiestructurados, interoperabilidad</td></tr></tbody></table>
 <p>Elegir <code>CHAR(9)</code> para un DNI de longitud fija ahorra y valida; usar <code>DECIMAL</code> (no <code>FLOAT</code>) para importes evita errores de redondeo en la recaudación.</p>
-<h3>1.11. Estructuras de datos y de almacenamiento</h3>
+<h3>2.7. Estructuras de datos y de almacenamiento</h3>
 <p>A nivel físico, los datos se guardan en <strong>ficheros</strong> que el SGBD organiza en unidades lógicas y físicas [ORA-CONCEPTS; PG-DOC]:</p>
 <ul><li><strong>Tablespace</strong> (espacio de tablas): contenedor lógico que agrupa objetos y los mapea a uno o varios ficheros del sistema operativo.</li><li><strong>Página o bloque</strong>: unidad mínima de lectura/escritura en disco (típicamente 4, 8 o 16 KB). El SGBD lee y escribe páginas completas, no filas sueltas; por eso el tamaño de fila y el de página influyen en el rendimiento.</li><li><strong>Extensión (extent)</strong>: conjunto contiguo de páginas que se asigna de una vez.</li><li><strong>Registro/fila (tuple/row)</strong>: la representación física de una tupla dentro de una página.</li></ul>
 <p>Las <strong>organizaciones de fichero</strong> clásicas (que se estudian con más detalle en estructuras de datos) son: <strong>heap</strong> (montón, sin orden), <strong>secuencial ordenada</strong>, <strong>por dispersión (hash)</strong> y <strong>indexada</strong>. La elección condiciona el coste de las operaciones:</p>
 <table><thead><tr><th>Organización</th><th>Inserción</th><th>Búsqueda por igualdad</th><th>Búsqueda por rango</th></tr></thead><tbody><tr><td><strong>Heap (montón)</strong></td><td>Muy rápida (al final)</td><td>Lenta (recorrido completo)</td><td>Lenta</td></tr><tr><td><strong>Secuencial ordenada</strong></td><td>Costosa (reordenar)</td><td>Rápida (búsqueda binaria)</td><td>Rápida</td></tr><tr><td><strong>Hash</strong></td><td>Rápida</td><td>Muy rápida</td><td>No soportada</td></tr><tr><td><strong>Indexada (B+tree)</strong></td><td>Media (mantener índice)</td><td>Rápida</td><td>Rápida</td></tr></tbody></table>
-<p>En un SGBD relacional típico, los datos se guardan en un <em>heap</em> (o en una tabla organizada por índice) y el rendimiento de acceso se consigue con <strong>índices</strong> (§1.12) montados encima, no cambiando la organización base.</p>
+<p>En un SGBD relacional típico, los datos se guardan en un <em>heap</em> (o en una tabla organizada por índice) y el rendimiento de acceso se consigue con <strong>índices</strong> (§2.8) montados encima, no cambiando la organización base.</p>
 <div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>Las organizaciones de ficheros, los árboles B/B+ y las funciones de dispersión (hash) se tratan en el <strong>Tema 13</strong> (estructuras de datos y organizaciones de ficheros). El almacenamiento y su virtualización, en el <strong>Tema 26</strong>.</div>
-<h3>1.12. Índices</h3>
+<h3>2.8. Índices</h3>
 <p>Un <strong>índice</strong> es una <strong>estructura auxiliar</strong> que acelera la localización de filas a costa de espacio extra y de un coste de mantenimiento en cada escritura [RAMAKRISHNAN, cap. 8; SILBER, cap. 14]. Es la herramienta de rendimiento más importante del diseño físico.</p>
 <p>Tipos principales:</p>
 <table><thead><tr><th>Tipo de índice</th><th>Estructura</th><th>Bueno para</th><th>Limitaciones</th></tr></thead><tbody><tr><td><strong>B-tree / B+tree</strong></td><td>Árbol equilibrado ordenado</td><td>Búsquedas por igualdad <strong>y por rango</strong> (<code>BETWEEN</code>, <code>&lt;</code>, <code>&gt;</code>), orden</td><td>Es el índice por defecto</td></tr><tr><td><strong>Hash</strong></td><td>Tabla de dispersión</td><td>Búsquedas por <strong>igualdad</strong> exacta</td><td>No sirve para rangos ni orden</td></tr><tr><td><strong>Bitmap</strong></td><td>Mapas de bits por valor</td><td>Columnas de <strong>baja cardinalidad</strong> (sexo, distrito) en entornos OLAP</td><td>Penaliza escrituras concurrentes</td></tr><tr><td><strong>Texto completo / GIN/GiST</strong></td><td>Invertido</td><td>Búsqueda en texto, datos geoespaciales</td><td>Específicos</td></tr></tbody></table>
@@ -210,9 +211,9 @@ CREATE TABLE HABITANTE (
 <p><strong>Índice compuesto y prefijo izquierdo.</strong> En un índice sobre <code>(distrito, fecha_alta)</code>, el SGBD lo aprovecha para filtrar por <code>distrito</code>, o por <code>distrito</code> <strong>y</strong> <code>fecha_alta</code>, pero <strong>no</strong> para filtrar solo por <code>fecha_alta</code> (regla del <strong>prefijo izquierdo</strong>). De ahí que el <strong>orden de las columnas</strong> en un índice compuesto sea una decisión de diseño.</p>
 <p><strong>Índice cubridor (covering index).</strong> Si un índice contiene <strong>todas las columnas</strong> que una consulta necesita, el SGBD responde <strong>leyendo solo el índice</strong>, sin acceder a la tabla (<em>index-only scan</em>). Es una técnica de optimización potente para consultas muy frecuentes.</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>El <strong>B+tree</strong> mantiene todas las hojas al mismo nivel (equilibrado) y enlazadas, por eso sirve para igualdad <strong>y</strong> rango. Un índice solo compensa sobre columnas <strong>selectivas</strong> y para consultas que recuperan <strong>pocas</strong> filas. En un índice compuesto rige el <strong>prefijo izquierdo</strong>: <code>(A, B)</code> sirve para <code>A</code> y para <code>A,B</code>, pero no para <code>B</code> solo.</div>
-<h3>1.13. Rendimiento y optimización</h3>
+<h3>2.9. Rendimiento y optimización</h3>
 <p>El <strong>optimizador de consultas</strong> del SGBD decide <strong>cómo ejecutar</strong> cada sentencia SQL: qué índices usar, en qué orden hacer los joins y qué algoritmo aplicar. Su decisión se materializa en un <strong>plan de ejecución</strong> [SILBER, cap. 16; ORA-CONCEPTS].</p>
-<ul><li><strong>Plan de ejecución</strong>: árbol de operaciones físicas (recorrido de tabla completo <em>full scan</em>, acceso por índice <em>index seek/scan</em>, <em>nested loop join</em>, <em>hash join</em>, <em>merge join</em>, ordenaciones…). Se inspecciona con <code>EXPLAIN</code> (PostgreSQL/MySQL) o <code>EXPLAIN PLAN</code> (Oracle) [PG-DOC; MS-SQL-INDEX].</li><li><strong>Optimización basada en costes (CBO)</strong>: el optimizador estima el coste de cada plan usando <strong>estadísticas</strong> (número de filas, distribución de valores, cardinalidad) y elige el más barato. Mantener las estadísticas actualizadas es esencial.</li><li><strong>Particionamiento</strong>: dividir una tabla grande en fragmentos por un criterio —<strong>por rango</strong> (fechas), <strong>por lista</strong> (distrito), <strong>por hash</strong>— para que las consultas accedan solo a la partición relevante (<em>partition pruning</em>) y para facilitar el mantenimiento.</li><li><strong>Clustering</strong>: agrupar físicamente filas relacionadas (p. ej., por el índice agrupado) para reducir lecturas de disco.</li><li><strong>Desnormalización controlada</strong> (§2.13) y <strong>vistas materializadas</strong>: precalcular resultados costosos.</li></ul>
+<ul><li><strong>Plan de ejecución</strong>: árbol de operaciones físicas (recorrido de tabla completo <em>full scan</em>, acceso por índice <em>index seek/scan</em>, <em>nested loop join</em>, <em>hash join</em>, <em>merge join</em>, ordenaciones…). Se inspecciona con <code>EXPLAIN</code> (PostgreSQL/MySQL) o <code>EXPLAIN PLAN</code> (Oracle) [PG-DOC; MS-SQL-INDEX].</li><li><strong>Optimización basada en costes (CBO)</strong>: el optimizador estima el coste de cada plan usando <strong>estadísticas</strong> (número de filas, distribución de valores, cardinalidad) y elige el más barato. Mantener las estadísticas actualizadas es esencial.</li><li><strong>Particionamiento</strong>: dividir una tabla grande en fragmentos por un criterio —<strong>por rango</strong> (fechas), <strong>por lista</strong> (distrito), <strong>por hash</strong>— para que las consultas accedan solo a la partición relevante (<em>partition pruning</em>) y para facilitar el mantenimiento.</li><li><strong>Clustering</strong>: agrupar físicamente filas relacionadas (p. ej., por el índice agrupado) para reducir lecturas de disco.</li><li><strong>Desnormalización controlada</strong> (§4.8) y <strong>vistas materializadas</strong>: precalcular resultados costosos.</li></ul>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>El <strong>plan de ejecución</strong> es el «cómo» que elige el <strong>optimizador</strong> para resolver el «qué» de la consulta SQL. Un <em>full table scan</em> sobre una tabla enorme suele ser síntoma de un índice ausente; pero en tablas pequeñas puede ser lo más rápido. Las <strong>estadísticas</strong> son la materia prima del optimizador de costes.</div>
 <div class="callout ayto"><span class="kicker">EJEMPLO AYTO MADRID</span>La tabla histórica de liquidaciones tributarias, particionada <strong>por año</strong>, permite que una consulta del ejercicio actual lea solo la partición del año en curso en lugar de recorrer 20 años de datos: es <em>partition pruning</em>. Para el cuadro de mando anual, una <strong>vista materializada</strong> con los totales por distrito evita recalcular agregados pesados en cada acceso.</div>
 <p><strong>Algoritmos de join.</strong> Cuando una consulta combina dos tablas, el optimizador elige entre tres algoritmos físicos según el tamaño de las tablas y los índices disponibles [SILBER, cap. 15]:</p>
@@ -221,23 +222,23 @@ CREATE TABLE HABITANTE (
 <p><strong>Mantenimiento del rendimiento.</strong> El plan óptimo de hoy puede dejar de serlo cuando la tabla crece o cambia su distribución de datos. Por eso el técnico debe: <strong>recalcular las estadísticas</strong> periódicamente (<code>ANALYZE</code> en PostgreSQL, <code>DBMS_STATS</code> en Oracle, <code>UPDATE STATISTICS</code> en SQL Server), <strong>reconstruir o reorganizar índices</strong> fragmentados (<code>REINDEX</code>) y revisar los planes de las consultas críticas. A veces el optimizador <strong>ignora</strong> un índice a propósito —porque estima que un <em>full scan</em> es más barato, o porque las estadísticas están desactualizadas, o porque la consulta aplica una función sobre la columna indexada que impide usar el índice (<code>WHERE UPPER(nombre) = …</code>)—; reconocer estas situaciones es parte del ajuste (<em>tuning</em>).</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>Tres algoritmos de join: <strong>nested loop</strong> (tabla pequeña + índice), <strong>hash join</strong> (tablas grandes, igualdad, sin índice) y <strong>sort-merge</strong> (datos ordenados o salida ordenada). El optimizador los elige por <strong>coste</strong> estimado a partir de las <strong>estadísticas</strong>, que hay que mantener actualizadas (<code>ANALYZE</code>).</div>
 <hr>
-<h2>2. El modelo lógico relacional</h2>
-<h3>2.1. Conceptos básicos</h3>
+<h2>3. El modelo lógico relacional</h2>
+<h3>3.1. Conceptos básicos</h3>
 <p>El <strong>modelo relacional</strong>, formulado por E. F. Codd en 1970 [CODD70], representa los datos como <strong>relaciones</strong> (tablas) y se apoya en la teoría de conjuntos y la lógica de predicados. Su terminología formal y su equivalente coloquial:</p>
 <table><thead><tr><th>Término formal</th><th>Término coloquial</th><th>Definición</th></tr></thead><tbody><tr><td><strong>Relación</strong></td><td>Tabla</td><td>Conjunto de tuplas sobre un esquema de atributos</td></tr><tr><td><strong>Tupla</strong></td><td>Fila / registro</td><td>Un elemento de la relación</td></tr><tr><td><strong>Atributo</strong></td><td>Columna / campo</td><td>Una propiedad con nombre y dominio</td></tr><tr><td><strong>Dominio</strong></td><td>Tipo de datos</td><td>Conjunto de valores válidos del atributo</td></tr><tr><td><strong>Esquema de relación</strong></td><td>Estructura de la tabla</td><td>Nombre + lista de atributos: <code>HABITANTE(dni, nombre, distrito)</code></td></tr><tr><td><strong>Grado</strong></td><td>—</td><td>Número de <strong>atributos</strong> (columnas)</td></tr><tr><td><strong>Cardinalidad</strong></td><td>—</td><td>Número de <strong>tuplas</strong> (filas)</td></tr><tr><td><strong>Instancia</strong></td><td>Contenido</td><td>Conjunto concreto de tuplas en un momento dado</td></tr></tbody></table>
 <p>Propiedades de una <strong>relación</strong> «pura» en el modelo de Codd [DATE, cap. 6]:</p>
-<ul><li><strong>No hay tuplas duplicadas</strong> (una relación es un conjunto): por eso siempre existe una clave.</li><li><strong>El orden de las tuplas es irrelevante</strong> (es un conjunto, no una lista).</li><li><strong>El orden de los atributos es irrelevante</strong> (se identifican por nombre).</li><li><strong>Cada valor es atómico</strong> (indivisible): esto es exactamente la <strong>1FN</strong> (§2.8).</li></ul>
+<ul><li><strong>No hay tuplas duplicadas</strong> (una relación es un conjunto): por eso siempre existe una clave.</li><li><strong>El orden de las tuplas es irrelevante</strong> (es un conjunto, no una lista).</li><li><strong>El orden de los atributos es irrelevante</strong> (se identifican por nombre).</li><li><strong>Cada valor es atómico</strong> (indivisible): esto es exactamente la <strong>1FN</strong> (§4.3).</li></ul>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span><strong>Grado = nº de columnas; cardinalidad = nº de filas.</strong> Es una pregunta clásica y se confunden con frecuencia. Una relación de grado 3 y cardinalidad 100 tiene 3 atributos y 100 tuplas.</div>
 <p><strong>Relación teórica frente a tabla SQL.</strong> Hay un matiz importante: en el modelo <strong>teórico</strong> de Codd una relación es un <strong>conjunto</strong> y, por tanto, no admite tuplas duplicadas. Pero una <strong>tabla SQL</strong> es en realidad un <strong>multiconjunto (bag)</strong>: <strong>sí</strong> permite filas repetidas salvo que una clave o restricción <code>UNIQUE</code> lo impida, y por eso <code>SELECT</code> puede devolver duplicados a menos que se use <code>DISTINCT</code>. Esta es una de las diferencias entre el modelo relacional puro y su materialización en SQL, junto con el tratamiento de los nulos y el orden de las filas (<code>ORDER BY</code>).</p>
-<h3>2.2. Claves: candidata, primaria, alternativa, superclave y ajena</h3>
+<h3>3.2. Claves: candidata, primaria, alternativa, superclave y ajena</h3>
 <p>Las <strong>claves</strong> son el mecanismo de identificación del modelo relacional [DATE, cap. 9; ELMASRI, cap. 5]:</p>
-<ul><li><strong>Superclave</strong>: cualquier conjunto de atributos que identifica unívocamente una tupla (puede contener atributos «de más»).</li><li><strong>Clave candidata</strong>: superclave <strong>mínima</strong> (si se le quita un atributo, deja de identificar). Una relación puede tener varias.</li><li><strong>Clave primaria (PK)</strong>: la clave candidata <strong>elegida</strong> por el diseñador para identificar la tabla. No admite nulos (integridad de entidad, §1.8).</li><li><strong>Clave alternativa</strong>: las claves candidatas <strong>no</strong> elegidas como primaria.</li><li><strong>Clave ajena o foránea (FK)</strong>: atributo(s) de una tabla que referencia(n) la clave primaria de otra (o de la misma), dando lugar a la integridad referencial.</li></ul>
+<ul><li><strong>Superclave</strong>: cualquier conjunto de atributos que identifica unívocamente una tupla (puede contener atributos «de más»).</li><li><strong>Clave candidata</strong>: superclave <strong>mínima</strong> (si se le quita un atributo, deja de identificar). Una relación puede tener varias.</li><li><strong>Clave primaria (PK)</strong>: la clave candidata <strong>elegida</strong> por el diseñador para identificar la tabla. No admite nulos (integridad de entidad, §2.4).</li><li><strong>Clave alternativa</strong>: las claves candidatas <strong>no</strong> elegidas como primaria.</li><li><strong>Clave ajena o foránea (FK)</strong>: atributo(s) de una tabla que referencia(n) la clave primaria de otra (o de la misma), dando lugar a la integridad referencial.</li></ul>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>En <code>HABITANTE(dni, nss, nombre, distrito)</code>, el DNI y el número de la Seguridad Social (NSS) identifican a la persona. ¿Cuáles son las claves?</em> Solución: <code>{dni}</code> y <code>{nss}</code> son <strong>claves candidatas</strong> (ambas identifican y son mínimas). Si elegimos <code>{dni}</code> como <strong>primaria</strong>, entonces <code>{nss}</code> es <strong>clave alternativa</strong>. <code>{dni, nombre}</code> sería una <strong>superclave</strong> (identifica, pero no es mínima porque sobra <code>nombre</code>). <code>distrito</code> es una <strong>clave ajena</strong> hacia <code>DISTRITO</code>.</div>
-<h3>2.3. Reglas de integridad del modelo relacional</h3>
-<p>Recapitulando las reglas de integridad que el modelo impone (ya introducidas en §1.8) [CODD70; DATE, cap. 9]:</p>
+<h3>3.3. Reglas de integridad del modelo relacional</h3>
+<p>Recapitulando las reglas de integridad que el modelo impone (ya introducidas en §2.4) [CODD70; DATE, cap. 9]:</p>
 <ol><li><strong>Integridad de entidad</strong>: la clave primaria no puede contener nulos.</li><li><strong>Integridad referencial</strong>: toda clave ajena referencia una fila existente o es nula.</li><li><strong>Integridad de dominio</strong>: cada valor pertenece al dominio de su atributo.</li><li><strong>Integridad definida por el usuario (reglas de negocio)</strong>: restricciones específicas de la organización (<code>CHECK</code>, disparadores).</li></ol>
 <p>El <strong>valor nulo (NULL)</strong> merece atención: representa información <strong>ausente o desconocida</strong>, <strong>no</strong> es cero ni cadena vacía. En la lógica relacional introduce una <strong>lógica de tres valores</strong> (verdadero, falso, desconocido), lo que complica comparaciones y agregaciones (<code>NULL = NULL</code> no es verdadero, sino desconocido).</p>
-<h3>2.4. Álgebra relacional</h3>
+<h3>3.4. Álgebra relacional</h3>
 <p>El <strong>álgebra relacional</strong> es un lenguaje <strong>procedimental</strong> (indica <em>cómo</em> obtener el resultado mediante una secuencia de operaciones) cuyo resultado es siempre una nueva relación; por eso las operaciones se <strong>componen</strong> [CODD70; DATE, cap. 7; ELMASRI, cap. 8]. Es la base teórica del optimizador y de SQL.</p>
 <p><strong>Operadores unarios:</strong></p>
 <ul><li><strong>Selección (σ)</strong> <code>σ_condición(R)</code>: devuelve las <strong>tuplas (filas)</strong> que cumplen la condición. Ej.: <code>σ_{distrito=1}(HABITANTE)</code>.</li><li><strong>Proyección (π)</strong> <code>π_atributos(R)</code>: devuelve las <strong>columnas</strong> indicadas, eliminando duplicados. Ej.: <code>π_{nombre, distrito}(HABITANTE)</code>.</li><li><strong>Renombrado (ρ)</strong> <code>ρ_S(R)</code>: cambia el nombre de la relación o sus atributos (útil para autojoins).</li></ul>
@@ -253,14 +254,15 @@ CREATE TABLE HABITANTE (
 <table><thead><tr><th>Operación del álgebra</th><th>Cláusula SQL</th></tr></thead><tbody><tr><td>Selección σ (filas)</td><td><code>WHERE</code></td></tr><tr><td>Proyección π (columnas)</td><td><code>SELECT</code> lista de columnas (con <code>DISTINCT</code>)</td></tr><tr><td>Producto cartesiano ×</td><td><code>FROM A, B</code> (sin condición de join)</td></tr><tr><td>Join ⋈</td><td><code>JOIN … ON</code> / join natural</td></tr><tr><td>Unión ∪ / Diferencia − / Intersección ∩</td><td><code>UNION</code> / <code>EXCEPT</code> / <code>INTERSECT</code></td></tr><tr><td>Agrupación γ</td><td><code>GROUP BY</code> + funciones de agregado</td></tr><tr><td>Renombrado ρ</td><td><code>AS</code> (alias)</td></tr></tbody></table>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Número de habitantes por distrito, solo distritos con más de 100.000.</em> Álgebra: <code>σ_{n&gt;100000}( γ_{distrito; COUNT(<em>)→n}(HABITANTE) )</code>. En SQL: <code>SELECT distrito, COUNT(</em>) AS n FROM HABITANTE GROUP BY distrito HAVING COUNT(*) &gt; 100000;</code> — el <code>HAVING</code> filtra <strong>después</strong> de agrupar (es una selección sobre el resultado del agregado), a diferencia del <code>WHERE</code>, que filtra <strong>antes</strong>.</div>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO — la división</span><em>Tenemos <code>PAGO(dni, id_tributo)</code> (qué tributos ha pagado cada habitante) y <code>TRIBUTO_OBLIGATORIO(id_tributo)</code> (los tributos que todos deben pagar). ¿Qué habitantes han pagado <strong>todos</strong> los tributos obligatorios?</em> Esto es justo lo que resuelve la <strong>división</strong>: <code>π_{dni, id_tributo}(PAGO) ÷ TRIBUTO_OBLIGATORIO</code>. Devuelve los <code>dni</code> cuyo conjunto de tributos pagados <strong>incluye todos</strong> los de la tabla divisor. El cuantificador «para todo» se traduce en álgebra como una división y, en SQL, con una doble negación (<code>NOT EXISTS … NOT EXISTS</code>) o contando coincidencias. Es el operador más difícil del álgebra y aparece siempre asociado a la idea de «todos los».</div>
-<h3>2.5. Cálculo relacional</h3>
+<h3>3.5. Cálculo relacional</h3>
 <p>El <strong>cálculo relacional</strong> es un lenguaje <strong>declarativo</strong>: describe <strong>qué</strong> se quiere obtener mediante una fórmula lógica, <strong>sin</strong> indicar el procedimiento [DATE, cap. 8; ELMASRI, cap. 8]. Se basa en el cálculo de predicados de primer orden. Hay dos variantes:</p>
 <ul><li><strong>Cálculo relacional de tuplas (CRT)</strong>: las variables recorren <strong>tuplas</strong>. Ej.: <code>{ t.nombre | HABITANTE(t) ∧ t.distrito = 1 }</code>.</li><li><strong>Cálculo relacional de dominios (CRD)</strong>: las variables recorren <strong>valores de dominios</strong> (atributos individuales).</li></ul>
 <p>Ejemplo en <strong>cálculo de dominios</strong>: «nombres de habitantes del distrito 1» se escribe <code>{ n | ∃d ( HABITANTE(d, n, 1) ) }</code>, donde las variables <code>d, n</code> recorren valores de los atributos. Una restricción importante es la de las <strong>expresiones seguras</strong>: una fórmula del cálculo debe producir un resultado <strong>finito</strong> (p. ej., <code>{ t | ¬HABITANTE(t) }</code> —«todo lo que no es habitante»— sería infinita y, por tanto, no segura). SQL evita esto por construcción.</p>
 <p><strong>Equivalencia y completitud</strong>: Codd demostró que el álgebra relacional, el cálculo de tuplas y el cálculo de dominios tienen el <strong>mismo poder expresivo</strong> (son equivalentes). Una expresión es <strong>relacionalmente completa</strong> si puede expresar todo lo que expresa el álgebra. SQL es declarativo y se inspira sobre todo en el cálculo, aunque incorpora elementos de ambos.</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span><strong>Álgebra = procedimental (cómo); cálculo = declarativo (qué).</strong> Ambos son <strong>equivalentes en poder expresivo</strong> (teorema de equivalencia de Codd). SQL es esencialmente <strong>declarativo</strong>.</div>
-<h3>2.6. Normalización: objetivos, redundancia y anomalías</h3>
-<p>La <strong>normalización</strong> es un proceso formal, propuesto por Codd [CODD72], que descompone las relaciones para <strong>eliminar la redundancia</strong> y las <strong>anomalías</strong>, garantizando que cada hecho se almacene una sola vez. Se basa en el análisis de las <strong>dependencias funcionales</strong> (§2.7) y avanza por <strong>formas normales</strong> sucesivas (1FN ⊂ 2FN ⊂ 3FN ⊂ BCNF ⊂ 4FN ⊂ 5FN), cada una más estricta.</p>
+<h2>4. Normalización</h2>
+<h3>4.1. Normalización: objetivos, redundancia y anomalías</h3>
+<p>La <strong>normalización</strong> es un proceso formal, propuesto por Codd [CODD72], que descompone las relaciones para <strong>eliminar la redundancia</strong> y las <strong>anomalías</strong>, garantizando que cada hecho se almacene una sola vez. Se basa en el análisis de las <strong>dependencias funcionales</strong> (§4.2) y avanza por <strong>formas normales</strong> sucesivas (1FN ⊂ 2FN ⊂ 3FN ⊂ BCNF ⊂ 4FN ⊂ 5FN), cada una más estricta.</p>
 <p>La normalización fue introducida por Codd en 1970-1972 (1FN, 2FN, 3FN), reforzada por Boyce y Codd en 1974 (BCNF) y extendida por Fagin (4FN en 1977 y 5FN). Conviene tener claro <strong>qué resuelve y qué no</strong>: elimina la <strong>redundancia derivada de dependencias funcionales</strong> y sus anomalías, pero <strong>no</strong> garantiza por sí sola el rendimiento (a veces lo penaliza, de ahí la desnormalización), <strong>no</strong> modela las reglas de negocio complejas (eso son restricciones y disparadores) y <strong>no</strong> sustituye a un buen diseño conceptual de partida: normalizar un modelo conceptualmente erróneo solo produce un error bien estructurado.</p>
 <p>Un mal diseño (relaciones no normalizadas) provoca tres tipos de <strong>anomalías</strong> [ELMASRI, cap. 14; DATE, cap. 12]:</p>
 <ul><li><strong>Anomalía de inserción</strong>: no se puede insertar un hecho sin conocer otro no relacionado (no poder dar de alta un distrito nuevo hasta que tenga al menos un habitante, porque ambos viven en la misma tabla).</li><li><strong>Anomalía de borrado</strong>: al borrar una fila se pierde información que no se quería eliminar (borrar al último habitante de un distrito borra también el nombre del distrito).</li><li><strong>Anomalía de actualización (modificación)</strong>: un dato repetido en muchas filas hay que cambiarlo en todas; si se olvida alguna, queda <strong>inconsistente</strong> (el nombre de un distrito guardado en cada habitante).</li></ul>
@@ -269,7 +271,7 @@ CREATE TABLE HABITANTE (
 <table><thead><tr><th>dni</th><th>nombre</th><th>cod_distrito</th><th>nombre_distrito</th></tr></thead><tbody><tr><td>0001A</td><td>Ana</td><td>1</td><td>Centro</td></tr><tr><td>0002B</td><td>Luis</td><td>1</td><td>Centro ← <em>repetido</em></td></tr><tr><td>0003C</td><td>Eva</td><td>2</td><td>Arganzuela</td></tr></tbody></table>
 <p>El dato «Centro» está duplicado: esa <strong>redundancia</strong> es la raíz de las tres anomalías. Normalizar (3FN) lo guarda una sola vez en <code>DISTRITO</code>.</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>Las <strong>tres anomalías</strong> —inserción, borrado y actualización— son <strong>la justificación</strong> de la normalización. Memoriza un ejemplo de cada una; es pregunta recurrente.</div>
-<h3>2.7. Dependencias funcionales y axiomas de Armstrong</h3>
+<h3>4.2. Dependencias funcionales y axiomas de Armstrong</h3>
 <p>Una <strong>dependencia funcional (DF)</strong> <code>X → Y</code> significa que el valor de los atributos <code>X</code> <strong>determina</strong> unívocamente el valor de los atributos <code>Y</code>: dos tuplas con igual <code>X</code> tienen igual <code>Y</code> [ELMASRI, cap. 14; DATE, cap. 11]. <code>X</code> es el <strong>determinante</strong>.</p>
 <p>Ejemplo: en HABITANTE, <code>dni → nombre</code> (el DNI determina el nombre), pero <code>nombre → dni</code> <strong>no</strong> se cumple (puede haber nombres repetidos).</p>
 <p>Tipos de dependencia:</p>
@@ -283,23 +285,23 @@ CREATE TABLE HABITANTE (
 <p><strong>Búsqueda de claves candidatas.</strong> Estrategia práctica: los atributos que <strong>no aparecen en la parte derecha</strong> de ninguna DF deben formar parte de <strong>toda</strong> clave candidata (nadie los determina). Se calcula su cierre; si ya cubre todo, son la clave; si no, se les añaden atributos hasta cubrir todo, buscando siempre conjuntos <strong>mínimos</strong>.</p>
 <p><strong>Recubrimiento mínimo (cobertura minimal).</strong> Un <strong>recubrimiento mínimo</strong> de un conjunto de DF es un conjunto equivalente (mismo cierre) pero <strong>sin redundancias</strong>: (1) toda parte derecha tiene <strong>un solo atributo</strong>, (2) no hay DF redundante (que se deduzca de las demás) y (3) no hay atributos redundantes en las partes izquierdas. Es el punto de partida de los <strong>algoritmos de síntesis</strong> que descomponen una relación en 3FN garantizando que se <strong>preservan las dependencias</strong>.</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>El <strong>cierre <code>X⁺</code></strong> es la herramienta universal: con él se comprueba si una DF se cumple y se hallan las <strong>claves candidatas</strong> (<code>X</code> superclave ⟺ <code>X⁺</code> = todos los atributos). El <strong>recubrimiento mínimo</strong> elimina DF y atributos redundantes y es la base de la descomposición en 3FN.</div>
-<h3>2.8. Primera Forma Normal (1FN)</h3>
+<h3>4.3. Primera Forma Normal (1FN)</h3>
 <p>Una relación está en <strong>1FN</strong> si <strong>todos sus atributos son atómicos</strong> (indivisibles): no hay <strong>grupos repetitivos</strong>, <strong>atributos multivaluados</strong> ni <strong>atributos compuestos</strong> sin descomponer [CODD70; DATE, cap. 12]. En la práctica, equivale a que cada celda contiene <strong>un único valor</strong> del dominio.</p>
 <p>Violación típica: una columna <code>telefonos</code> con «600111222, 600333444» (varios valores en una celda), o columnas repetidas <code>telefono1, telefono2, telefono3</code>.</p>
 <p>Solución: extraer los valores multivaluados a una <strong>tabla aparte</strong> relacionada por clave ajena.</p>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Normalizar a 1FN: <code>HABITANTE(dni, nombre, telefonos)</code> donde <code>telefonos</code> guarda varios números.</em> Solución: <code>HABITANTE(dni PK, nombre)</code> y <code>TELEFONO(dni, numero, PK(dni, numero))</code> con <code>dni</code> como clave ajena. Ahora cada celda es atómica y un habitante puede tener N teléfonos sin columnas fijas ni listas dentro de una celda.</div>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span><strong>1FN = valores atómicos</strong>, una sola valor por celda, sin grupos repetitivos. Es el requisito mínimo para ser una relación «verdadera» en el modelo de Codd.</div>
-<h3>2.9. Segunda Forma Normal (2FN)</h3>
+<h3>4.4. Segunda Forma Normal (2FN)</h3>
 <p>Una relación está en <strong>2FN</strong> si está en <strong>1FN</strong> y, además, <strong>todo atributo no clave depende de la clave primaria completa</strong>, no de una parte de ella. Es decir, <strong>no hay dependencias funcionales parciales</strong> de la clave [CODD72; ELMASRI, cap. 14].</p>
 <p>La 2FN <strong>solo tiene riesgo cuando la clave primaria es compuesta</strong> (formada por varios atributos). Si la clave es un único atributo, la relación en 1FN ya está automáticamente en 2FN.</p>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Relación <code>MATRICULA_CURSO(dni, cod_curso, nombre_habitante, titulo_curso, nota)</code> con clave primaria <code>{dni, cod_curso}</code>.</em> Análisis: <code>nombre_habitante</code> depende solo de <code>dni</code> (parte de la clave) → <strong>dependencia parcial</strong>. <code>titulo_curso</code> depende solo de <code>cod_curso</code> → <strong>dependencia parcial</strong>. <code>nota</code> depende de <strong>toda</strong> la clave <code>{dni, cod_curso}</code> → correcto. Solución 2FN: separar en <code>HABITANTE(dni PK, nombre_habitante)</code>, <code>CURSO(cod_curso PK, titulo_curso)</code> y <code>MATRICULA(dni, cod_curso, nota, PK(dni, cod_curso))</code>. Cada atributo no clave depende ya de su clave completa.</div>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span><strong>2FN = 1FN + sin dependencias parciales</strong> de la clave. Solo aplica si la <strong>clave es compuesta</strong>. Si la clave primaria es un solo atributo, 1FN ⟹ 2FN automáticamente.</div>
-<h3>2.10. Tercera Forma Normal (3FN)</h3>
+<h3>4.5. Tercera Forma Normal (3FN)</h3>
 <p>Una relación está en <strong>3FN</strong> si está en <strong>2FN</strong> y, además, <strong>ningún atributo no clave depende transitivamente de la clave</strong>; es decir, <strong>no hay dependencias entre atributos no clave</strong> [CODD72; DATE, cap. 12]. Equivalente: todo atributo no clave depende de la clave «directamente», y solo de la clave.</p>
 <p>Formulación clásica: para toda DF <code>X → A</code> no trivial, o bien <strong>X es superclave</strong>, o bien <strong>A es un atributo primo</strong> (parte de alguna clave candidata).</p>
-<div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Relación <code>HABITANTE(dni PK, nombre, cod_distrito, nombre_distrito)</code>.</em> Análisis: <code>dni → cod_distrito</code> y <code>cod_distrito → nombre_distrito</code>, luego por transitividad <code>dni → nombre_distrito</code> a través de un atributo <strong>no clave</strong> (<code>cod_distrito</code>) → <strong>dependencia transitiva</strong> → viola 3FN. Solución 3FN: <code>HABITANTE(dni PK, nombre, cod_distrito)</code> y <code>DISTRITO(cod_distrito PK, nombre_distrito)</code>. El nombre del distrito se guarda <strong>una sola vez</strong>; desaparecen las anomalías de §2.6.</div>
+<div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Relación <code>HABITANTE(dni PK, nombre, cod_distrito, nombre_distrito)</code>.</em> Análisis: <code>dni → cod_distrito</code> y <code>cod_distrito → nombre_distrito</code>, luego por transitividad <code>dni → nombre_distrito</code> a través de un atributo <strong>no clave</strong> (<code>cod_distrito</code>) → <strong>dependencia transitiva</strong> → viola 3FN. Solución 3FN: <code>HABITANTE(dni PK, nombre, cod_distrito)</code> y <code>DISTRITO(cod_distrito PK, nombre_distrito)</code>. El nombre del distrito se guarda <strong>una sola vez</strong>; desaparecen las anomalías de §4.1.</div>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span><strong>3FN = 2FN + sin dependencias transitivas</strong> entre atributos no clave. Mnemotecnia (Kent): cada atributo no clave depende de <em>«la clave, toda la clave y nada más que la clave»</em>. La 3FN es el <strong>objetivo práctico habitual</strong> del diseño relacional.</div>
-<h3>2.11. Forma Normal de Boyce-Codd (BCNF)</h3>
+<h3>4.6. Forma Normal de Boyce-Codd (BCNF)</h3>
 <p>La <strong>BCNF</strong> (Boyce-Codd, 1974) [CODD74BCNF] es una versión <strong>más estricta</strong> de la 3FN: una relación está en BCNF si <strong>para toda dependencia funcional no trivial <code>X → Y</code>, <code>X</code> es superclave</strong> (clave candidata). Es decir, <strong>todo determinante es clave candidata</strong>.</p>
 <p>La diferencia con la 3FN aparece solo cuando hay <strong>varias claves candidatas solapadas</strong> (que comparten atributos). En esos casos raros, una relación puede estar en 3FN pero no en BCNF, porque un atributo primo depende de algo que no es clave.</p>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO</span><em>Relación <code>CITA(habitante, oficina, funcionario)</code> donde cada funcionario trabaja en una sola oficina (<code>funcionario → oficina</code>) y un habitante en una oficina es atendido por un funcionario (<code>{habitante, oficina} → funcionario</code>).</em> Claves candidatas: <code>{habitante, oficina}</code> y <code>{habitante, funcionario}</code>. La DF <code>funcionario → oficina</code> tiene como determinante <code>funcionario</code>, que <strong>no es superclave</strong> → <strong>viola BCNF</strong> (aunque puede estar en 3FN, porque <code>oficina</code> es atributo primo). Solución: descomponer en <code>FUNCIONARIO(funcionario PK, oficina)</code> y <code>CITA(habitante, funcionario)</code>.</div>
@@ -308,7 +310,7 @@ CREATE TABLE HABITANTE (
 <ol><li><strong>Descomposición sin pérdida de información (lossless join)</strong>: al volver a unir las tablas con un join natural se recupera <strong>exactamente</strong> la relación original, sin filas espurias. Es <strong>obligatoria</strong>: una descomposición con pérdida es inaceptable. Se garantiza si el atributo común a las dos tablas es <strong>clave</strong> de al menos una de ellas.</li><li><strong>Preservación de dependencias</strong>: cada dependencia funcional original puede verificarse en <strong>una sola</strong> de las tablas resultantes, sin necesidad de hacer joins para comprobarla. Es <strong>deseable</strong>, porque permite que el SGBD imponga las restricciones de forma eficiente.</li></ol>
 <p>El compromiso clásico: la descomposición en <strong>3FN</strong> siempre puede lograr <strong>ambas</strong> propiedades (algoritmo de síntesis sobre el recubrimiento mínimo); la descomposición en <strong>BCNF</strong> garantiza siempre la primera (sin pérdida) pero a veces <strong>sacrifica</strong> la segunda (no preserva todas las dependencias). Por eso, en la práctica, muchos diseños se quedan en <strong>3FN</strong> cuando llegar a BCNF rompería la preservación.</p>
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>Una descomposición <strong>sin pérdida</strong> es obligatoria (se garantiza si el atributo común es clave de una tabla); la <strong>preservación de dependencias</strong> es deseable. <strong>3FN</strong> consigue ambas; <strong>BCNF</strong> garantiza la ausencia de pérdida pero puede no preservar dependencias.</div>
-<h3>2.12. Formas normales superiores (4FN y 5FN)</h3>
+<h3>4.7. Formas normales superiores (4FN y 5FN)</h3>
 <p>Más allá de la BCNF existen formas normales que tratan dependencias distintas de las funcionales [FAGIN77; DATE, cap. 13]:</p>
 <ul><li><strong>Cuarta Forma Normal (4FN)</strong>: elimina las <strong>dependencias multivaluadas</strong> (<code>X ↠ Y</code>) no triviales que no sean por superclave. Aparece cuando una tabla mezcla dos relaciones N:M independientes (p. ej., un funcionario con varios <strong>idiomas</strong> y varias <strong>titulaciones</strong>, sin relación entre sí: guardarlos juntos genera el producto cartesiano de ambos).</li><li><strong>Quinta Forma Normal (5FN o PJ/NF)</strong>: elimina las <strong>dependencias de reunión (join)</strong> que no se derivan de las claves candidatas; trata casos de descomposición y recomposición sin pérdida en tres o más tablas.</li></ul>
 <p>En la práctica administrativa, <strong>llegar a 3FN o BCNF es suficiente</strong> en la inmensa mayoría de los diseños; 4FN y 5FN son situaciones poco frecuentes pero conviene <strong>conocer su existencia y propósito</strong> de cara al examen.</p>
@@ -316,7 +318,7 @@ CREATE TABLE HABITANTE (
 <p><strong>Cuadro-resumen de las formas normales</strong> (memorización directa para el test):</p>
 <table><thead><tr><th>Forma</th><th>Requisito (sobre la anterior)</th><th>Elimina</th><th>Condición de la clave</th></tr></thead><tbody><tr><td><strong>1FN</strong></td><td>Valores atómicos</td><td>Grupos repetitivos / multivaluados</td><td>—</td></tr><tr><td><strong>2FN</strong></td><td>1FN + sin dependencias <strong>parciales</strong></td><td>Dependencia de parte de la clave</td><td>Solo aplica si la clave es <strong>compuesta</strong></td></tr><tr><td><strong>3FN</strong></td><td>2FN + sin dependencias <strong>transitivas</strong></td><td>Atributo no clave que depende de otro no clave</td><td>Cada DF: X superclave <strong>o</strong> A primo</td></tr><tr><td><strong>BCNF</strong></td><td>3FN reforzada</td><td>Determinantes que no son clave</td><td><strong>Todo</strong> determinante es clave candidata</td></tr><tr><td><strong>4FN</strong></td><td>BCNF + sin dependencias <strong>multivaluadas</strong></td><td>Multivaluadas independientes</td><td>—</td></tr><tr><td><strong>5FN</strong></td><td>4FN + sin dependencias de <strong>reunión</strong></td><td>Dependencias de join no triviales</td><td>—</td></tr></tbody></table>
 <div class="callout ejercicio"><span class="kicker">EJERCICIO RESUELTO — normalización completa</span><em>Partimos de una tabla única, sin normalizar, que registra la tramitación de licencias por los técnicos de un distrito:</em> <code>LICENCIA(num_exp, solicitante, tecnicos_asignados, cod_distrito, nombre_distrito, tasa_base)</code> donde <code>tecnicos_asignados</code> guarda varios nombres en una celda, y la tasa depende del distrito. <strong>Paso 1 — a 1FN (valores atómicos).</strong> El atributo <code>tecnicos_asignados</code> es multivaluado → se extrae: <code>LICENCIA(num_exp PK, solicitante, cod_distrito, nombre_distrito, tasa_base)</code> y <code>ASIGNACION(num_exp, tecnico, PK(num_exp, tecnico))</code>. Ya no hay celdas con listas. <strong>Paso 2 — a 2FN (sin dependencias parciales).</strong> <code>LICENCIA</code> tiene clave simple <code>{num_exp}</code> → ya está en 2FN. En <code>ASIGNACION</code>, con clave <code>{num_exp, tecnico}</code>, no hay atributos no clave → trivialmente en 2FN. (Si <code>ASIGNACION</code> guardara <code>nombre_tecnico</code>, dependería solo de <code>tecnico</code> —parte de la clave— y habría que extraer una tabla <code>TECNICO</code>.) <strong>Paso 3 — a 3FN (sin dependencias transitivas).</strong> En <code>LICENCIA</code>: <code>num_exp → cod_distrito</code> y <code>cod_distrito → nombre_distrito</code> y <code>cod_distrito → tasa_base</code> → <code>nombre_distrito</code> y <code>tasa_base</code> dependen <strong>transitivamente</strong> de la clave a través de <code>cod_distrito</code> (no clave). Se separa: <code>LICENCIA(num_exp PK, solicitante, cod_distrito)</code> y <code>DISTRITO(cod_distrito PK, nombre_distrito, tasa_base)</code>. <strong>Paso 4 — comprobar BCNF.</strong> En cada tabla resultante, el único determinante es la clave primaria → <strong>todas están ya en BCNF</strong>. Resultado final: cuatro tablas (<code>LICENCIA</code>, <code>ASIGNACION</code>, <code>DISTRITO</code> y, si procede, <code>TECNICO</code>), sin redundancia ni anomalías, recomponibles sin pérdida.</div>
-<h3>2.13. Desnormalización controlada</h3>
+<h3>4.8. Desnormalización controlada</h3>
 <p>La <strong>desnormalización</strong> consiste en <strong>reintroducir redundancia de forma deliberada y controlada</strong> en un esquema ya normalizado, para <strong>mejorar el rendimiento</strong> de consultas críticas, asumiendo el coste de mantener la coherencia [RAMAKRISHNAN, cap. 21; SILBER, cap. 16]. No es «diseñar mal»: es una decisión consciente y documentada tras medir.</p>
 <p>Técnicas habituales:</p>
 <ul><li><strong>Atributos derivados precalculados</strong> (guardar el total de una factura en lugar de sumar líneas en cada consulta).</li><li><strong>Duplicar columnas de uso frecuente</strong> para evitar joins (guardar el nombre del distrito junto al código, aceptando actualizarlo).</li><li><strong>Tablas de resumen / agregados</strong> y <strong>vistas materializadas</strong> para informes.</li><li><strong>Particiones y precálculos</strong> orientados a OLAP/data warehouse.</li></ul>
@@ -324,7 +326,7 @@ CREATE TABLE HABITANTE (
 <div class="callout dato"><span class="kicker">DATO CLAVE EXAMEN</span>Primero <strong>normalizar</strong> (corrección e integridad), después <strong>medir</strong> y, solo si hace falta, <strong>desnormalizar</strong> puntos concretos (rendimiento). La desnormalización es un <strong>compromiso</strong>: gana velocidad de lectura a costa de redundancia y de complejidad de actualización. Es típica en entornos <strong>analíticos (OLAP)</strong> y poco recomendable en <strong>transaccionales (OLTP)</strong> con muchas escrituras.</div>
 <div class="callout ayto"><span class="kicker">EJEMPLO AYTO MADRID</span>El sistema transaccional del Padrón se mantiene <strong>normalizado (3FN)</strong> para garantizar la integridad de las altas y bajas diarias. Pero el <strong>data warehouse</strong> que alimenta los cuadros de mando demográficos (población por distrito, edad y sexo) se <strong>desnormaliza</strong> en un esquema en estrella con tablas de hechos y dimensiones, porque ahí prima la velocidad de las consultas analíticas sobre la ausencia de redundancia.</div>
 <div class="callout ref"><span class="kicker">REFERENCIA CRUZADA</span>Los modelos OLTP frente a OLAP, los almacenes de datos y NoSQL se tratan en el <strong>Tema 15</strong> (SGBD y administración). La seguridad y la protección de los datos diseñados, en los <strong>Temas 32 y 39</strong>.</div>
-<h3>2.14. Buenas prácticas y errores típicos de diseño</h3>
+<h3>4.9. Buenas prácticas y errores típicos de diseño</h3>
 <p>Cierre práctico que reúne los criterios del tema [DATE, cap. 14; ELMASRI, cap. 14]:</p>
 <ul><li><strong>Normaliza primero, desnormaliza después y solo con medida</strong>: empieza en 3FN/BCNF y reintroduce redundancia únicamente sobre cuellos de botella reales.</li><li><strong>Declara la integridad en el esquema</strong>, no en el código de aplicación: claves primarias y ajenas, <code>NOT NULL</code>, <code>UNIQUE</code>, <code>CHECK</code>. Es más fiable y centralizado.</li><li><strong>Una clave primaria en cada tabla</strong>: preferiblemente estable; valora clave subrogada cuando la natural sea volátil o compuesta y pesada.</li><li><strong>No almacenes datos derivados</strong> salvo desnormalización justificada (recalcula totales, edades, etc.).</li><li><strong>Nombra de forma consistente</strong> (singular/plural, convenios de claves ajenas) y documenta el diccionario de datos.</li><li><strong>Indexa lo que se consulta, no todo</strong>: cada índice acelera lecturas pero penaliza escrituras y ocupa espacio.</li><li><strong>Cuida la frontera del temario</strong>: aquí va el diseño y la normalización; el modelo conceptual al T16, el SQL al T19 y la administración del SGBD al T15.</li></ul>
 <p>Errores frecuentes de examen y de práctica: resolver una relación N:M sin tabla intermedia; confundir selección (filas) con proyección (columnas); creer que la 2FN aplica con clave simple; meter varios valores en una celda (rompe 1FN); olvidar que la clave primaria no admite nulos; y pensar que «más índices = más rápido siempre».</p>
@@ -333,14 +335,14 @@ CREATE TABLE HABITANTE (
 <p><em>Fin del contenido teórico. Continúa con los <strong>Diagramas</strong> (visualización de los conceptos), el <strong>Test</strong> (60 preguntas de autoevaluación) y los <strong>Casos prácticos</strong> (aplicación al Ayuntamiento de Madrid).</em></p></section>
 <section id="tab-indice" class="tab-content"><hr>
 <h2>Estructura del tema</h2>
-<div class="indice-outline"><ol style="list-style:none"><li><strong>1. Diseño de bases de datos: concepto y objetivos</strong><ol style="list-style:none"><li>1.1. Qué es diseñar una base de datos y por qué importa</li><li>1.2. Los tres niveles de diseño (conceptual, lógico, físico) y el ciclo de vida</li><li>1.3. Objetivos del diseño (integridad, no redundancia, rendimiento, independencia)</li><li>1.4. Diseño conceptual: el modelo entidad-relación (E-R)</li><li>1.5. Diseño lógico</li><li>1.6. Transformación de entidades y relaciones al modelo relacional</li><li>1.7. Eliminación de redundancias</li><li>1.8. Integridad de entidad e integridad referencial</li><li>1.9. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)</li><li>1.10. Diseño físico</li><li>1.11. Estructuras de datos y de almacenamiento (tablespaces, páginas, particiones)</li><li>1.12. Índices (B-tree, hash, bitmap, agrupado y no agrupado)</li><li>1.13. Rendimiento y optimización (planes de ejecución, particionamiento, clustering)</li></ol></li><li><strong>2. El modelo lógico relacional</strong><ol style="list-style:none"><li>2.1. Conceptos básicos (relación, tupla, atributo, dominio, grado, cardinalidad)</li><li>2.2. Claves: candidata, primaria, alternativa, superclave y ajena</li><li>2.3. Reglas de integridad del modelo relacional</li><li>2.4. Álgebra relacional (operadores y consultas)</li><li>2.5. Cálculo relacional (de tuplas y de dominios)</li><li>2.6. Normalización: objetivos, redundancia y anomalías</li><li>2.7. Dependencias funcionales y axiomas de Armstrong</li><li>2.8. Primera Forma Normal (1FN)</li><li>2.9. Segunda Forma Normal (2FN)</li><li>2.10. Tercera Forma Normal (3FN)</li><li>2.11. Forma Normal de Boyce-Codd (BCNF)</li><li>2.12. Formas normales superiores (4FN y 5FN)</li><li>2.13. Desnormalización controlada</li><li>2.14. Buenas prácticas y errores típicos de diseño</li></ol></li></ol></div>
+<div class="indice-outline"><ol style="list-style:none"><li><strong>1. Diseño de bases de datos</strong><ol style="list-style:none"><li>1.1. Qué es diseñar una base de datos y por qué importa</li><li>1.2. Los tres niveles de diseño (conceptual, lógico, físico) y el ciclo de vida</li><li>1.3. Objetivos del diseño (integridad, no redundancia, rendimiento, independencia)</li><li>1.4. Diseño conceptual: el modelo entidad-relación (E-R)</li></ol></li><li><strong>2. Diseño lógico y físico</strong><ol style="list-style:none"><li>2.1. Diseño lógico</li><li>2.2. Transformación de entidades y relaciones al modelo relacional</li><li>2.3. Eliminación de redundancias</li><li>2.4. Integridad de entidad e integridad referencial</li><li>2.5. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)</li><li>2.6. Diseño físico</li><li>2.7. Estructuras de datos y de almacenamiento (tablespaces, páginas, particiones)</li><li>2.8. Índices (B-tree, hash, bitmap, agrupado y no agrupado)</li><li>2.9. Rendimiento y optimización (planes de ejecución, particionamiento, clustering)</li></ol></li><li><strong>3. El modelo lógico relacional</strong><ol style="list-style:none"><li>3.1. Conceptos básicos (relación, tupla, atributo, dominio, grado, cardinalidad)</li><li>3.2. Claves: candidata, primaria, alternativa, superclave y ajena</li><li>3.3. Reglas de integridad del modelo relacional</li><li>3.4. Álgebra relacional (operadores y consultas)</li><li>3.5. Cálculo relacional (de tuplas y de dominios)</li></ol></li><li><strong>4. Normalización</strong><ol style="list-style:none"><li>4.1. Normalización: objetivos, redundancia y anomalías</li><li>4.2. Dependencias funcionales y axiomas de Armstrong</li><li>4.3. Primera Forma Normal (1FN)</li><li>4.4. Segunda Forma Normal (2FN)</li><li>4.5. Tercera Forma Normal (3FN)</li><li>4.6. Forma Normal de Boyce-Codd (BCNF)</li><li>4.7. Formas normales superiores (4FN y 5FN)</li><li>4.8. Desnormalización controlada</li><li>4.9. Buenas prácticas y errores típicos de diseño</li></ol></li></ol></div>
 <h2>Conceptos clave para memorizar</h2>
 <table><thead><tr><th>Concepto</th><th>Dato clave</th></tr></thead><tbody><tr><td>Diseño de BD</td><td>Proceso en 3 niveles: conceptual → lógico → físico</td></tr><tr><td>Modelo conceptual</td><td>Independiente del SGBD; el más usado es el entidad-relación (Chen, 1976)</td></tr><tr><td>Modelo lógico</td><td>Adaptado al tipo de SGBD (relacional); aún independiente del producto</td></tr><tr><td>Modelo físico</td><td>Cómo se almacena realmente: ficheros, índices, particiones (producto concreto)</td></tr><tr><td>Independencia de datos</td><td>Cambiar un nivel sin afectar a los superiores (física y lógica)</td></tr><tr><td>Relación</td><td>Tabla: conjunto de tuplas (filas) sobre un esquema de atributos (columnas)</td></tr><tr><td>Dominio</td><td>Conjunto de valores válidos de un atributo</td></tr><tr><td>Grado / Cardinalidad</td><td>Nº de atributos (columnas) / nº de tuplas (filas) de una relación</td></tr><tr><td>Clave candidata</td><td>Conjunto mínimo de atributos que identifica unívocamente una tupla</td></tr><tr><td>Clave primaria</td><td>Clave candidata elegida; no admite nulos (integridad de entidad)</td></tr><tr><td>Clave ajena (foránea)</td><td>Atributo que referencia la clave primaria de otra tabla (integridad referencial)</td></tr><tr><td>Integridad de entidad</td><td>La clave primaria no puede ser nula ni duplicada</td></tr><tr><td>Integridad referencial</td><td>Toda clave ajena apunta a una fila existente o es nula</td></tr><tr><td>Álgebra relacional</td><td>Lenguaje procedimental: σ (selección), π (proyección), ⋈ (join), ∪, −, ×, ÷</td></tr><tr><td>Cálculo relacional</td><td>Lenguaje declarativo (qué, no cómo); de tuplas y de dominios</td></tr><tr><td>Dependencia funcional</td><td>X → Y: el valor de X determina el de Y</td></tr><tr><td>Axiomas de Armstrong</td><td>Reflexividad, aumento y transitividad (reglas de inferencia de DF)</td></tr><tr><td>Anomalías</td><td>Problemas de inserción, borrado y actualización por mal diseño</td></tr><tr><td>1FN</td><td>Atributos atómicos: sin grupos repetitivos ni valores multivaluados</td></tr><tr><td>2FN</td><td>1FN + sin dependencias parciales de la clave (atributos dependen de TODA la clave)</td></tr><tr><td>3FN</td><td>2FN + sin dependencias transitivas entre atributos no clave</td></tr><tr><td>BCNF</td><td>Todo determinante es clave candidata (3FN reforzada)</td></tr><tr><td>Desnormalización</td><td>Introducir redundancia controlada a propósito para ganar rendimiento</td></tr><tr><td>Índice</td><td>Estructura auxiliar (B-tree, hash, bitmap) que acelera las búsquedas</td></tr><tr><td>Plan de ejecución</td><td>Ruta que elige el optimizador para resolver una consulta</td></tr></tbody></table>
 <!-- ficha-estudio:ini --><div class="ficha-estudio"><div class="fe-item"><span class="fe-k">Extensi&oacute;n</span><span class="fe-v">~10.000 palabras &middot; 12 diagramas &middot; 60 preguntas de test</span></div><div class="fe-item"><span class="fe-k">Tiempo estimado de estudio</span><span class="fe-v">11-13 horas <span class="fe-n">(primera vuelta completa, sin contar repasos)</span></span></div></div><!-- ficha-estudio:fin --></section>
 <section id="tab-diagramas" class="tab-content"><hr>
 <hr>
 <h2>Índice de diagramas</h2>
-<table><thead><tr><th>ID</th><th>Título</th><th>Sección</th><th>Tipo</th><th>Formato</th></tr></thead><tbody><tr><td>D1</td><td>Los tres niveles de diseño</td><td>§1.2</td><td>Flujo</td><td>660×300</td></tr><tr><td>D2</td><td>Elementos del modelo entidad-relación</td><td>§1.4</td><td>Conceptual</td><td>660×320</td></tr><tr><td>D3</td><td>Transformación E-R → relacional</td><td>§1.6</td><td>Comparativa</td><td>680×320</td></tr><tr><td>D4</td><td>Integridad de entidad y referencial</td><td>§1.8</td><td>Estructura</td><td>680×300</td></tr><tr><td>D5</td><td>Los cuatro sublenguajes de SQL</td><td>§1.9</td><td>Bloques</td><td>660×300</td></tr><tr><td>D6</td><td>Tipos de índice</td><td>§1.12</td><td>Comparativa</td><td>680×320</td></tr><tr><td>D7</td><td>Conceptos del modelo relacional</td><td>§2.1</td><td>Estructura</td><td>680×320</td></tr><tr><td>D8</td><td>Tipos de claves</td><td>§2.2</td><td>Anidamiento</td><td>620×340</td></tr><tr><td>D9</td><td>Operadores del álgebra relacional</td><td>§2.4</td><td>Mapa</td><td>680×340</td></tr><tr><td>D10</td><td>Las tres anomalías</td><td>§2.6</td><td>Conceptual</td><td>660×300</td></tr><tr><td>D11</td><td>Las formas normales (anidadas)</td><td>§2.6-2.12</td><td>Anidamiento</td><td>640×360</td></tr><tr><td>D12</td><td>Estructura de un índice B+tree</td><td>§1.12</td><td>Árbol</td><td>680×320</td></tr></tbody></table>
+<table><thead><tr><th>ID</th><th>Título</th><th>Sección</th><th>Tipo</th><th>Formato</th></tr></thead><tbody><tr><td>D1</td><td>Los tres niveles de diseño</td><td>§1.2</td><td>Flujo</td><td>660×300</td></tr><tr><td>D2</td><td>Elementos del modelo entidad-relación</td><td>§1.4</td><td>Conceptual</td><td>660×320</td></tr><tr><td>D3</td><td>Transformación E-R → relacional</td><td>§2.2</td><td>Comparativa</td><td>680×320</td></tr><tr><td>D4</td><td>Integridad de entidad y referencial</td><td>§2.4</td><td>Estructura</td><td>680×300</td></tr><tr><td>D5</td><td>Los cuatro sublenguajes de SQL</td><td>§2.5</td><td>Bloques</td><td>660×300</td></tr><tr><td>D6</td><td>Tipos de índice</td><td>§2.8</td><td>Comparativa</td><td>680×320</td></tr><tr><td>D7</td><td>Conceptos del modelo relacional</td><td>§3.1</td><td>Estructura</td><td>680×320</td></tr><tr><td>D8</td><td>Tipos de claves</td><td>§3.2</td><td>Anidamiento</td><td>620×340</td></tr><tr><td>D9</td><td>Operadores del álgebra relacional</td><td>§3.4</td><td>Mapa</td><td>680×340</td></tr><tr><td>D10</td><td>Las tres anomalías</td><td>§4.1</td><td>Conceptual</td><td>660×300</td></tr><tr><td>D11</td><td>Las formas normales (anidadas)</td><td>§4.1-2.12</td><td>Anidamiento</td><td>640×360</td></tr><tr><td>D12</td><td>Estructura de un índice B+tree</td><td>§2.8</td><td>Árbol</td><td>680×320</td></tr></tbody></table>
 <hr>
 <h2>D1 · Los tres niveles de diseño</h2>
 <p><strong>Sección</strong>: §1.2 — Los tres niveles de diseño y el ciclo de vida <strong>Propósito</strong>: Mostrar la secuencia conceptual → lógico → físico y de qué depende cada nivel.</p>
@@ -379,7 +381,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D3 · Transformación E-R → relacional</h2>
-<p><strong>Sección</strong>: §1.6 — Transformación de entidades y relaciones al modelo relacional <strong>Propósito</strong>: Contrastar la regla 1:N (propaga clave) con la N:M (crea tabla intermedia).</p>
+<p><strong>Sección</strong>: §2.2 — Transformación de entidades y relaciones al modelo relacional <strong>Propósito</strong>: Contrastar la regla 1:N (propaga clave) con la N:M (crea tabla intermedia).</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Reglas de transformación: una relación 1 a N propaga la clave ajena; una relación N a M crea una tabla intermedia con dos claves ajenas">
   <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.c{font:600 11px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="170" y="26" text-anchor="middle" class="h">Relación 1:N → propaga clave</text>
@@ -398,7 +400,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D4 · Integridad de entidad y referencial</h2>
-<p><strong>Sección</strong>: §1.8 — Integridad de entidad e integridad referencial <strong>Propósito</strong>: Visualizar la clave primaria (sin nulos) y la clave ajena que apunta a una fila existente.</p>
+<p><strong>Sección</strong>: §2.4 — Integridad de entidad e integridad referencial <strong>Propósito</strong>: Visualizar la clave primaria (sin nulos) y la clave ajena que apunta a una fila existente.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Integridad de entidad: la clave primaria no es nula; integridad referencial: la clave ajena apunta a una fila existente de la tabla referenciada">
   <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.k{font:700 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="120" y="26" text-anchor="middle" class="h">HABITANTE</text>
@@ -419,7 +421,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D5 · Los cuatro sublenguajes de SQL</h2>
-<p><strong>Sección</strong>: §1.9 — Lenguajes de definición y manipulación <strong>Propósito</strong>: Separar DDL / DML / DCL / TCL por su finalidad.</p>
+<p><strong>Sección</strong>: §2.5 — Lenguajes de definición y manipulación <strong>Propósito</strong>: Separar DDL / DML / DCL / TCL por su finalidad.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" role="img" aria-label="Los cuatro sublenguajes de SQL: DDL para la estructura, DML para los datos, DCL para los permisos y TCL para las transacciones">
   <style>.t{font:700 13px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="330" y="28" text-anchor="middle" class="h">SQL (ISO/IEC 9075) — cuatro sublenguajes</text>
@@ -431,7 +433,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D6 · Tipos de índice</h2>
-<p><strong>Sección</strong>: §1.12 — Índices <strong>Propósito</strong>: Comparar B+tree, hash y bitmap según su uso ideal.</p>
+<p><strong>Sección</strong>: §2.8 — Índices <strong>Propósito</strong>: Comparar B+tree, hash y bitmap según su uso ideal.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Comparación de tipos de índice: B+tree para igualdad y rango, hash solo para igualdad, bitmap para columnas de baja cardinalidad">
   <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="340" y="26" text-anchor="middle" class="h">¿Qué índice usar?</text>
@@ -443,7 +445,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D7 · Conceptos del modelo relacional</h2>
-<p><strong>Sección</strong>: §2.1 — Conceptos básicos <strong>Propósito</strong>: Anclar relación/tupla/atributo/dominio/grado/cardinalidad sobre una tabla.</p>
+<p><strong>Sección</strong>: §3.1 — Conceptos básicos <strong>Propósito</strong>: Anclar relación/tupla/atributo/dominio/grado/cardinalidad sobre una tabla.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Sobre una tabla: la relación es la tabla, la tupla es una fila, el atributo una columna, el grado el número de columnas y la cardinalidad el número de filas">
   <style>.k{font:700 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.a{font:600 11px system-ui,sans-serif;fill:#d13c3c}</style>
   <text x="250" y="26" text-anchor="middle" class="h">Relación HABITANTE (grado 3, cardinalidad 3)</text>
@@ -461,7 +463,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D8 · Tipos de claves</h2>
-<p><strong>Sección</strong>: §2.2 — Claves: candidata, primaria, alternativa, superclave y ajena <strong>Propósito</strong>: Mostrar el anidamiento superclave ⊇ candidata ⊇ primaria y la clave ajena.</p>
+<p><strong>Sección</strong>: §3.2 — Claves: candidata, primaria, alternativa, superclave y ajena <strong>Propósito</strong>: Mostrar el anidamiento superclave ⊇ candidata ⊇ primaria y la clave ajena.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" role="img" aria-label="Las superclaves contienen a las claves candidatas; una de las candidatas se elige como clave primaria y las demás son alternativas; la clave ajena referencia otra tabla">
   <style>.t{font:700 12px system-ui,sans-serif;fill:#0055a0}.s{font:11px system-ui,sans-serif;fill:#444}.b{font:600 11px system-ui,sans-serif;fill:#fff}</style>
   <text x="230" y="26" text-anchor="middle" class="t">Jerarquía de claves</text>
@@ -475,7 +477,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D9 · Operadores del álgebra relacional</h2>
-<p><strong>Sección</strong>: §2.4 — Álgebra relacional <strong>Propósito</strong>: Listar operadores primitivos y derivados con su símbolo y efecto.</p>
+<p><strong>Sección</strong>: §3.4 — Álgebra relacional <strong>Propósito</strong>: Listar operadores primitivos y derivados con su símbolo y efecto.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-label="Operadores del álgebra relacional: cinco primitivos (selección, proyección, unión, diferencia, producto cartesiano) y derivados (join, intersección, división)">
   <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}</style>
   <text x="340" y="26" text-anchor="middle" class="h">Álgebra relacional (lenguaje procedimental)</text>
@@ -495,7 +497,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D10 · Las tres anomalías</h2>
-<p><strong>Sección</strong>: §2.6 — Normalización: objetivos, redundancia y anomalías <strong>Propósito</strong>: Mostrar las anomalías de inserción, borrado y actualización sobre una tabla redundante.</p>
+<p><strong>Sección</strong>: §4.1 — Normalización: objetivos, redundancia y anomalías <strong>Propósito</strong>: Mostrar las anomalías de inserción, borrado y actualización sobre una tabla redundante.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" role="img" aria-label="Las tres anomalías de un diseño no normalizado: inserción, borrado y actualización, causadas por la redundancia de datos">
   <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}</style>
   <text x="330" y="26" text-anchor="middle" class="h">Redundancia → tres anomalías</text>
@@ -509,7 +511,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D11 · Las formas normales (anidadas)</h2>
-<p><strong>Sección</strong>: §2.6-2.12 — Normalización <strong>Propósito</strong>: Mostrar el anidamiento 1FN ⊃ 2FN ⊃ 3FN ⊃ BCNF ⊃ 4FN ⊃ 5FN y qué exige cada una.</p>
+<p><strong>Sección</strong>: §4.1-2.12 — Normalización <strong>Propósito</strong>: Mostrar el anidamiento 1FN ⊃ 2FN ⊃ 3FN ⊃ BCNF ⊃ 4FN ⊃ 5FN y qué exige cada una.</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Las formas normales son cada vez más estrictas y están anidadas: 1FN contiene 2FN, que contiene 3FN, BCNF, 4FN y 5FN">
   <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:10px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="320" y="24" text-anchor="middle" class="h">Formas normales (cada una incluye la anterior)</text>
@@ -524,7 +526,7 @@ CREATE TABLE HABITANTE (
 </svg>
 <hr>
 <h2>D12 · Estructura de un índice B+tree</h2>
-<p><strong>Sección</strong>: §1.12 — Índices <strong>Propósito</strong>: Ilustrar el árbol equilibrado con hojas enlazadas (igualdad y rango).</p>
+<p><strong>Sección</strong>: §2.8 — Índices <strong>Propósito</strong>: Ilustrar el árbol equilibrado con hojas enlazadas (igualdad y rango).</p>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Estructura de un índice B+tree: un nodo raíz, nodos intermedios de guía y hojas enlazadas que contienen los punteros a las filas y permiten recorridos por rango">
   <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="340" y="26" text-anchor="middle" class="h">Índice B+tree (equilibrado, hojas enlazadas)</text>
@@ -564,7 +566,7 @@ CREATE TABLE HABITANTE (
 <p><strong>Cuestión 3 — Relación N:M (3 puntos).</strong> La relación entre EXPEDIENTE e INTERESADO es N:M. Diseñe la solución relacional completa, con la tabla resultante, su clave primaria y sus claves ajenas.</p>
 <p><strong>Cuestión 4 — Integridad (3 puntos).</strong> Explique qué reglas de integridad (de entidad y referencial) garantizan que: (a) no exista un expediente sin número; (b) no se asigne un expediente a una unidad inexistente. Proponga la política referencial al intentar borrar una unidad que aún tramita expedientes.</p>
 <h3>Solución orientativa</h3>
-<ul><li><strong>C1</strong>: Entidades <code>PROCEDIMIENTO(cod_proc PK)</code>, <code>EXPEDIENTE(num_exp PK)</code>, <code>INTERESADO(dni PK)</code>, <code>UNIDAD(cod_unidad PK)</code>. Las claves naturales son cod_proc, num_exp, dni y cod_unidad. <em>(§1.4, §2.2)</em></li><li><strong>C2</strong>: Es una relación <strong>1:N</strong> → la clave de UNIDAD se <strong>propaga</strong> como clave ajena en EXPEDIENTE: <code>EXPEDIENTE(num_exp PK, fecha_apertura, cod_proc FK, cod_unidad FK)</code>. No se crea tabla nueva. <em>(§1.6)</em></li><li><strong>C3</strong>: La N:M se resuelve con una <strong>tabla intermedia</strong>: <code>INTERVENCION(num_exp, dni, rol, PK(num_exp, dni))</code> con dos claves ajenas (<code>num_exp → EXPEDIENTE</code>, <code>dni → INTERESADO</code>). El atributo <code>rol</code> (titular, representante…) es propio de la relación. <em>(§1.6)</em></li><li><strong>C4</strong>: (a) la <strong>integridad de entidad</strong> impide que <code>num_exp</code> (clave primaria) sea nulo; (b) la <strong>integridad referencial</strong> sobre <code>cod_unidad</code> impide asignar el expediente a una unidad inexistente. Al borrar una unidad con expedientes, la política adecuada es <code>RESTRICT/NO ACTION</code> (rechazar el borrado) para no dejar expedientes huérfanos. <em>(§1.8)</em></li></ul>
+<ul><li><strong>C1</strong>: Entidades <code>PROCEDIMIENTO(cod_proc PK)</code>, <code>EXPEDIENTE(num_exp PK)</code>, <code>INTERESADO(dni PK)</code>, <code>UNIDAD(cod_unidad PK)</code>. Las claves naturales son cod_proc, num_exp, dni y cod_unidad. <em>(§1.4, §3.2)</em></li><li><strong>C2</strong>: Es una relación <strong>1:N</strong> → la clave de UNIDAD se <strong>propaga</strong> como clave ajena en EXPEDIENTE: <code>EXPEDIENTE(num_exp PK, fecha_apertura, cod_proc FK, cod_unidad FK)</code>. No se crea tabla nueva. <em>(§2.2)</em></li><li><strong>C3</strong>: La N:M se resuelve con una <strong>tabla intermedia</strong>: <code>INTERVENCION(num_exp, dni, rol, PK(num_exp, dni))</code> con dos claves ajenas (<code>num_exp → EXPEDIENTE</code>, <code>dni → INTERESADO</code>). El atributo <code>rol</code> (titular, representante…) es propio de la relación. <em>(§2.2)</em></li><li><strong>C4</strong>: (a) la <strong>integridad de entidad</strong> impide que <code>num_exp</code> (clave primaria) sea nulo; (b) la <strong>integridad referencial</strong> sobre <code>cod_unidad</code> impide asignar el expediente a una unidad inexistente. Al borrar una unidad con expedientes, la política adecuada es <code>RESTRICT/NO ACTION</code> (rechazar el borrado) para no dejar expedientes huérfanos. <em>(§2.4)</em></li></ul>
 <h3>Criterios de evaluación</h3>
 <table><thead><tr><th>Criterio</th><th>Puntos</th></tr></thead><tbody><tr><td>Identifica entidades y claves primarias correctas</td><td>2</td></tr><tr><td>Resuelve la 1:N propagando la clave ajena al lado «N»</td><td>2</td></tr><tr><td>Diseña la tabla intermedia N:M con clave compuesta y dos FK</td><td>3</td></tr><tr><td>Explica integridad de entidad y referencial + política RESTRICT</td><td>3</td></tr></tbody></table>
 <hr>
@@ -579,7 +581,7 @@ CREATE TABLE HABITANTE (
 <p><strong>Cuestión 3 — 2FN y 3FN (4 puntos).</strong> Lleve el diseño hasta la 3FN explicando, en cada paso, qué tipo de dependencia se elimina (parcial o transitiva) y mostrando las tablas resultantes con sus claves.</p>
 <p><strong>Cuestión 4 — Justificación (2 puntos).</strong> ¿Por qué el diseño normalizado elimina las incoherencias detectadas? ¿Hasta qué forma normal es razonable llegar aquí y por qué?</p>
 <h3>Solución orientativa</h3>
-<ul><li><strong>C1</strong>: <strong>Inserción</strong> (no se puede registrar un distrito nuevo sin una licencia); <strong>borrado</strong> (borrar la última licencia de un distrito elimina su nombre y tasa); <strong>actualización</strong> (cambiar el nombre del distrito obliga a tocar todas las filas, y olvidar alguna genera la incoherencia observada). <em>(§2.6)</em></li><li><strong>C2</strong>: <code>tecnicos</code> viola la <strong>1FN</strong> (varios valores en una celda, no atómico). Se extrae: <code>LICENCIA(num_lic PK, titular_dni, titular_nombre, cod_distrito, nombre_distrito, tasa_distrito)</code> y <code>ASIGNACION(num_lic, tecnico, PK(num_lic, tecnico))</code>. <em>(§2.8)</em></li><li><strong>C3</strong>: La clave de LICENCIA es simple (<code>num_lic</code>) → no hay dependencias <strong>parciales</strong>, ya está en <strong>2FN</strong>. Pero hay dependencias <strong>transitivas</strong>: <code>num_lic → cod_distrito → {nombre_distrito, tasa_distrito}</code> y <code>num_lic → titular_dni → titular_nombre</code>. Para la <strong>3FN</strong> se separan: <code>DISTRITO(cod_distrito PK, nombre_distrito, tasa_distrito)</code>, <code>TITULAR(titular_dni PK, titular_nombre)</code> y <code>LICENCIA(num_lic PK, titular_dni FK, cod_distrito FK)</code>. <em>(§2.9, §2.10)</em></li><li><strong>C4</strong>: Cada hecho (nombre y tasa del distrito, nombre del titular) se almacena <strong>una sola vez</strong>, así que no puede quedar inconsistente, se puede dar de alta un distrito sin licencias y borrar una licencia no afecta al distrito. Llegar a <strong>3FN</strong> es suficiente: aquí cada determinante de las tablas resultantes es clave, por lo que también cumplen BCNF, sin necesidad de formas superiores. <em>(§2.6, §2.10, §2.11)</em></li></ul>
+<ul><li><strong>C1</strong>: <strong>Inserción</strong> (no se puede registrar un distrito nuevo sin una licencia); <strong>borrado</strong> (borrar la última licencia de un distrito elimina su nombre y tasa); <strong>actualización</strong> (cambiar el nombre del distrito obliga a tocar todas las filas, y olvidar alguna genera la incoherencia observada). <em>(§4.1)</em></li><li><strong>C2</strong>: <code>tecnicos</code> viola la <strong>1FN</strong> (varios valores en una celda, no atómico). Se extrae: <code>LICENCIA(num_lic PK, titular_dni, titular_nombre, cod_distrito, nombre_distrito, tasa_distrito)</code> y <code>ASIGNACION(num_lic, tecnico, PK(num_lic, tecnico))</code>. <em>(§4.3)</em></li><li><strong>C3</strong>: La clave de LICENCIA es simple (<code>num_lic</code>) → no hay dependencias <strong>parciales</strong>, ya está en <strong>2FN</strong>. Pero hay dependencias <strong>transitivas</strong>: <code>num_lic → cod_distrito → {nombre_distrito, tasa_distrito}</code> y <code>num_lic → titular_dni → titular_nombre</code>. Para la <strong>3FN</strong> se separan: <code>DISTRITO(cod_distrito PK, nombre_distrito, tasa_distrito)</code>, <code>TITULAR(titular_dni PK, titular_nombre)</code> y <code>LICENCIA(num_lic PK, titular_dni FK, cod_distrito FK)</code>. <em>(§4.4, §4.5)</em></li><li><strong>C4</strong>: Cada hecho (nombre y tasa del distrito, nombre del titular) se almacena <strong>una sola vez</strong>, así que no puede quedar inconsistente, se puede dar de alta un distrito sin licencias y borrar una licencia no afecta al distrito. Llegar a <strong>3FN</strong> es suficiente: aquí cada determinante de las tablas resultantes es clave, por lo que también cumplen BCNF, sin necesidad de formas superiores. <em>(§4.1, §4.5, §4.6)</em></li></ul>
 <h3>Criterios de evaluación</h3>
 <table><thead><tr><th>Criterio</th><th>Puntos</th></tr></thead><tbody><tr><td>Nombra las tres anomalías con ejemplos correctos</td><td>2</td></tr><tr><td>Detecta la violación de 1FN y la corrige con tabla aparte</td><td>2</td></tr><tr><td>Alcanza la 3FN distinguiendo dependencia parcial vs transitiva</td><td>4</td></tr><tr><td>Justifica la eliminación de incoherencias y el grado de normalización</td><td>2</td></tr></tbody></table>
 <hr>
@@ -592,7 +594,7 @@ CREATE TABLE HABITANTE (
 <p><strong>Cuestión 3 — Particionamiento (2 puntos).</strong> ¿Cómo organizaría físicamente la tabla para que el informe anual no recorra los 20 millones de filas? Nombre la técnica y el beneficio.</p>
 <p><strong>Cuestión 4 — Desnormalización (3 puntos).</strong> Para el cuadro de mando, ¿qué técnica aplicaría y qué contrapartida asume? Distinga el tratamiento entre el sistema transaccional (altas diarias) y el analítico.</p>
 <h3>Solución orientativa</h3>
-<ul><li><strong>C1</strong>: Para (a), índice <strong>B-tree</strong> sobre <code>matricula</code> (igualdad, columna selectiva). Para (b), índice <strong>B-tree</strong> sobre <code>fecha_denuncia</code> (soporta rangos). Los índices <strong>aceleran las lecturas</strong> pero <strong>penalizan la carga nocturna</strong>, porque cada INSERT debe actualizar todos los índices: hay que equilibrar. <em>(§1.12)</em></li><li><strong>C2</strong>: <code>EXPLAIN</code> (PostgreSQL/MySQL) o <code>EXPLAIN PLAN</code> (Oracle) muestra el plan. El optimizador necesita <strong>estadísticas actualizadas</strong> (cardinalidad, distribución de valores) para estimar costes; conviene ejecutar <code>ANALYZE</code>. Si tras crear el índice sigue el <em>full scan</em>, suele ser por estadísticas desactualizadas o por una función sobre la columna. <em>(§1.13)</em></li><li><strong>C3</strong>: <strong>Particionar</strong> la tabla <strong>por rango de fecha (por año)</strong>. El informe del ejercicio en curso lee solo la partición correspondiente (<em>partition pruning</em>) en vez de los 20 millones de filas; además facilita el mantenimiento y el archivado. <em>(§1.13)</em></li><li><strong>C4</strong>: Una <strong>vista materializada</strong> (o tabla de resumen) con el total recaudado por distrito y año, que evita recalcular el agregado en cada acceso. Contrapartida: hay que <strong>refrescarla</strong> y asume <strong>redundancia controlada</strong>. El sistema <strong>transaccional</strong> se mantiene <strong>normalizado</strong> (integridad de las altas); el <strong>analítico/cuadro de mando</strong> se <strong>desnormaliza</strong> (rendimiento de lectura). <em>(§1.13, §2.13)</em></li></ul>
+<ul><li><strong>C1</strong>: Para (a), índice <strong>B-tree</strong> sobre <code>matricula</code> (igualdad, columna selectiva). Para (b), índice <strong>B-tree</strong> sobre <code>fecha_denuncia</code> (soporta rangos). Los índices <strong>aceleran las lecturas</strong> pero <strong>penalizan la carga nocturna</strong>, porque cada INSERT debe actualizar todos los índices: hay que equilibrar. <em>(§2.8)</em></li><li><strong>C2</strong>: <code>EXPLAIN</code> (PostgreSQL/MySQL) o <code>EXPLAIN PLAN</code> (Oracle) muestra el plan. El optimizador necesita <strong>estadísticas actualizadas</strong> (cardinalidad, distribución de valores) para estimar costes; conviene ejecutar <code>ANALYZE</code>. Si tras crear el índice sigue el <em>full scan</em>, suele ser por estadísticas desactualizadas o por una función sobre la columna. <em>(§2.9)</em></li><li><strong>C3</strong>: <strong>Particionar</strong> la tabla <strong>por rango de fecha (por año)</strong>. El informe del ejercicio en curso lee solo la partición correspondiente (<em>partition pruning</em>) en vez de los 20 millones de filas; además facilita el mantenimiento y el archivado. <em>(§2.9)</em></li><li><strong>C4</strong>: Una <strong>vista materializada</strong> (o tabla de resumen) con el total recaudado por distrito y año, que evita recalcular el agregado en cada acceso. Contrapartida: hay que <strong>refrescarla</strong> y asume <strong>redundancia controlada</strong>. El sistema <strong>transaccional</strong> se mantiene <strong>normalizado</strong> (integridad de las altas); el <strong>analítico/cuadro de mando</strong> se <strong>desnormaliza</strong> (rendimiento de lectura). <em>(§2.9, §4.8)</em></li></ul>
 <h3>Criterios de evaluación</h3>
 <table><thead><tr><th>Criterio</th><th>Puntos</th></tr></thead><tbody><tr><td>Propone índices B-tree adecuados y reconoce su coste en escritura</td><td>3</td></tr><tr><td>Identifica EXPLAIN y la necesidad de estadísticas</td><td>2</td></tr><tr><td>Aplica particionamiento por rango con <em>partition pruning</em></td><td>2</td></tr><tr><td>Justifica la desnormalización/vista materializada y distingue OLTP vs OLAP</td><td>3</td></tr></tbody></table>
 <hr>
@@ -600,7 +602,7 @@ CREATE TABLE HABITANTE (
 <section id="tab-validacion" class="tab-content"><hr>
 <hr>
 <h2>1. Cobertura del temario oficial</h2>
-<ul><li>[ ] <strong>Diseño de bases de datos</strong>: concepto, objetivos, niveles conceptual/lógico/físico, ciclo de vida — §1.1-1.3</li><li>[ ] <strong>Diseño lógico</strong>: transformación E-R → relacional, eliminación de redundancias, integridad, DDL/DML/DCL/TCL — §1.5-1.9</li><li>[ ] <strong>Diseño físico</strong>: estructuras de almacenamiento, índices, rendimiento, planes de ejecución, particionamiento — §1.10-1.13</li><li>[ ] <strong>Modelo lógico relacional</strong>: conceptos, claves, integridad, álgebra y cálculo relacional — §2.1-2.5</li><li>[ ] <strong>Normalización</strong>: anomalías, dependencias funcionales, 1FN-2FN-3FN-BCNF, 4FN/5FN, desnormalización — §2.6-2.13</li></ul>
+<ul><li>[ ] <strong>Diseño de bases de datos</strong>: concepto, objetivos, niveles conceptual/lógico/físico, ciclo de vida — §1.1-1.3</li><li>[ ] <strong>Diseño lógico</strong>: transformación E-R → relacional, eliminación de redundancias, integridad, DDL/DML/DCL/TCL — §2.1-1.9</li><li>[ ] <strong>Diseño físico</strong>: estructuras de almacenamiento, índices, rendimiento, planes de ejecución, particionamiento — §2.6-1.13</li><li>[ ] <strong>Modelo lógico relacional</strong>: conceptos, claves, integridad, álgebra y cálculo relacional — §3.1-2.5</li><li>[ ] <strong>Normalización</strong>: anomalías, dependencias funcionales, 1FN-2FN-3FN-BCNF, 4FN/5FN, desnormalización — §4.1-2.13</li></ul>
 <h2>2. Contenido teórico</h2>
 <ul><li>[ ] El nivel de profundidad es adecuado para C1 (¿hay que ampliar alguna sección?)</li><li>[ ] Las definiciones de las formas normales (1FN-BCNF) y de las dependencias funcionales son correctas</li><li>[ ] El álgebra relacional (operadores primitivos vs derivados) y su equivalencia con el cálculo son correctos</li><li>[ ] La frontera con el Tema 15 (SGBD/administración), el Tema 16 (modelo conceptual) y el Tema 19 (SQL) está clara</li><li>[ ] Los ejemplos Ayto Madrid (Padrón, expedientes, licencias, tributos, multas) son verosímiles</li></ul>
 <h2>3. Fuentes</h2>
@@ -614,7 +616,7 @@ CREATE TABLE HABITANTE (
 <h2>7. Referencias cruzadas a otros temas</h2>
 <ul><li>[ ] Validadas contra BOAM 10.032 (T13, T15, T16, T19, T26, T32, T39)</li><li>[ ] Ninguna referencia cruzada cita un enunciado de tema incorrecto</li></ul>
 <h2>8. Calidad editorial</h2>
-<ul><li>[ ] Ortografía verificada (tildes y ñ) — sin diacríticos perdidos</li><li>[ ] Coherencia de versión (v1.1) en title, badges, banner y footer del <code>index.html</code></li><li>[ ] El <code>index.html</code> abre, navega entre las 8 pestañas y el motor de test funciona</li><li>[ ] Las listas anidadas del Contenido se muestran con sus niveles (sin aplanar)</li></ul>
+<ul><li>[ ] Ortografía verificada (tildes y ñ) — sin diacríticos perdidos</li><li>[ ] Coherencia de versión (v1.2) en title, badges, banner y footer del <code>index.html</code></li><li>[ ] El <code>index.html</code> abre, navega entre las 8 pestañas y el motor de test funciona</li><li>[ ] Las listas anidadas del Contenido se muestran con sus niveles (sin aplanar)</li></ul>
 <hr>
 <h2>Observaciones abiertas</h2>
 <p>_(Espacio para anotaciones de María, Ana y la revisión IAM.)_</p></section>
@@ -628,7 +630,7 @@ CREATE TABLE HABITANTE (
 <table><thead><tr><th>ID</th><th>Referencia</th></tr></thead><tbody><tr><td><code>[RGPD]</code></td><td>Reglamento (UE) 2016/679 (RGPD) — minimización y exactitud de datos en el diseño.</td></tr><tr><td><code>[LOPDGDD]</code></td><td>Ley Orgánica 3/2018 de Protección de Datos y Garantía de los Derechos Digitales.</td></tr><tr><td><code>[ENS]</code></td><td>Real Decreto 311/2022, Esquema Nacional de Seguridad — integridad y trazabilidad.</td></tr><tr><td><code>[BOAM10032]</code></td><td>BOAM 10.032 (23-dic-2025). Bases específicas TIC C1 Ayto. Madrid — temario oficial.</td></tr></tbody></table>
 <hr>
 <p><em>Las referencias Tier 1 son la base del contenido; Tier 2 ilustra la materialización en productos reales; Tier 3 enmarca el cumplimiento aplicable al Ayuntamiento de Madrid.</em></p></section>
-<div class="footer">Tema 17 · v1.1 · 2026-06-20 · ETRIVIUM — IAM Ayuntamiento de Madrid · Generado desde los .md (sincronizado)</div>
+<div class="footer">Tema 17 · v1.2 · 2026-06-20 · ETRIVIUM — IAM Ayuntamiento de Madrid · Generado desde los .md (sincronizado)</div>
 </div>
 <script>
 const questions = [
@@ -684,7 +686,7 @@ const questions = [
 "El código fuente de la aplicación cliente"
 ],
 "correct": 0,
-"ref": "§1.5 [ELMASRI]",
+"ref": "§2.1 [ELMASRI]",
 "expl": "Transforma el modelo conceptual en el modelo del tipo de SGBD elegido (relacional)."
 },
 {
@@ -706,7 +708,7 @@ const questions = [
 "Análisis de requisitos"
 ],
 "correct": 1,
-"ref": "§1.10 [RAMAKRISHNAN]",
+"ref": "§2.6 [RAMAKRISHNAN]",
 "expl": "El diseño físico decide el almacenamiento y las estructuras de acceso en el producto concreto."
 },
 {
@@ -750,7 +752,7 @@ const questions = [
 "Fusionando ambas entidades en una sola tabla siempre"
 ],
 "correct": 1,
-"ref": "§1.6 [ELMASRI]",
+"ref": "§2.2 [ELMASRI]",
 "expl": "En 1:N la clave del lado «1» va al lado «N»; no se crea tabla nueva."
 },
 {
@@ -761,7 +763,7 @@ const questions = [
 "Creando una tabla intermedia con clave compuesta y dos claves ajenas"
 ],
 "correct": 2,
-"ref": "§1.6 [ELMASRI]",
+"ref": "§2.2 [ELMASRI]",
 "expl": "La tabla puente almacena además los atributos propios de la relación (p. ej. porcentaje de titularidad)."
 },
 {
@@ -772,7 +774,7 @@ const questions = [
 "Tres columnas fijas: telefono1, telefono2, telefono3"
 ],
 "correct": 0,
-"ref": "§1.6 [ELMASRI]",
+"ref": "§2.2 [ELMASRI]",
 "expl": "Guardar varios valores en una celda violaría la 1FN; las columnas fijas limitan artificialmente el número."
 },
 {
@@ -805,7 +807,7 @@ const questions = [
 "Obliga a crear una tabla intermedia"
 ],
 "correct": 0,
-"ref": "§1.6 [ELMASRI]",
+"ref": "§2.2 [ELMASRI]",
 "expl": "Almacenarlo introduce redundancia; solo se hace por desnormalización justificada."
 },
 {
@@ -827,7 +829,7 @@ const questions = [
 "Una clave formada por todos los atributos de la tabla"
 ],
 "correct": 1,
-"ref": "§1.9 [DATE]",
+"ref": "§2.5 [DATE]",
 "expl": "Aporta estabilidad frente a las claves naturales, que pueden cambiar."
 },
 {
@@ -838,7 +840,7 @@ const questions = [
 "Ningún atributo de la clave primaria puede ser nulo"
 ],
 "correct": 2,
-"ref": "§1.8 [CODD70]",
+"ref": "§2.4 [CODD70]",
 "expl": "Si lo fuera, no podría identificar unívocamente la fila."
 },
 {
@@ -849,7 +851,7 @@ const questions = [
 "Sea único en toda la base de datos"
 ],
 "correct": 0,
-"ref": "§1.8 [DATE]",
+"ref": "§2.4 [DATE]",
 "expl": "Evita las «referencias colgantes»."
 },
 {
@@ -860,7 +862,7 @@ const questions = [
 "SET DEFAULT"
 ],
 "correct": 1,
-"ref": "§1.8 [ISO9075]",
+"ref": "§2.4 [ISO9075]",
 "expl": "Propaga el borrado o la actualización a las filas que referencian la fila padre."
 },
 {
@@ -871,7 +873,7 @@ const questions = [
 "DDL"
 ],
 "correct": 2,
-"ref": "§1.9 [ISO9075]",
+"ref": "§2.5 [ISO9075]",
 "expl": "El DDL (Data Definition Language) define la estructura: tablas, índices, vistas y restricciones."
 },
 {
@@ -882,7 +884,7 @@ const questions = [
 "TCL"
 ],
 "correct": 0,
-"ref": "§1.9 [ISO9075]",
+"ref": "§2.5 [ISO9075]",
 "expl": "El DCL controla los privilegios de usuarios y roles."
 },
 {
@@ -893,7 +895,7 @@ const questions = [
 "DELETE es DML (transaccional, con WHERE) y TRUNCATE es DDL (vacía la tabla)"
 ],
 "correct": 2,
-"ref": "§1.9 [ISO9075]",
+"ref": "§2.5 [ISO9075]",
 "expl": "TRUNCATE es rápida y normalmente no transaccional ni filtrable."
 },
 {
@@ -904,7 +906,7 @@ const questions = [
 "Ordenar el resultado con ORDER BY"
 ],
 "correct": 1,
-"ref": "§1.12 [RAMAKRISHNAN]",
+"ref": "§2.8 [RAMAKRISHNAN]",
 "expl": "El hash no soporta rangos ni orden; para eso se usa el B+tree."
 },
 {
@@ -915,7 +917,7 @@ const questions = [
 "No necesita mantenerse al insertar"
 ],
 "correct": 0,
-"ref": "§1.12 [RAMAKRISHNAN]",
+"ref": "§2.8 [RAMAKRISHNAN]",
 "expl": "Sus hojas están al mismo nivel y enlazadas, lo que facilita los recorridos por rango."
 },
 {
@@ -926,7 +928,7 @@ const questions = [
 "Acelera lecturas pero penaliza escrituras y consume espacio"
 ],
 "correct": 2,
-"ref": "§1.12 [RAMAKRISHNAN]",
+"ref": "§2.8 [RAMAKRISHNAN]",
 "expl": "Cada índice debe mantenerse en cada INSERT/UPDATE/DELETE."
 },
 {
@@ -937,7 +939,7 @@ const questions = [
 "De tipo BLOB"
 ],
 "correct": 1,
-"ref": "§1.12 [ORA-CONCEPTS]",
+"ref": "§2.8 [ORA-CONCEPTS]",
 "expl": "Penaliza la concurrencia de escrituras, por eso es típico de OLAP."
 },
 {
@@ -948,7 +950,7 @@ const questions = [
 "No tiene relación con el orden de las filas"
 ],
 "correct": 1,
-"ref": "§1.12 [MS-SQL-INDEX]",
+"ref": "§2.8 [MS-SQL-INDEX]",
 "expl": "A menudo coincide con la clave primaria."
 },
 {
@@ -959,7 +961,7 @@ const questions = [
 "La lista de usuarios con permiso sobre la tabla"
 ],
 "correct": 0,
-"ref": "§1.13 [SILBER]",
+"ref": "§2.9 [SILBER]",
 "expl": "Se inspecciona con EXPLAIN y depende de las estadísticas."
 },
 {
@@ -970,7 +972,7 @@ const questions = [
 "El número de claves ajenas"
 ],
 "correct": 1,
-"ref": "§2.1 [DATE]",
+"ref": "§3.1 [DATE]",
 "expl": "La cardinalidad, en cambio, es el número de filas."
 },
 {
@@ -981,7 +983,7 @@ const questions = [
 "El número de dominios definidos"
 ],
 "correct": 0,
-"ref": "§2.1 [DATE]",
+"ref": "§3.1 [DATE]",
 "expl": "Grado = columnas; cardinalidad = filas."
 },
 {
@@ -992,7 +994,7 @@ const questions = [
 "El conjunto de valores válidos que puede tomar el atributo"
 ],
 "correct": 2,
-"ref": "§2.1 [DATE]",
+"ref": "§3.1 [DATE]",
 "expl": "Por ejemplo, el dominio de «distrito» son los códigos 1..21."
 },
 {
@@ -1003,7 +1005,7 @@ const questions = [
 "La relación teórica es un conjunto (sin duplicados); la tabla SQL es un multiconjunto (permite filas repetidas salvo restricción)"
 ],
 "correct": 2,
-"ref": "§2.1 [DATE]",
+"ref": "§3.1 [DATE]",
 "expl": "Por eso SELECT puede devolver duplicados salvo DISTINCT."
 },
 {
@@ -1014,7 +1016,7 @@ const questions = [
 "Una clave que apunta a otra tabla"
 ],
 "correct": 0,
-"ref": "§2.2 [DATE]",
+"ref": "§3.2 [DATE]",
 "expl": "La clave candidata es la superclave mínima."
 },
 {
@@ -1025,7 +1027,7 @@ const questions = [
 "La clave que se descarta del diseño"
 ],
 "correct": 1,
-"ref": "§2.2 [ELMASRI]",
+"ref": "§3.2 [ELMASRI]",
 "expl": "De entre las candidatas, la elegida es la primaria; las demás, alternativas."
 },
 {
@@ -1036,7 +1038,7 @@ const questions = [
 "Superclaves"
 ],
 "correct": 0,
-"ref": "§2.2 [DATE]",
+"ref": "§3.2 [DATE]",
 "expl": "Suelen implementarse con una restricción UNIQUE."
 },
 {
@@ -1047,7 +1049,7 @@ const questions = [
 "Una clave alternativa (candidata no elegida)"
 ],
 "correct": 2,
-"ref": "§2.2 [DATE]",
+"ref": "§3.2 [DATE]",
 "expl": "El NSS también identifica unívocamente, pero no fue elegido como primaria."
 },
 {
@@ -1058,7 +1060,7 @@ const questions = [
 "Una cadena vacía"
 ],
 "correct": 1,
-"ref": "§2.3 [DATE]",
+"ref": "§3.3 [DATE]",
 "expl": "No es cero ni cadena vacía, e introduce una lógica de tres valores."
 },
 {
@@ -1069,7 +1071,7 @@ const questions = [
 "La integridad referencial: toda clave ajena referencia una fila existente o es nula"
 ],
 "correct": 2,
-"ref": "§2.3 [CODD70]",
+"ref": "§3.3 [CODD70]",
 "expl": "Junto con la integridad de entidad, de dominio y las reglas de negocio."
 },
 {
@@ -1080,7 +1082,7 @@ const questions = [
 "De definición de estructura (DDL)"
 ],
 "correct": 0,
-"ref": "§2.4 [DATE]",
+"ref": "§3.4 [DATE]",
 "expl": "El cálculo relacional, en cambio, es declarativo."
 },
 {
@@ -1091,7 +1093,7 @@ const questions = [
 "Une dos tablas"
 ],
 "correct": 1,
-"ref": "§2.4 [ELMASRI]",
+"ref": "§3.4 [ELMASRI]",
 "expl": "La proyección (π) es la que elige columnas."
 },
 {
@@ -1102,7 +1104,7 @@ const questions = [
 "Calcula el producto cartesiano"
 ],
 "correct": 0,
-"ref": "§2.4 [ELMASRI]",
+"ref": "§3.4 [ELMASRI]",
 "expl": "No confundir con la selección σ, que filtra filas."
 },
 {
@@ -1113,7 +1115,7 @@ const questions = [
 "Selección, proyección, join, división y renombrado"
 ],
 "correct": 1,
-"ref": "§2.4 [CODD70]",
+"ref": "§3.4 [CODD70]",
 "expl": "El join, la intersección y la división se derivan de estos cinco."
 },
 {
@@ -1124,7 +1126,7 @@ const questions = [
 "«qué elementos están relacionados con TODOS los de otro conjunto»"
 ],
 "correct": 2,
-"ref": "§2.4 [DATE]",
+"ref": "§3.4 [DATE]",
 "expl": "Por ejemplo, qué habitantes han pagado todos los tributos obligatorios."
 },
 {
@@ -1135,7 +1137,7 @@ const questions = [
 "De control de transacciones"
 ],
 "correct": 0,
-"ref": "§2.5 [DATE]",
+"ref": "§3.5 [DATE]",
 "expl": "Tiene dos variantes: de tuplas y de dominios."
 },
 {
@@ -1146,7 +1148,7 @@ const questions = [
 "Son equivalentes (mismo poder expresivo)"
 ],
 "correct": 2,
-"ref": "§2.5 [DATE]",
+"ref": "§3.5 [DATE]",
 "expl": "Es el teorema de equivalencia de Codd; SQL se inspira en ambos."
 },
 {
@@ -1157,7 +1159,7 @@ const questions = [
 "Reducir el número de tablas al mínimo"
 ],
 "correct": 1,
-"ref": "§2.6 [CODD72]",
+"ref": "§4.1 [CODD72]",
 "expl": "Se basa en el análisis de las dependencias funcionales."
 },
 {
@@ -1168,7 +1170,7 @@ const questions = [
 "De red, de disco y de memoria"
 ],
 "correct": 1,
-"ref": "§2.6 [ELMASRI]",
+"ref": "§4.1 [ELMASRI]",
 "expl": "Las tres derivan de la redundancia de datos."
 },
 {
@@ -1179,7 +1181,7 @@ const questions = [
 "El valor de X determina unívocamente el valor de Y"
 ],
 "correct": 2,
-"ref": "§2.7 [ELMASRI]",
+"ref": "§4.2 [ELMASRI]",
 "expl": "X es el determinante; dos tuplas con igual X tienen igual Y."
 },
 {
@@ -1190,7 +1192,7 @@ const questions = [
 "Inserción, borrado y actualización"
 ],
 "correct": 0,
-"ref": "§2.7 [ARMSTRONG74]",
+"ref": "§4.2 [ARMSTRONG74]",
 "expl": "Son correctos y completos; las demás reglas se derivan de ellos."
 },
 {
@@ -1201,7 +1203,7 @@ const questions = [
 "Calcular el tamaño físico de la tabla"
 ],
 "correct": 1,
-"ref": "§2.7 [ELMASRI]",
+"ref": "§4.2 [ELMASRI]",
 "expl": "Si X⁺ contiene todos los atributos, X es superclave."
 },
 {
@@ -1212,7 +1214,7 @@ const questions = [
 "Tiene menos de cinco columnas"
 ],
 "correct": 1,
-"ref": "§2.8 [CODD70]",
+"ref": "§4.3 [CODD70]",
 "expl": "Sin grupos repetitivos ni valores multivaluados."
 },
 {
@@ -1223,7 +1225,7 @@ const questions = [
 "Las dependencias funcionales parciales de la clave"
 ],
 "correct": 2,
-"ref": "§2.9 [CODD72]",
+"ref": "§4.4 [CODD72]",
 "expl": "Solo tiene riesgo cuando la clave primaria es compuesta."
 },
 {
@@ -1234,7 +1236,7 @@ const questions = [
 "No puede tener claves ajenas"
 ],
 "correct": 0,
-"ref": "§2.9 [CODD72]",
+"ref": "§4.4 [CODD72]",
 "expl": "Sin clave compuesta no puede haber dependencias parciales."
 },
 {
@@ -1245,7 +1247,7 @@ const questions = [
 "Valores nulos en ninguna columna"
 ],
 "correct": 0,
-"ref": "§2.10 [CODD72]",
+"ref": "§4.5 [CODD72]",
 "expl": "Mnemotecnia: cada atributo depende de la clave, toda la clave y nada más que la clave."
 },
 {
@@ -1256,7 +1258,7 @@ const questions = [
 "No existan claves ajenas"
 ],
 "correct": 1,
-"ref": "§2.11 [CODD74BCNF]",
+"ref": "§4.6 [CODD74BCNF]",
 "expl": "Es una 3FN reforzada; toda relación en BCNF está en 3FN."
 },
 {
@@ -1267,7 +1269,7 @@ const questions = [
 "Que elimine todas las claves ajenas"
 ],
 "correct": 1,
-"ref": "§2.11 [SILBER]",
+"ref": "§4.6 [SILBER]",
 "expl": "Se garantiza si el atributo común es clave de al menos una de las tablas resultantes."
 },
 {
@@ -1278,7 +1280,7 @@ const questions = [
 "Multivaluadas"
 ],
 "correct": 2,
-"ref": "§2.12 [FAGIN77]",
+"ref": "§4.7 [FAGIN77]",
 "expl": "La 5FN, por su parte, trata las dependencias de reunión (join)."
 },
 {
@@ -1289,7 +1291,7 @@ const questions = [
 "Volver siempre a la 1FN"
 ],
 "correct": 0,
-"ref": "§2.13 [RAMAKRISHNAN]",
+"ref": "§4.8 [RAMAKRISHNAN]",
 "expl": "Se aplica al final, sobre cuellos de botella medidos, típica en entornos OLAP."
 }
 ];

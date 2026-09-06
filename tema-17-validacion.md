@@ -11,10 +11,10 @@
 ## 1. Cobertura del temario oficial
 
 - [ ] **Diseño de bases de datos**: concepto, objetivos, niveles conceptual/lógico/físico, ciclo de vida — §1.1-1.3
-- [ ] **Diseño lógico**: transformación E-R → relacional, eliminación de redundancias, integridad, DDL/DML/DCL/TCL — §1.5-1.9
-- [ ] **Diseño físico**: estructuras de almacenamiento, índices, rendimiento, planes de ejecución, particionamiento — §1.10-1.13
-- [ ] **Modelo lógico relacional**: conceptos, claves, integridad, álgebra y cálculo relacional — §2.1-2.5
-- [ ] **Normalización**: anomalías, dependencias funcionales, 1FN-2FN-3FN-BCNF, 4FN/5FN, desnormalización — §2.6-2.13
+- [ ] **Diseño lógico**: transformación E-R → relacional, eliminación de redundancias, integridad, DDL/DML/DCL/TCL — §2.1-1.9
+- [ ] **Diseño físico**: estructuras de almacenamiento, índices, rendimiento, planes de ejecución, particionamiento — §2.6-1.13
+- [ ] **Modelo lógico relacional**: conceptos, claves, integridad, álgebra y cálculo relacional — §3.1-2.5
+- [ ] **Normalización**: anomalías, dependencias funcionales, 1FN-2FN-3FN-BCNF, 4FN/5FN, desnormalización — §4.1-2.13
 
 ## 2. Contenido teórico
 

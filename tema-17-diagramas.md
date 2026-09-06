@@ -16,16 +16,16 @@
 |---|---|---|---|---|
 | D1 | Los tres niveles de diseño | §1.2 | Flujo | 660×300 |
 | D2 | Elementos del modelo entidad-relación | §1.4 | Conceptual | 660×320 |
-| D3 | Transformación E-R → relacional | §1.6 | Comparativa | 680×320 |
-| D4 | Integridad de entidad y referencial | §1.8 | Estructura | 680×300 |
-| D5 | Los cuatro sublenguajes de SQL | §1.9 | Bloques | 660×300 |
-| D6 | Tipos de índice | §1.12 | Comparativa | 680×320 |
-| D7 | Conceptos del modelo relacional | §2.1 | Estructura | 680×320 |
-| D8 | Tipos de claves | §2.2 | Anidamiento | 620×340 |
-| D9 | Operadores del álgebra relacional | §2.4 | Mapa | 680×340 |
-| D10 | Las tres anomalías | §2.6 | Conceptual | 660×300 |
-| D11 | Las formas normales (anidadas) | §2.6-2.12 | Anidamiento | 640×360 |
-| D12 | Estructura de un índice B+tree | §1.12 | Árbol | 680×320 |
+| D3 | Transformación E-R → relacional | §2.2 | Comparativa | 680×320 |
+| D4 | Integridad de entidad y referencial | §2.4 | Estructura | 680×300 |
+| D5 | Los cuatro sublenguajes de SQL | §2.5 | Bloques | 660×300 |
+| D6 | Tipos de índice | §2.8 | Comparativa | 680×320 |
+| D7 | Conceptos del modelo relacional | §3.1 | Estructura | 680×320 |
+| D8 | Tipos de claves | §3.2 | Anidamiento | 620×340 |
+| D9 | Operadores del álgebra relacional | §3.4 | Mapa | 680×340 |
+| D10 | Las tres anomalías | §4.1 | Conceptual | 660×300 |
+| D11 | Las formas normales (anidadas) | §4.1-2.12 | Anidamiento | 640×360 |
+| D12 | Estructura de un índice B+tree | §2.8 | Árbol | 680×320 |
 
 ---
 
@@ -81,7 +81,7 @@
 
 ## D3 · Transformación E-R → relacional
 
-**Sección**: §1.6 — Transformación de entidades y relaciones al modelo relacional
+**Sección**: §2.2 — Transformación de entidades y relaciones al modelo relacional
 **Propósito**: Contrastar la regla 1:N (propaga clave) con la N:M (crea tabla intermedia).
 
 ```svg
@@ -107,7 +107,7 @@
 
 ## D4 · Integridad de entidad y referencial
 
-**Sección**: §1.8 — Integridad de entidad e integridad referencial
+**Sección**: §2.4 — Integridad de entidad e integridad referencial
 **Propósito**: Visualizar la clave primaria (sin nulos) y la clave ajena que apunta a una fila existente.
 
 ```svg
@@ -135,7 +135,7 @@
 
 ## D5 · Los cuatro sublenguajes de SQL
 
-**Sección**: §1.9 — Lenguajes de definición y manipulación
+**Sección**: §2.5 — Lenguajes de definición y manipulación
 **Propósito**: Separar DDL / DML / DCL / TCL por su finalidad.
 
 ```svg
@@ -154,7 +154,7 @@
 
 ## D6 · Tipos de índice
 
-**Sección**: §1.12 — Índices
+**Sección**: §2.8 — Índices
 **Propósito**: Comparar B+tree, hash y bitmap según su uso ideal.
 
 ```svg
@@ -173,7 +173,7 @@
 
 ## D7 · Conceptos del modelo relacional
 
-**Sección**: §2.1 — Conceptos básicos
+**Sección**: §3.1 — Conceptos básicos
 **Propósito**: Anclar relación/tupla/atributo/dominio/grado/cardinalidad sobre una tabla.
 
 ```svg
@@ -198,7 +198,7 @@
 
 ## D8 · Tipos de claves
 
-**Sección**: §2.2 — Claves: candidata, primaria, alternativa, superclave y ajena
+**Sección**: §3.2 — Claves: candidata, primaria, alternativa, superclave y ajena
 **Propósito**: Mostrar el anidamiento superclave ⊇ candidata ⊇ primaria y la clave ajena.
 
 ```svg
@@ -219,7 +219,7 @@
 
 ## D9 · Operadores del álgebra relacional
 
-**Sección**: §2.4 — Álgebra relacional
+**Sección**: §3.4 — Álgebra relacional
 **Propósito**: Listar operadores primitivos y derivados con su símbolo y efecto.
 
 ```svg
@@ -246,7 +246,7 @@
 
 ## D10 · Las tres anomalías
 
-**Sección**: §2.6 — Normalización: objetivos, redundancia y anomalías
+**Sección**: §4.1 — Normalización: objetivos, redundancia y anomalías
 **Propósito**: Mostrar las anomalías de inserción, borrado y actualización sobre una tabla redundante.
 
 ```svg
@@ -267,7 +267,7 @@
 
 ## D11 · Las formas normales (anidadas)
 
-**Sección**: §2.6-2.12 — Normalización
+**Sección**: §4.1-2.12 — Normalización
 **Propósito**: Mostrar el anidamiento 1FN ⊃ 2FN ⊃ 3FN ⊃ BCNF ⊃ 4FN ⊃ 5FN y qué exige cada una.
 
 ```svg
@@ -289,7 +289,7 @@
 
 ## D12 · Estructura de un índice B+tree
 
-**Sección**: §1.12 — Índices
+**Sección**: §2.8 — Índices
 **Propósito**: Ilustrar el árbol equilibrado con hojas enlazadas (igualdad y rango).
 
 ```svg

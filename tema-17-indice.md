@@ -9,36 +9,42 @@
 
 ## Estructura del tema
 
-1. **Diseño de bases de datos: concepto y objetivos**
+> Las **cuatro secciones son las cuatro materias que enumera el título oficial**, en su mismo orden y con sus mismas palabras.
+
+1. **Diseño de bases de datos**
    1.1. Qué es diseñar una base de datos y por qué importa
    1.2. Los tres niveles de diseño (conceptual, lógico, físico) y el ciclo de vida
    1.3. Objetivos del diseño (integridad, no redundancia, rendimiento, independencia)
    1.4. Diseño conceptual: el modelo entidad-relación (E-R)
-   1.5. Diseño lógico
-   1.6. Transformación de entidades y relaciones al modelo relacional
-   1.7. Eliminación de redundancias
-   1.8. Integridad de entidad e integridad referencial
-   1.9. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)
-   1.10. Diseño físico
-   1.11. Estructuras de datos y de almacenamiento (tablespaces, páginas, particiones)
-   1.12. Índices (B-tree, hash, bitmap, agrupado y no agrupado)
-   1.13. Rendimiento y optimización (planes de ejecución, particionamiento, clustering)
 
-2. **El modelo lógico relacional**
-   2.1. Conceptos básicos (relación, tupla, atributo, dominio, grado, cardinalidad)
-   2.2. Claves: candidata, primaria, alternativa, superclave y ajena
-   2.3. Reglas de integridad del modelo relacional
-   2.4. Álgebra relacional (operadores y consultas)
-   2.5. Cálculo relacional (de tuplas y de dominios)
-   2.6. Normalización: objetivos, redundancia y anomalías
-   2.7. Dependencias funcionales y axiomas de Armstrong
-   2.8. Primera Forma Normal (1FN)
-   2.9. Segunda Forma Normal (2FN)
-   2.10. Tercera Forma Normal (3FN)
-   2.11. Forma Normal de Boyce-Codd (BCNF)
-   2.12. Formas normales superiores (4FN y 5FN)
-   2.13. Desnormalización controlada
-   2.14. Buenas prácticas y errores típicos de diseño
+2. **Diseño lógico y físico**
+   2.1. Diseño lógico
+   2.2. Transformación de entidades y relaciones al modelo relacional
+   2.3. Eliminación de redundancias
+   2.4. Integridad de entidad e integridad referencial
+   2.5. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)
+   2.6. Diseño físico
+   2.7. Estructuras de datos y de almacenamiento (tablespaces, páginas, particiones)
+   2.8. Índices (B-tree, hash, bitmap, agrupado y no agrupado)
+   2.9. Rendimiento y optimización (planes de ejecución, particionamiento, clustering)
+
+3. **El modelo lógico relacional**
+   3.1. Conceptos básicos (relación, tupla, atributo, dominio, grado, cardinalidad)
+   3.2. Claves: candidata, primaria, alternativa, superclave y ajena
+   3.3. Reglas de integridad del modelo relacional
+   3.4. Álgebra relacional (operadores y consultas)
+   3.5. Cálculo relacional (de tuplas y de dominios)
+
+4. **Normalización**
+   4.1. Normalización: objetivos, redundancia y anomalías
+   4.2. Dependencias funcionales y axiomas de Armstrong
+   4.3. Primera Forma Normal (1FN)
+   4.4. Segunda Forma Normal (2FN)
+   4.5. Tercera Forma Normal (3FN)
+   4.6. Forma Normal de Boyce-Codd (BCNF)
+   4.7. Formas normales superiores (4FN y 5FN)
+   4.8. Desnormalización controlada
+   4.9. Buenas prácticas y errores típicos de diseño
 
 ---
 

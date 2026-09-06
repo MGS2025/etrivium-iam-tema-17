@@ -4,6 +4,21 @@
 
 ---
 
+## v1.2 — 2026-09-06 — Ajuste a la literalidad del título
+
+**Estado**: pendiente de validación por el IAM.
+
+**Motivo**: criterio de literalidad del título fijado por el IAM (Jesús Cuadrado, 02-09-2026). El título oficial nombra materias que no tenían apartado propio.
+
+### Alcance
+
+- El tema pasa de **2 a 4 secciones**: «Diseño lógico y físico» y «Normalización» pasan a ser secciones propias.
+- **No se ha reescrito contenido**: se ha reorganizado y renumerado. Las **128 referencias internas** del contenido, los diagramas, el test, los casos y la validación se han renumerado en una sola pasada y verificado después: ninguna apunta a un epígrafe inexistente.
+- El índice muestra ahora las mismas materias que el título oficial, en su orden y con sus palabras.
+- Renumerado con `_tools-qa/renumera.py`.
+
+---
+
 ## v1.1 — 2026-09-06 — Ficha de extensión y tiempo de estudio
 
 **Estado**: sin cambios de contenido. Solo se añade información sobre el propio tema.
