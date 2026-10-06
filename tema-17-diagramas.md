@@ -35,8 +35,8 @@
 **Propósito**: Mostrar la secuencia conceptual → lógico → físico y de qué depende cada nivel.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" role="img" aria-label="Los tres niveles del diseño de bases de datos: conceptual, lógico y físico, del más abstracto al más concreto">
-  <style>.t{font:700 13px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-1" viewBox="0 0 660 300" role="img" aria-label="Los tres niveles del diseño de bases de datos: conceptual, lógico y físico, del más abstracto al más concreto">
+  <style>.d17-1 .t{font:700 13px system-ui,sans-serif;fill:#fff}.d17-1 .s{font:11px system-ui,sans-serif;fill:#fff}.d17-1 .l{font:11px system-ui,sans-serif;fill:#444}.d17-1 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="330" y="28" text-anchor="middle" class="h">Del análisis de requisitos a la base de datos</text>
   <rect x="120" y="48" width="420" height="56" rx="6" fill="#6ea3d2"/><text x="330" y="72" text-anchor="middle" class="t">1 · Diseño CONCEPTUAL</text><text x="330" y="92" text-anchor="middle" class="s">Modelo entidad-relación · independiente del SGBD</text>
   <rect x="120" y="120" width="420" height="56" rx="6" fill="#0055a0"/><text x="330" y="144" text-anchor="middle" class="t">2 · Diseño LÓGICO</text><text x="330" y="164" text-anchor="middle" class="s">Tablas, claves y normalización · depende del modelo relacional</text>
@@ -58,8 +58,8 @@
 **Propósito**: Recordar la notación E-R (rectángulo, elipse, rombo) con un ejemplo del Padrón.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 320" role="img" aria-label="Elementos del modelo entidad-relación: entidad rectángulo, atributo elipse, relación rombo, con ejemplo Habitante reside en Distrito">
-  <style>.b{font:600 12px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-2" viewBox="0 0 660 320" role="img" aria-label="Elementos del modelo entidad-relación: entidad rectángulo, atributo elipse, relación rombo, con ejemplo Habitante reside en Distrito">
+  <style>.d17-2 .b{font:600 12px system-ui,sans-serif;fill:#fff}.d17-2 .l{font:11px system-ui,sans-serif;fill:#444}.d17-2 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="330" y="26" text-anchor="middle" class="h">Notación E-R (ejemplo: Padrón Municipal)</text>
   <rect x="60" y="120" width="130" height="50" rx="4" fill="#0055a0"/><text x="125" y="150" text-anchor="middle" class="b">HABITANTE</text>
   <rect x="470" y="120" width="130" height="50" rx="4" fill="#0055a0"/><text x="535" y="150" text-anchor="middle" class="b">DISTRITO</text>
@@ -85,11 +85,11 @@
 **Propósito**: Contrastar la regla 1:N (propaga clave) con la N:M (crea tabla intermedia).
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Reglas de transformación: una relación 1 a N propaga la clave ajena; una relación N a M crea una tabla intermedia con dos claves ajenas">
-  <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.c{font:600 11px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-3" viewBox="0 0 680 320" role="img" aria-label="Reglas de transformación: una relación 1 a N propaga la clave ajena; una relación N a M crea una tabla intermedia con dos claves ajenas">
+  <style>.d17-3 .b{font:600 11px system-ui,sans-serif;fill:#fff}.d17-3 .c{font:600 11px system-ui,sans-serif;fill:#0055a0}.d17-3 .l{font:11px system-ui,sans-serif;fill:#444}.d17-3 .h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="170" y="26" text-anchor="middle" class="h">Relación 1:N → propaga clave</text>
   <rect x="40" y="48" width="110" height="44" rx="4" fill="#0055a0"/><text x="95" y="66" text-anchor="middle" class="b">DISTRITO</text><text x="95" y="82" text-anchor="middle" class="b">codigo (PK)</text>
-  <rect x="190" y="48" width="130" height="44" rx="4" fill="#2d8659"/><text x="255" y="66" text-anchor="middle" class="b">HABITANTE</text><text x="255" y="82" text-anchor="middle" class="b">dni (PK), cod_distrito (FK)</text>
+  <rect x="190" y="48" width="130" height="58" rx="4" fill="#2d8659"/><text x="255" y="66" text-anchor="middle" class="b">HABITANTE</text><text x="255" y="82" text-anchor="middle" class="b">dni (PK)</text><text x="255" y="97" text-anchor="middle" class="b">cod_distrito (FK)</text>
   <path d="M150 70 L190 70" stroke="#888" stroke-width="2" marker-end="url(#b)"/>
   <text x="95" y="120" text-anchor="middle" class="l">No se crea tabla;</text><text x="95" y="136" text-anchor="middle" class="l">la clave va al lado «N»</text>
   <text x="510" y="26" text-anchor="middle" class="h">Relación N:M → tabla intermedia</text>
@@ -111,21 +111,21 @@
 **Propósito**: Visualizar la clave primaria (sin nulos) y la clave ajena que apunta a una fila existente.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" role="img" aria-label="Integridad de entidad: la clave primaria no es nula; integridad referencial: la clave ajena apunta a una fila existente de la tabla referenciada">
-  <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.k{font:700 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
-  <text x="120" y="26" text-anchor="middle" class="h">HABITANTE</text>
-  <rect x="40" y="40" width="160" height="26" fill="#0055a0"/><text x="60" y="58" class="k">dni (PK)</text><text x="130" y="58" class="k">cod_distrito (FK)</text>
-  <rect x="40" y="66" width="160" height="24" fill="#e8f0f8"/><text x="60" y="83" class="l">0001A</text><text x="150" y="83" class="l">1</text>
-  <rect x="40" y="90" width="160" height="24" fill="#fff"/><text x="60" y="107" class="l">0002B</text><text x="150" y="107" class="l">2</text>
-  <rect x="40" y="114" width="160" height="24" fill="#fbeeed"/><text x="58" y="131" class="l">(nulo)</text><text x="150" y="131" class="l">1</text>
-  <text x="120" y="160" text-anchor="middle" fill="#d13c3c" font="700 11px system-ui,sans-serif">✗ PK nula → viola integridad de entidad</text>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-4" viewBox="0 0 680 300" role="img" aria-label="Integridad de entidad: la clave primaria no es nula; integridad referencial: la clave ajena apunta a una fila existente de la tabla referenciada">
+  <style>.d17-4 .b{font:600 11px system-ui,sans-serif;fill:#fff}.d17-4 .k{font:700 11px system-ui,sans-serif;fill:#fff}.d17-4 .l{font:11px system-ui,sans-serif;fill:#444}.d17-4 .h{font:700 12px system-ui,sans-serif;fill:#0055a0}</style>
+  <text x="145" y="26" text-anchor="middle" class="h">HABITANTE</text>
+  <rect x="40" y="40" width="210" height="26" fill="#0055a0"/><text x="55" y="58" class="k">dni (PK)</text><text x="130" y="58" class="k">cod_distrito (FK)</text>
+  <rect x="40" y="66" width="210" height="24" fill="#e8f0f8"/><text x="55" y="83" class="l">0001A</text><text x="175" y="83" class="l">1</text>
+  <rect x="40" y="90" width="210" height="24" fill="#fff"/><text x="55" y="107" class="l">0002B</text><text x="175" y="107" class="l">2</text>
+  <rect x="40" y="114" width="210" height="24" fill="#fbeeed"/><text x="53" y="131" class="l">(nulo)</text><text x="175" y="131" class="l">1</text>
+  <text x="40" y="160" fill="#d13c3c" style="font:700 11px system-ui,sans-serif">✗ PK nula → viola integridad de entidad</text>
   <text x="500" y="26" text-anchor="middle" class="h">DISTRITO</text>
   <rect x="430" y="40" width="160" height="26" fill="#2d8659"/><text x="450" y="58" class="k">codigo (PK)</text><text x="535" y="58" class="k">nombre</text>
   <rect x="430" y="66" width="160" height="24" fill="#e8f5ee"/><text x="450" y="83" class="l">1</text><text x="530" y="83" class="l">Centro</text>
   <rect x="430" y="90" width="160" height="24" fill="#fff"/><text x="450" y="107" class="l">2</text><text x="530" y="107" class="l">Arganzuela</text>
-  <path d="M200 78 C320 78 320 78 428 78" stroke="#2d8659" stroke-width="2" fill="none" marker-end="url(#c)"/>
-  <text x="315" y="72" text-anchor="middle" class="l">FK → PK existente ✓</text>
-  <text x="430" y="160" class="l">Integridad referencial: toda FK apunta a una fila real o es nula</text>
+  <path d="M250 78 C340 78 340 78 428 78" stroke="#2d8659" stroke-width="2" fill="none" marker-end="url(#c)"/>
+  <text x="340" y="72" text-anchor="middle" class="l">FK → PK existente ✓</text>
+  <text x="430" y="160" class="l">Integridad referencial: toda FK apunta</text><text x="430" y="176" class="l">a una fila real o es nula</text>
   <defs><marker id="c" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 z" fill="#2d8659"/></marker></defs>
   <text x="670" y="288" text-anchor="end" font="11px system-ui,sans-serif" fill="#666">[Fuente: CODD70; DATE, cap. 9]</text>
 </svg>
@@ -139,8 +139,8 @@
 **Propósito**: Separar DDL / DML / DCL / TCL por su finalidad.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" role="img" aria-label="Los cuatro sublenguajes de SQL: DDL para la estructura, DML para los datos, DCL para los permisos y TCL para las transacciones">
-  <style>.t{font:700 13px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-5" viewBox="0 0 660 300" role="img" aria-label="Los cuatro sublenguajes de SQL: DDL para la estructura, DML para los datos, DCL para los permisos y TCL para las transacciones">
+  <style>.d17-5 .t{font:700 13px system-ui,sans-serif;fill:#fff}.d17-5 .s{font:11px system-ui,sans-serif;fill:#fff}.d17-5 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="330" y="28" text-anchor="middle" class="h">SQL (ISO/IEC 9075) — cuatro sublenguajes</text>
   <rect x="40" y="50" width="280" height="90" rx="6" fill="#0055a0"/><text x="180" y="78" text-anchor="middle" class="t">DDL — Estructura</text><text x="180" y="100" text-anchor="middle" class="s">CREATE · ALTER · DROP · TRUNCATE</text><text x="180" y="120" text-anchor="middle" class="s">Define tablas, índices, vistas</text>
   <rect x="340" y="50" width="280" height="90" rx="6" fill="#2d8659"/><text x="480" y="78" text-anchor="middle" class="t">DML — Datos</text><text x="480" y="100" text-anchor="middle" class="s">SELECT · INSERT · UPDATE · DELETE</text><text x="480" y="120" text-anchor="middle" class="s">Consulta y modifica filas</text>
@@ -158,8 +158,8 @@
 **Propósito**: Comparar B+tree, hash y bitmap según su uso ideal.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Comparación de tipos de índice: B+tree para igualdad y rango, hash solo para igualdad, bitmap para columnas de baja cardinalidad">
-  <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-6" viewBox="0 0 680 320" role="img" aria-label="Comparación de tipos de índice: B+tree para igualdad y rango, hash solo para igualdad, bitmap para columnas de baja cardinalidad">
+  <style>.d17-6 .t{font:700 12px system-ui,sans-serif;fill:#fff}.d17-6 .s{font:11px system-ui,sans-serif;fill:#fff}.d17-6 .l{font:11px system-ui,sans-serif;fill:#444}.d17-6 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="340" y="26" text-anchor="middle" class="h">¿Qué índice usar?</text>
   <rect x="30" y="48" width="200" height="120" rx="6" fill="#0055a0"/><text x="130" y="74" text-anchor="middle" class="t">B+tree (por defecto)</text><text x="130" y="98" text-anchor="middle" class="s">Igualdad = </text><text x="130" y="116" text-anchor="middle" class="s">Rango BETWEEN, &lt;, &gt;</text><text x="130" y="134" text-anchor="middle" class="s">Orden ORDER BY</text><text x="130" y="156" text-anchor="middle" class="s">Equilibrado y enlazado</text>
   <rect x="245" y="48" width="190" height="120" rx="6" fill="#2d8659"/><text x="340" y="74" text-anchor="middle" class="t">Hash</text><text x="340" y="100" text-anchor="middle" class="s">Solo igualdad exacta</text><text x="340" y="120" text-anchor="middle" class="s">Muy rápido</text><text x="340" y="142" text-anchor="middle" class="s">No sirve para rangos</text>
@@ -177,8 +177,8 @@
 **Propósito**: Anclar relación/tupla/atributo/dominio/grado/cardinalidad sobre una tabla.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Sobre una tabla: la relación es la tabla, la tupla es una fila, el atributo una columna, el grado el número de columnas y la cardinalidad el número de filas">
-  <style>.k{font:700 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.a{font:600 11px system-ui,sans-serif;fill:#d13c3c}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-7" viewBox="0 0 680 320" role="img" aria-label="Sobre una tabla: la relación es la tabla, la tupla es una fila, el atributo una columna, el grado el número de columnas y la cardinalidad el número de filas">
+  <style>.d17-7 .k{font:700 11px system-ui,sans-serif;fill:#fff}.d17-7 .l{font:11px system-ui,sans-serif;fill:#444}.d17-7 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}.d17-7 .a{font:600 11px system-ui,sans-serif;fill:#d13c3c}</style>
   <text x="250" y="26" text-anchor="middle" class="h">Relación HABITANTE (grado 3, cardinalidad 3)</text>
   <rect x="120" y="44" width="260" height="26" fill="#0055a0"/><text x="150" y="62" class="k">dni</text><text x="240" y="62" class="k">nombre</text><text x="330" y="62" class="k">distrito</text>
   <rect x="120" y="70" width="260" height="24" fill="#e8f0f8"/><text x="150" y="87" class="l">0001A</text><text x="240" y="87" class="l">Ana</text><text x="335" y="87" class="l">1</text>
@@ -186,7 +186,7 @@
   <rect x="120" y="118" width="260" height="24" fill="#e8f0f8"/><text x="150" y="135" class="l">0003C</text><text x="240" y="135" class="l">Eva</text><text x="335" y="135" class="l">1</text>
   <text x="400" y="60" class="a">← esquema / atributos (columnas)</text>
   <text x="400" y="106" class="a">← tupla (fila)</text>
-  <line x1="150" y1="155" x2="150" y2="175" stroke="#d13c3c"/><line x1="370" y1="155" x2="370" y2="175" stroke="#d13c3c"/><text x="250" y="190" text-anchor="middle" class="a">grado = nº de columnas = 3</text>
+  <line x1="150" y1="155" x2="150" y2="175" stroke="#d13c3c"/><line x1="370" y1="155" x2="370" y2="175" stroke="#d13c3c"/><text x="260" y="170" text-anchor="middle" class="a">grado = nº de columnas = 3</text>
   <text x="60" y="200" class="l">Atributo = columna · Dominio = valores válidos del atributo (p. ej. distrito ∈ 1..21)</text>
   <text x="60" y="222" class="l">Cardinalidad = nº de filas = 3 · No hay tuplas duplicadas (es un conjunto)</text>
   <text x="60" y="244" class="l">Orden de filas y columnas: irrelevante en el modelo teórico</text>
@@ -202,13 +202,13 @@
 **Propósito**: Mostrar el anidamiento superclave ⊇ candidata ⊇ primaria y la clave ajena.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" role="img" aria-label="Las superclaves contienen a las claves candidatas; una de las candidatas se elige como clave primaria y las demás son alternativas; la clave ajena referencia otra tabla">
-  <style>.t{font:700 12px system-ui,sans-serif;fill:#0055a0}.s{font:11px system-ui,sans-serif;fill:#444}.b{font:600 11px system-ui,sans-serif;fill:#fff}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-8" viewBox="0 0 620 340" role="img" aria-label="Las superclaves contienen a las claves candidatas; una de las candidatas se elige como clave primaria y las demás son alternativas; la clave ajena referencia otra tabla">
+  <style>.d17-8 .t{font:700 12px system-ui,sans-serif;fill:#0055a0}.d17-8 .s{font:11px system-ui,sans-serif;fill:#444}.d17-8 .b{font:600 11px system-ui,sans-serif;fill:#fff}</style>
   <text x="230" y="26" text-anchor="middle" class="t">Jerarquía de claves</text>
   <ellipse cx="230" cy="160" rx="200" ry="120" fill="#e8f0f8" stroke="#6ea3d2"/><text x="230" y="62" text-anchor="middle" class="t">Superclaves</text>
-  <ellipse cx="230" cy="175" rx="150" ry="90" fill="#cfe0f1" stroke="#3378b9"/><text x="230" y="110" text-anchor="middle" class="t">Claves candidatas (mínimas)</text>
+  <ellipse cx="230" cy="175" rx="150" ry="90" fill="#cfe0f1" stroke="#3378b9"/><text x="230" y="118" text-anchor="middle" class="t">Claves candidatas (mínimas)</text>
   <ellipse cx="230" cy="195" rx="92" ry="52" fill="#0055a0"/><text x="230" y="190" text-anchor="middle" class="b">Clave primaria</text><text x="230" y="208" text-anchor="middle" class="b">(elegida, sin nulos)</text>
-  <text x="230" y="148" text-anchor="middle" class="s">alternativas = candidatas no elegidas</text>
+  <text x="230" y="136" text-anchor="middle" class="s">alternativas = candidatas no elegidas</text>
   <rect x="460" y="120" width="130" height="80" rx="6" fill="#2d8659"/><text x="525" y="150" text-anchor="middle" class="b">Clave ajena</text><text x="525" y="170" text-anchor="middle" class="b">(FK) → PK</text><text x="525" y="186" text-anchor="middle" class="b">de otra tabla</text>
   <text x="310" y="312" text-anchor="middle" class="s">superclave ⊇ candidata ⊇ primaria · la FK da integridad referencial</text>
   <text x="610" y="330" text-anchor="end" font="11px system-ui,sans-serif" fill="#666">[Fuente: DATE, cap. 9]</text>
@@ -223,8 +223,8 @@
 **Propósito**: Listar operadores primitivos y derivados con su símbolo y efecto.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" role="img" aria-label="Operadores del álgebra relacional: cinco primitivos (selección, proyección, unión, diferencia, producto cartesiano) y derivados (join, intersección, división)">
-  <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-9" viewBox="0 0 680 340" role="img" aria-label="Operadores del álgebra relacional: cinco primitivos (selección, proyección, unión, diferencia, producto cartesiano) y derivados (join, intersección, división)">
+  <style>.d17-9 .t{font:700 12px system-ui,sans-serif;fill:#fff}.d17-9 .s{font:11px system-ui,sans-serif;fill:#fff}.d17-9 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}.d17-9 .l{font:11px system-ui,sans-serif;fill:#444}</style>
   <text x="340" y="26" text-anchor="middle" class="h">Álgebra relacional (lenguaje procedimental)</text>
   <rect x="30" y="44" width="320" height="150" rx="6" fill="#eef3f9" stroke="#0055a0"/><text x="190" y="64" text-anchor="middle" class="h">5 primitivos</text>
   <rect x="45" y="74" width="145" height="30" rx="4" fill="#0055a0"/><text x="117" y="94" text-anchor="middle" class="s">σ Selección (filas)</text>
@@ -250,10 +250,10 @@
 **Propósito**: Mostrar las anomalías de inserción, borrado y actualización sobre una tabla redundante.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 300" role="img" aria-label="Las tres anomalías de un diseño no normalizado: inserción, borrado y actualización, causadas por la redundancia de datos">
-  <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:11px system-ui,sans-serif;fill:#fff}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}.l{font:11px system-ui,sans-serif;fill:#444}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-10" viewBox="0 0 660 300" role="img" aria-label="Las tres anomalías de un diseño no normalizado: inserción, borrado y actualización, causadas por la redundancia de datos">
+  <style>.d17-10 .t{font:700 12px system-ui,sans-serif;fill:#fff}.d17-10 .s{font:11px system-ui,sans-serif;fill:#fff}.d17-10 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}.d17-10 .l{font:11px system-ui,sans-serif;fill:#444}</style>
   <text x="330" y="26" text-anchor="middle" class="h">Redundancia → tres anomalías</text>
-  <rect x="220" y="40" width="220" height="40" rx="6" fill="#d13c3c"/><text x="330" y="58" text-anchor="middle" class="t">Dato repetido en muchas filas</text><text x="330" y="73" text-anchor="middle" class="s">(p. ej. nombre_distrito en cada habitante)</text>
+  <rect x="200" y="40" width="260" height="40" rx="6" fill="#d13c3c"/><text x="330" y="58" text-anchor="middle" class="t">Dato repetido en muchas filas</text><text x="330" y="73" text-anchor="middle" class="s">(p. ej. nombre_distrito en cada habitante)</text>
   <rect x="30" y="120" width="190" height="110" rx="6" fill="#0055a0"/><text x="125" y="146" text-anchor="middle" class="t">Inserción</text><text x="125" y="172" text-anchor="middle" class="s">No puedo dar de alta</text><text x="125" y="190" text-anchor="middle" class="s">un distrito sin tener</text><text x="125" y="208" text-anchor="middle" class="s">al menos un habitante</text>
   <rect x="235" y="120" width="190" height="110" rx="6" fill="#0055a0"/><text x="330" y="146" text-anchor="middle" class="t">Borrado</text><text x="330" y="172" text-anchor="middle" class="s">Borrar al último</text><text x="330" y="190" text-anchor="middle" class="s">habitante elimina el</text><text x="330" y="208" text-anchor="middle" class="s">nombre del distrito</text>
   <rect x="440" y="120" width="190" height="110" rx="6" fill="#0055a0"/><text x="535" y="146" text-anchor="middle" class="t">Actualización</text><text x="535" y="172" text-anchor="middle" class="s">Cambiar el nombre</text><text x="535" y="190" text-anchor="middle" class="s">obliga a tocar TODAS</text><text x="535" y="208" text-anchor="middle" class="s">las filas (inconsistencia)</text>
@@ -271,17 +271,17 @@
 **Propósito**: Mostrar el anidamiento 1FN ⊃ 2FN ⊃ 3FN ⊃ BCNF ⊃ 4FN ⊃ 5FN y qué exige cada una.
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Las formas normales son cada vez más estrictas y están anidadas: 1FN contiene 2FN, que contiene 3FN, BCNF, 4FN y 5FN">
-  <style>.t{font:700 12px system-ui,sans-serif;fill:#fff}.s{font:10px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-11" viewBox="0 0 640 385" role="img" aria-label="Las formas normales son cada vez más estrictas y están anidadas: 1FN contiene 2FN, que contiene 3FN, BCNF, 4FN y 5FN">
+  <style>.d17-11 .t{font:700 12px system-ui,sans-serif;fill:#fff}.d17-11 .s{font:10px system-ui,sans-serif;fill:#fff}.d17-11 .l{font:11px system-ui,sans-serif;fill:#444}.d17-11 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="320" y="24" text-anchor="middle" class="h">Formas normales (cada una incluye la anterior)</text>
-  <rect x="40" y="36" width="560" height="300" rx="8" fill="#cfe0f1"/><text x="320" y="54" text-anchor="middle" class="t" fill="#003d73">1FN — valores atómicos</text>
-  <rect x="80" y="64" width="480" height="256" rx="8" fill="#9cc0e3"/><text x="320" y="82" text-anchor="middle" class="t" fill="#003d73">2FN — sin dependencias parciales</text>
+  <rect x="40" y="36" width="560" height="300" rx="8" fill="#cfe0f1"/><text x="320" y="54" text-anchor="middle" class="t" style="fill:#003d73">1FN — valores atómicos</text>
+  <rect x="80" y="64" width="480" height="256" rx="8" fill="#9cc0e3"/><text x="320" y="82" text-anchor="middle" class="t" style="fill:#003d73">2FN — sin dependencias parciales</text>
   <rect x="120" y="92" width="400" height="212" rx="8" fill="#5e97ce"/><text x="320" y="110" text-anchor="middle" class="t">3FN — sin dependencias transitivas</text>
   <rect x="160" y="120" width="320" height="166" rx="8" fill="#0055a0"/><text x="320" y="138" text-anchor="middle" class="t">BCNF — todo determinante es clave</text>
   <rect x="200" y="148" width="240" height="118" rx="8" fill="#024" /><text x="320" y="166" text-anchor="middle" class="t">4FN — sin dep. multivaluadas</text>
   <rect x="240" y="176" width="160" height="70" rx="8" fill="#2d8659"/><text x="320" y="208" text-anchor="middle" class="t">5FN</text><text x="320" y="226" text-anchor="middle" class="s">sin dep. de reunión</text>
-  <text x="320" y="350" text-anchor="middle" class="l">Objetivo práctico habitual: 3FN / BCNF</text>
-  <text x="630" y="356" text-anchor="end" font="11px system-ui,sans-serif" fill="#666">[Fuente: CODD72; FAGIN77]</text>
+  <text x="320" y="354" text-anchor="middle" class="l">Objetivo práctico habitual: 3FN / BCNF</text>
+  <text x="630" y="378" text-anchor="end" font="11px system-ui,sans-serif" fill="#666">[Fuente: CODD72; FAGIN77]</text>
 </svg>
 ```
 
@@ -293,8 +293,8 @@
 **Propósito**: Ilustrar el árbol equilibrado con hojas enlazadas (igualdad y rango).
 
 ```svg
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" role="img" aria-label="Estructura de un índice B+tree: un nodo raíz, nodos intermedios de guía y hojas enlazadas que contienen los punteros a las filas y permiten recorridos por rango">
-  <style>.b{font:600 11px system-ui,sans-serif;fill:#fff}.l{font:11px system-ui,sans-serif;fill:#444}.h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
+<svg xmlns="http://www.w3.org/2000/svg" class="d17-12" viewBox="0 0 680 320" role="img" aria-label="Estructura de un índice B+tree: un nodo raíz, nodos intermedios de guía y hojas enlazadas que contienen los punteros a las filas y permiten recorridos por rango">
+  <style>.d17-12 .b{font:600 11px system-ui,sans-serif;fill:#fff}.d17-12 .l{font:11px system-ui,sans-serif;fill:#444}.d17-12 .h{font:700 13px system-ui,sans-serif;fill:#0055a0}</style>
   <text x="340" y="26" text-anchor="middle" class="h">Índice B+tree (equilibrado, hojas enlazadas)</text>
   <rect x="295" y="44" width="90" height="34" rx="4" fill="#003d73"/><text x="340" y="66" text-anchor="middle" class="b">Raíz [50]</text>
   <rect x="140" y="120" width="120" height="34" rx="4" fill="#0055a0"/><text x="200" y="142" text-anchor="middle" class="b">[20 | 35]</text>
