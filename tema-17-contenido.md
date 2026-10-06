@@ -16,13 +16,13 @@
 
 Este tema incluye cuatro tipos de **cajas callout** para facilitar el estudio:
 
-> **[DATO CLAVE EXAMEN]** Información de alta densidad memorística, con alta probabilidad de aparecer en el test oficial.
+> **[DATO CLAVE]** Información de alta densidad memorística.
 
 > **[EJERCICIO RESUELTO]** Problema + solución paso a paso (transformación E-R, normalización, álgebra relacional).
 
-> **[EJEMPLO AYTO MADRID]** Aplicación real de la teoría al entorno municipal (Padrón, tributos, expedientes, multas, callejero).
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Aplicación real de la teoría al entorno municipal (Padrón, tributos, expedientes, multas, callejero).
 
-> **[REFERENCIA CRUZADA]** Enlace conceptual a otros temas del temario oficial.
+> **[RELACIÓN CON OTROS TEMAS]** Enlace conceptual a otros temas del temario oficial.
 
 Los términos técnicos se mantienen en su nomenclatura habitual (clave primaria, join, dependencia funcional, índice B-tree…). Las fuentes se referencian con etiquetas breves tipo `[CODD70]` o `[ELMASRI, cap. 14]` — el registro completo está en `tema-17-fuentes.md`. Los símbolos del álgebra relacional (σ, π, ⋈, ∪, −, ×, ÷) se glosan la primera vez que aparecen.
 
@@ -36,9 +36,9 @@ Los términos técnicos se mantienen en su nomenclatura habitual (clave primaria
 
 El diseño parte de un **análisis de requisitos**: qué información necesita gestionar la organización y qué operaciones realizará con ella. En el Ayuntamiento, esos requisitos provienen de los procedimientos administrativos: dar de alta a un habitante en el Padrón, liquidar un tributo, tramitar un expediente o registrar una multa. El diseñador traduce esas necesidades en una **estructura de datos** que el SGBD podrá implementar.
 
-> **[DATO CLAVE EXAMEN]** El diseño de una base de datos persigue cuatro metas que aparecen una y otra vez en el temario: **integridad** (datos correctos), **mínima redundancia** (no repetir información sin control), **rendimiento** (acceso rápido) e **independencia de datos** (poder cambiar el almacenamiento sin reescribir las aplicaciones).
+> **[DATO CLAVE]** El diseño de una base de datos persigue cuatro metas que aparecen una y otra vez en el temario: **integridad** (datos correctos), **mínima redundancia** (no repetir información sin control), **rendimiento** (acceso rápido) e **independencia de datos** (poder cambiar el almacenamiento sin reescribir las aplicaciones).
 
-> **[REFERENCIA CRUZADA]** El **Tema 15** trata el SGBD y su administración; el **Tema 16**, el modelo conceptual de datos (entidades, atributos y relaciones); el **Tema 19**, el lenguaje SQL con el que se materializa este diseño. Este Tema 17 es el puente: convierte el modelo conceptual del T16 en un esquema relacional implementable y bien normalizado.
+> **[RELACIÓN CON OTROS TEMAS]** El **Tema 15** trata el SGBD y su administración; el **Tema 16**, el modelo conceptual de datos (entidades, atributos y relaciones); el **Tema 19**, el lenguaje SQL con el que se materializa este diseño. Este Tema 17 es el puente: convierte el modelo conceptual del T16 en un esquema relacional implementable y bien normalizado.
 
 ### 1.2. Los tres niveles de diseño y el ciclo de vida
 
@@ -50,7 +50,7 @@ El diseño de bases de datos se organiza en **tres niveles sucesivos**, cada uno
 
 Esta separación en niveles es la base de la **independencia de datos**: se puede cambiar el nivel físico (añadir un índice, mover un fichero) sin tocar el nivel lógico, y cambiar el nivel lógico (añadir una columna) afectando lo mínimo a las aplicaciones [DATE, cap. 2].
 
-> **[DATO CLAVE EXAMEN]** Regla mnemotécnica del orden: **C-L-F** (Conceptual → Lógico → Físico). El conceptual es **independiente del SGBD**; el lógico depende del **tipo** de modelo (relacional); el físico depende del **producto** concreto.
+> **[DATO CLAVE]** Regla mnemotécnica del orden: **C-L-F** (Conceptual → Lógico → Físico). El conceptual es **independiente del SGBD**; el lógico depende del **tipo** de modelo (relacional); el físico depende del **producto** concreto.
 
 El ciclo de vida de la base de datos no termina con el diseño inicial: incluye implementación, carga de datos, explotación, mantenimiento (ajustes de rendimiento, nuevos requisitos) y, eventualmente, migración o retirada.
 
@@ -91,7 +91,7 @@ El modelo **entidad-relación**, propuesto por Peter Chen en 1976 [CHEN76], es e
 - **Cardinalidad** de una relación: cuántas ocurrencias de una entidad se asocian con la otra. Las tres clásicas son **1:1**, **1:N** y **N:M**.
 - **Clave** de la entidad: atributo o conjunto que identifica unívocamente cada ocurrencia (el DNI identifica a un habitante).
 
-Dos propiedades más de las relaciones que el examen suele tocar:
+Dos propiedades más de las relaciones:
 
 - **Grado de la relación**: número de entidades que participan. **Binaria** (lo normal, dos entidades), **ternaria** (tres) o **reflexiva/recursiva** (una entidad consigo misma: un EMPLEADO «es jefe de» otro EMPLEADO).
 - **Participación**: **total (obligatoria)** si toda ocurrencia de la entidad debe participar en la relación (todo habitante debe residir en un distrito), o **parcial (opcional)** si puede no hacerlo. La participación total se traduce en el modelo lógico en una clave ajena `NOT NULL`.
@@ -100,9 +100,9 @@ Los **atributos** se clasifican además en: **simples** vs **compuestos** (la di
 
 El modelo **E-R extendido (EER)** añade generalización/especialización (jerarquías «es-un»), agregación y entidades débiles. Una **entidad débil** no tiene clave propia y depende de otra (p. ej., LÍNEA_DE_LIQUIDACIÓN depende de LIQUIDACIÓN).
 
-> **[REFERENCIA CRUZADA]** El modelo entidad-relación se desarrolla a fondo en el **Tema 16** (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder **transformarlo** en tablas (§2.2).
+> **[RELACIÓN CON OTROS TEMAS]** El modelo entidad-relación se desarrolla a fondo en el **Tema 16** (modelo conceptual de datos, reglas de modelización, diagramas de flujo). Aquí se recuerda lo imprescindible para poder **transformarlo** en tablas (§2.2).
 
-> **[EJEMPLO AYTO MADRID]** Un esquema conceptual del Padrón podría tener las entidades **HABITANTE** (DNI, nombre, fecha_nacimiento), **DISTRITO** (código, nombre) y **VÍA** (código de vía, nombre del callejero), con relaciones «HABITANTE reside en VÍA» (N:1) y «VÍA pertenece a DISTRITO» (N:1). Madrid tiene 21 distritos, lo que da una idea de las cardinalidades reales.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Un esquema conceptual del Padrón podría tener las entidades **HABITANTE** (DNI, nombre, fecha_nacimiento), **DISTRITO** (código, nombre) y **VÍA** (código de vía, nombre del callejero), con relaciones «HABITANTE reside en VÍA» (N:1) y «VÍA pertenece a DISTRITO» (N:1). Madrid tiene 21 distritos, lo que da una idea de las cardinalidades reales.
 
 ## 2. Diseño lógico y físico
 
@@ -119,7 +119,7 @@ Las tareas del diseño lógico son, en orden [ELMASRI, cap. 9]:
 
 ### 2.2. Transformación de entidades y relaciones al modelo relacional
 
-Las **reglas de transformación** del modelo E-R al relacional son un clásico de examen [ELMASRI, cap. 9; SILBER, cap. 6]:
+Las **reglas de transformación** del modelo E-R al relacional son las siguientes [ELMASRI, cap. 9; SILBER, cap. 6]:
 
 - **Cada entidad fuerte → una tabla**. Sus atributos simples son columnas; su clave pasa a ser **clave primaria**.
 - **Atributo compuesto** → se descompone en sus componentes simples (la dirección se parte en vía, número, código postal).
@@ -133,7 +133,7 @@ Las **reglas de transformación** del modelo E-R al relacional son un clásico d
 > **[EJERCICIO RESUELTO]** *Transformar la relación N:M «un HABITANTE puede ser titular de varios TRIBUTOS y un tributo puede tener varios titulares».*
 > Solución: se crean las tablas `HABITANTE(dni PK, nombre)` y `TRIBUTO(id PK, concepto, importe)`, y una **tabla intermedia** `TITULARIDAD(dni, id_tributo, porcentaje, PK(dni, id_tributo))` con dos **claves ajenas**: `dni → HABITANTE.dni` e `id_tributo → TRIBUTO.id`. El atributo `porcentaje` (cuota de titularidad) es propio de la relación y vive en la tabla intermedia, no en las entidades.
 
-> **[DATO CLAVE EXAMEN]** Regla rápida: **1:N propaga clave** (no crea tabla); **N:M crea tabla intermedia** (con clave compuesta y dos claves ajenas). Es uno de los errores más frecuentes en el examen: intentar resolver una N:M sin tabla puente.
+> **[DATO CLAVE]** Regla rápida: **1:N propaga clave** (no crea tabla); **N:M crea tabla intermedia** (con clave compuesta y dos claves ajenas). Es un error frecuente intentar resolver una N:M sin tabla puente.
 
 Cuadro-resumen de las reglas de transformación, que conviene tener memorizado:
 
@@ -183,9 +183,9 @@ Cuando se borra o modifica la fila referenciada, el SGBD aplica una **política 
 
 Además existen las **restricciones de dominio** (un atributo solo admite valores de su dominio: un CP es numérico de 5 dígitos), de **unicidad** (`UNIQUE`), de **obligatoriedad** (`NOT NULL`) y las **reglas de negocio** (`CHECK`, disparadores).
 
-> **[EJEMPLO AYTO MADRID]** En la base del Padrón, `HABITANTE.distrito` es una clave ajena hacia `DISTRITO.codigo` con política `RESTRICT`: no se puede borrar un distrito mientras tenga habitantes asignados. En cambio, en una tabla de tramitación, al anular un expediente puede interesar `CASCADE` sobre sus documentos asociados.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En la base del Padrón, `HABITANTE.distrito` es una clave ajena hacia `DISTRITO.codigo` con política `RESTRICT`: no se puede borrar un distrito mientras tenga habitantes asignados. En cambio, en una tabla de tramitación, al anular un expediente puede interesar `CASCADE` sobre sus documentos asociados.
 
-> **[REFERENCIA CRUZADA]** La integridad y la trazabilidad de los datos en la Administración están además sujetas al **ENS** (RD 311/2022) y al **RGPD** (exactitud y minimización de datos), tratados en los **Temas 32 y 39**.
+> **[RELACIÓN CON OTROS TEMAS]** La integridad y la trazabilidad de los datos en la Administración están además sujetas al **ENS** (RD 311/2022) y al **RGPD** (exactitud y minimización de datos), tratados en los **Temas 32 y 39**.
 
 ### 2.5. Lenguajes de definición y manipulación (DDL, DML, DCL, TCL)
 
@@ -216,7 +216,7 @@ CREATE TABLE HABITANTE (
 );
 ```
 
-> **[DATO CLAVE EXAMEN]** No confundir: **DDL = estructura**, **DML = datos**, **DCL = permisos**, **TCL = transacciones**. `TRUNCATE` es DDL (vacía la tabla y suele ser irreversible y rápida), mientras que `DELETE` es DML (borra filas, transaccional, con `WHERE`).
+> **[DATO CLAVE]** No confundir: **DDL = estructura**, **DML = datos**, **DCL = permisos**, **TCL = transacciones**. `TRUNCATE` es DDL (vacía la tabla y suele ser irreversible y rápida), mientras que `DELETE` es DML (borra filas, transaccional, con `WHERE`).
 
 Además de las tablas, el DDL define **otros objetos del esquema** que pertenecen al diseño:
 
@@ -224,9 +224,9 @@ Además de las tablas, el DDL define **otros objetos del esquema** que pertenece
 - **Secuencias / autonuméricos**: generadores de claves primarias artificiales (subrogadas).
 - **Restricciones**: pueden ser **declarativas** (`PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`, `NOT NULL`, `CHECK` — el SGBD las impone automáticamente, es lo preferible) o **procedimentales** (disparadores/*triggers* que ejecutan código ante eventos, para reglas que no caben en una restricción declarativa).
 
-> **[DATO CLAVE EXAMEN]** Una **clave subrogada (surrogate)** es un identificador artificial (autonumérico) sin significado de negocio; una **clave natural** usa datos reales (DNI). La subrogada da estabilidad (no cambia) y eficiencia; la natural evita una columna extra pero puede cambiar y propagar el cambio por las claves ajenas.
+> **[DATO CLAVE]** Una **clave subrogada (surrogate)** es un identificador artificial (autonumérico) sin significado de negocio; una **clave natural** usa datos reales (DNI). La subrogada da estabilidad (no cambia) y eficiencia; la natural evita una columna extra pero puede cambiar y propagar el cambio por las claves ajenas.
 
-> **[REFERENCIA CRUZADA]** El estándar SQL, los procedimientos almacenados y los disparadores se desarrollan en el **Tema 19** (lenguajes de interrogación de bases de datos).
+> **[RELACIÓN CON OTROS TEMAS]** El estándar SQL, los procedimientos almacenados y los disparadores se desarrollan en el **Tema 19** (lenguajes de interrogación de bases de datos).
 
 ### 2.6. Diseño físico
 
@@ -274,7 +274,7 @@ Las **organizaciones de fichero** clásicas (que se estudian con más detalle en
 
 En un SGBD relacional típico, los datos se guardan en un *heap* (o en una tabla organizada por índice) y el rendimiento de acceso se consigue con **índices** (§2.8) montados encima, no cambiando la organización base.
 
-> **[REFERENCIA CRUZADA]** Las organizaciones de ficheros, los árboles B/B+ y las funciones de dispersión (hash) se tratan en el **Tema 13** (estructuras de datos y organizaciones de ficheros). El almacenamiento y su virtualización, en el **Tema 26**.
+> **[RELACIÓN CON OTROS TEMAS]** Las organizaciones de ficheros, los árboles B/B+ y las funciones de dispersión (hash) se tratan en el **Tema 13** (estructuras de datos y organizaciones de ficheros). El almacenamiento y su virtualización, en el **Tema 26**.
 
 ### 2.8. Índices
 
@@ -296,9 +296,9 @@ Otra clasificación clave:
 - **Índice único**: además de acelerar, impone unicidad (lo usan `PRIMARY KEY` y `UNIQUE`).
 - **Índice compuesto**: sobre varias columnas; el **orden de las columnas importa** (se aprovecha por prefijo izquierdo).
 
-> **[DATO CLAVE EXAMEN]** Los índices **aceleran las lecturas** (`SELECT … WHERE`) pero **penalizan las escrituras** (`INSERT`/`UPDATE`/`DELETE`), porque hay que mantenerlos, y ocupan espacio. Indexar de más es un error de diseño tan grave como no indexar. El **B-tree** sirve para igualdad y rango; el **hash**, solo para igualdad.
+> **[DATO CLAVE]** Los índices **aceleran las lecturas** (`SELECT … WHERE`) pero **penalizan las escrituras** (`INSERT`/`UPDATE`/`DELETE`), porque hay que mantenerlos, y ocupan espacio. Indexar de más es un error de diseño tan grave como no indexar. El **B-tree** sirve para igualdad y rango; el **hash**, solo para igualdad.
 
-> **[EJEMPLO AYTO MADRID]** En la tabla de multas de tráfico (millones de filas), un índice B-tree sobre `matricula` acelera las consultas por vehículo; un índice sobre `fecha_denuncia` permite filtrar por rango temporal; y un índice **bitmap** sobre `distrito` (solo 21 valores) es eficiente en informes analíticos. Pero cada índice ralentiza la carga masiva nocturna de nuevas denuncias.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** En la tabla de multas de tráfico (millones de filas), un índice B-tree sobre `matricula` acelera las consultas por vehículo; un índice sobre `fecha_denuncia` permite filtrar por rango temporal; y un índice **bitmap** sobre `distrito` (solo 21 valores) es eficiente en informes analíticos. Pero cada índice ralentiza la carga masiva nocturna de nuevas denuncias.
 
 **Por qué el B+tree es el rey.** La variante **B+tree** es la estructura por defecto en casi todos los SGBD relacionales [RAMAKRISHNAN, cap. 10]. Es un árbol **multinivel y equilibrado** en el que: (a) todas las hojas están a la **misma profundidad** (búsqueda con coste logarítmico y predecible); (b) las claves de los **nodos internos** solo sirven de guía y los **datos/punteros reales** están en las **hojas**; (c) las hojas están **enlazadas entre sí** en una lista, lo que permite **recorridos por rango** muy eficientes (leer una hoja y saltar a la siguiente). Gracias al alto factor de ramificación, un árbol de 3-4 niveles indexa millones de filas con muy pocas lecturas de disco. Esto explica por qué el B+tree sirve igual de bien para igualdad (`=`) que para rango (`BETWEEN`, `<`, `>`, `ORDER BY`), algo que el hash no puede hacer.
 
@@ -308,7 +308,7 @@ Otra clasificación clave:
 
 **Índice cubridor (covering index).** Si un índice contiene **todas las columnas** que una consulta necesita, el SGBD responde **leyendo solo el índice**, sin acceder a la tabla (*index-only scan*). Es una técnica de optimización potente para consultas muy frecuentes.
 
-> **[DATO CLAVE EXAMEN]** El **B+tree** mantiene todas las hojas al mismo nivel (equilibrado) y enlazadas, por eso sirve para igualdad **y** rango. Un índice solo compensa sobre columnas **selectivas** y para consultas que recuperan **pocas** filas. En un índice compuesto rige el **prefijo izquierdo**: `(A, B)` sirve para `A` y para `A,B`, pero no para `B` solo.
+> **[DATO CLAVE]** El **B+tree** mantiene todas las hojas al mismo nivel (equilibrado) y enlazadas, por eso sirve para igualdad **y** rango. Un índice solo compensa sobre columnas **selectivas** y para consultas que recuperan **pocas** filas. En un índice compuesto rige el **prefijo izquierdo**: `(A, B)` sirve para `A` y para `A,B`, pero no para `B` solo.
 
 ### 2.9. Rendimiento y optimización
 
@@ -320,9 +320,9 @@ El **optimizador de consultas** del SGBD decide **cómo ejecutar** cada sentenci
 - **Clustering**: agrupar físicamente filas relacionadas (p. ej., por el índice agrupado) para reducir lecturas de disco.
 - **Desnormalización controlada** (§4.8) y **vistas materializadas**: precalcular resultados costosos.
 
-> **[DATO CLAVE EXAMEN]** El **plan de ejecución** es el «cómo» que elige el **optimizador** para resolver el «qué» de la consulta SQL. Un *full table scan* sobre una tabla enorme suele ser síntoma de un índice ausente; pero en tablas pequeñas puede ser lo más rápido. Las **estadísticas** son la materia prima del optimizador de costes.
+> **[DATO CLAVE]** El **plan de ejecución** es el «cómo» que elige el **optimizador** para resolver el «qué» de la consulta SQL. Un *full table scan* sobre una tabla enorme suele ser síntoma de un índice ausente; pero en tablas pequeñas puede ser lo más rápido. Las **estadísticas** son la materia prima del optimizador de costes.
 
-> **[EJEMPLO AYTO MADRID]** La tabla histórica de liquidaciones tributarias, particionada **por año**, permite que una consulta del ejercicio actual lea solo la partición del año en curso en lugar de recorrer 20 años de datos: es *partition pruning*. Para el cuadro de mando anual, una **vista materializada** con los totales por distrito evita recalcular agregados pesados en cada acceso.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** La tabla histórica de liquidaciones tributarias, particionada **por año**, permite que una consulta del ejercicio actual lea solo la partición del año en curso en lugar de recorrer 20 años de datos: es *partition pruning*. Para el cuadro de mando anual, una **vista materializada** con los totales por distrito evita recalcular agregados pesados en cada acceso.
 
 **Algoritmos de join.** Cuando una consulta combina dos tablas, el optimizador elige entre tres algoritmos físicos según el tamaño de las tablas y los índices disponibles [SILBER, cap. 15]:
 
@@ -336,7 +336,7 @@ El **optimizador de consultas** del SGBD decide **cómo ejecutar** cada sentenci
 
 **Mantenimiento del rendimiento.** El plan óptimo de hoy puede dejar de serlo cuando la tabla crece o cambia su distribución de datos. Por eso el técnico debe: **recalcular las estadísticas** periódicamente (`ANALYZE` en PostgreSQL, `DBMS_STATS` en Oracle, `UPDATE STATISTICS` en SQL Server), **reconstruir o reorganizar índices** fragmentados (`REINDEX`) y revisar los planes de las consultas críticas. A veces el optimizador **ignora** un índice a propósito —porque estima que un *full scan* es más barato, o porque las estadísticas están desactualizadas, o porque la consulta aplica una función sobre la columna indexada que impide usar el índice (`WHERE UPPER(nombre) = …`)—; reconocer estas situaciones es parte del ajuste (*tuning*).
 
-> **[DATO CLAVE EXAMEN]** Tres algoritmos de join: **nested loop** (tabla pequeña + índice), **hash join** (tablas grandes, igualdad, sin índice) y **sort-merge** (datos ordenados o salida ordenada). El optimizador los elige por **coste** estimado a partir de las **estadísticas**, que hay que mantener actualizadas (`ANALYZE`).
+> **[DATO CLAVE]** Tres algoritmos de join: **nested loop** (tabla pequeña + índice), **hash join** (tablas grandes, igualdad, sin índice) y **sort-merge** (datos ordenados o salida ordenada). El optimizador los elige por **coste** estimado a partir de las **estadísticas**, que hay que mantener actualizadas (`ANALYZE`).
 
 ---
 
@@ -364,7 +364,7 @@ Propiedades de una **relación** «pura» en el modelo de Codd [DATE, cap. 6]:
 - **El orden de los atributos es irrelevante** (se identifican por nombre).
 - **Cada valor es atómico** (indivisible): esto es exactamente la **1FN** (§4.3).
 
-> **[DATO CLAVE EXAMEN]** **Grado = nº de columnas; cardinalidad = nº de filas.** Es una pregunta clásica y se confunden con frecuencia. Una relación de grado 3 y cardinalidad 100 tiene 3 atributos y 100 tuplas.
+> **[DATO CLAVE]** **Grado = nº de columnas; cardinalidad = nº de filas.** Se confunden con frecuencia. Una relación de grado 3 y cardinalidad 100 tiene 3 atributos y 100 tuplas.
 
 **Relación teórica frente a tabla SQL.** Hay un matiz importante: en el modelo **teórico** de Codd una relación es un **conjunto** y, por tanto, no admite tuplas duplicadas. Pero una **tabla SQL** es en realidad un **multiconjunto (bag)**: **sí** permite filas repetidas salvo que una clave o restricción `UNIQUE` lo impida, y por eso `SELECT` puede devolver duplicados a menos que se use `DISTINCT`. Esta es una de las diferencias entre el modelo relacional puro y su materialización en SQL, junto con el tratamiento de los nulos y el orden de las filas (`ORDER BY`).
 
@@ -418,7 +418,7 @@ El **álgebra relacional** es un lenguaje **procedimental** (indica *cómo* obte
   - **Outer join (externo)**: conserva también las tuplas sin pareja (izquierdo, derecho o completo), rellenando con nulos.
 - **División (÷)**: `R ÷ S` devuelve los valores de R asociados a **todos** los de S. Resuelve consultas del tipo «qué habitantes han pagado **todos** los tributos».
 
-> **[DATO CLAVE EXAMEN]** Los **operadores primitivos** (no derivables) del álgebra relacional son **cinco**: selección (σ), proyección (π), unión (∪), diferencia (−) y producto cartesiano (×). El join, la intersección y la división se **derivan** de ellos. La **selección filtra filas**; la **proyección elige columnas**: no confundirlas.
+> **[DATO CLAVE]** Los **operadores primitivos** (no derivables) del álgebra relacional son **cinco**: selección (σ), proyección (π), unión (∪), diferencia (−) y producto cartesiano (×). El join, la intersección y la división se **derivan** de ellos. La **selección filtra filas**; la **proyección elige columnas**: no confundirlas.
 
 > **[EJERCICIO RESUELTO]** *Obtener el nombre de los habitantes del distrito Centro (código 1).*
 > Solución en álgebra: `π_{nombre}( σ_{distrito=1}(HABITANTE) )` — primero se **seleccionan** las filas del distrito 1, luego se **proyecta** la columna nombre. En SQL: `SELECT nombre FROM HABITANTE WHERE distrito = 1;`
@@ -429,7 +429,7 @@ El **álgebra relacional** es un lenguaje **procedimental** (indica *cómo* obte
 - **Asignación (←)**: guarda un resultado intermedio en una relación temporal, para construir consultas por pasos.
 - **Outer join** detallado: el **izquierdo** (`⟕`) conserva todas las filas de la izquierda; el **derecho** (`⟖`), las de la derecha; el **completo** (`⟗`), las de ambas. Las filas sin pareja se rellenan con **nulos**.
 
-**Correspondencia álgebra ↔ SQL** (muy útil para el examen):
+**Correspondencia álgebra ↔ SQL**:
 
 | Operación del álgebra | Cláusula SQL |
 |---|---|
@@ -458,7 +458,7 @@ Ejemplo en **cálculo de dominios**: «nombres de habitantes del distrito 1» se
 
 **Equivalencia y completitud**: Codd demostró que el álgebra relacional, el cálculo de tuplas y el cálculo de dominios tienen el **mismo poder expresivo** (son equivalentes). Una expresión es **relacionalmente completa** si puede expresar todo lo que expresa el álgebra. SQL es declarativo y se inspira sobre todo en el cálculo, aunque incorpora elementos de ambos.
 
-> **[DATO CLAVE EXAMEN]** **Álgebra = procedimental (cómo); cálculo = declarativo (qué).** Ambos son **equivalentes en poder expresivo** (teorema de equivalencia de Codd). SQL es esencialmente **declarativo**.
+> **[DATO CLAVE]** **Álgebra = procedimental (cómo); cálculo = declarativo (qué).** Ambos son **equivalentes en poder expresivo** (teorema de equivalencia de Codd). SQL es esencialmente **declarativo**.
 
 ## 4. Normalización
 
@@ -474,7 +474,7 @@ Un mal diseño (relaciones no normalizadas) provoca tres tipos de **anomalías**
 - **Anomalía de borrado**: al borrar una fila se pierde información que no se quería eliminar (borrar al último habitante de un distrito borra también el nombre del distrito).
 - **Anomalía de actualización (modificación)**: un dato repetido en muchas filas hay que cambiarlo en todas; si se olvida alguna, queda **inconsistente** (el nombre de un distrito guardado en cada habitante).
 
-> **[EJEMPLO AYTO MADRID]** Tabla mal diseñada `EMPADRONAMIENTO(dni, nombre, cod_distrito, nombre_distrito)`. Si cambia el nombre de un distrito hay que actualizar **todas** las filas de sus habitantes (anomalía de actualización); no se puede registrar un distrito sin habitantes (inserción); y borrar al último habitante elimina el nombre del distrito (borrado). La solución: separar `DISTRITO(cod_distrito, nombre_distrito)` y dejar en `EMPADRONAMIENTO` solo `cod_distrito` como clave ajena.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** Tabla mal diseñada `EMPADRONAMIENTO(dni, nombre, cod_distrito, nombre_distrito)`. Si cambia el nombre de un distrito hay que actualizar **todas** las filas de sus habitantes (anomalía de actualización); no se puede registrar un distrito sin habitantes (inserción); y borrar al último habitante elimina el nombre del distrito (borrado). La solución: separar `DISTRITO(cod_distrito, nombre_distrito)` y dejar en `EMPADRONAMIENTO` solo `cod_distrito` como clave ajena.
 
 Visualmente, la tabla problemática repite el nombre del distrito en cada fila:
 
@@ -486,7 +486,7 @@ Visualmente, la tabla problemática repite el nombre del distrito en cada fila:
 
 El dato «Centro» está duplicado: esa **redundancia** es la raíz de las tres anomalías. Normalizar (3FN) lo guarda una sola vez en `DISTRITO`.
 
-> **[DATO CLAVE EXAMEN]** Las **tres anomalías** —inserción, borrado y actualización— son **la justificación** de la normalización. Memoriza un ejemplo de cada una; es pregunta recurrente.
+> **[DATO CLAVE]** Las **tres anomalías** —inserción, borrado y actualización— son **la justificación** de la normalización. Memoriza un ejemplo de cada una.
 
 ### 4.2. Dependencias funcionales y axiomas de Armstrong
 
@@ -511,7 +511,7 @@ Los **axiomas de Armstrong** [ARMSTRONG74] son las reglas de inferencia **comple
 
 De ellos se derivan reglas útiles: **unión** (`X→Y, X→Z ⟹ X→YZ`), **descomposición** (`X→YZ ⟹ X→Y, X→Z`) y **pseudotransitividad**. El **cierre de un conjunto de atributos** (`X⁺`) son todos los atributos que `X` determina; sirve para hallar claves candidatas.
 
-> **[DATO CLAVE EXAMEN]** Los **tres axiomas de Armstrong** son **reflexividad, aumento y transitividad**. Son **correctos** (no deducen DF falsas) y **completos** (deducen todas las verdaderas). Las demás reglas (unión, descomposición, pseudotransitividad) se **derivan** de ellos.
+> **[DATO CLAVE]** Los **tres axiomas de Armstrong** son **reflexividad, aumento y transitividad**. Son **correctos** (no deducen DF falsas) y **completos** (deducen todas las verdaderas). Las demás reglas (unión, descomposición, pseudotransitividad) se **derivan** de ellos.
 
 **Cálculo del cierre de atributos (X⁺).** El **cierre** `X⁺` es el conjunto de todos los atributos determinados por `X` bajo un conjunto de DF. Algoritmo: se parte de `X⁺ = X` y, repetidamente, por cada DF `A → B` cuyo `A ⊆ X⁺`, se añade `B` a `X⁺`, hasta que no crezca más. Sirve para dos cosas esenciales: **decidir si una DF se cumple** (`X → Y` se cumple si `Y ⊆ X⁺`) y **encontrar las claves candidatas** (`X` es superclave si `X⁺` = todos los atributos; y candidata si además es mínima).
 
@@ -522,7 +522,7 @@ De ellos se derivan reglas útiles: **unión** (`X→Y, X→Z ⟹ X→YZ`), **de
 
 **Recubrimiento mínimo (cobertura minimal).** Un **recubrimiento mínimo** de un conjunto de DF es un conjunto equivalente (mismo cierre) pero **sin redundancias**: (1) toda parte derecha tiene **un solo atributo**, (2) no hay DF redundante (que se deduzca de las demás) y (3) no hay atributos redundantes en las partes izquierdas. Es el punto de partida de los **algoritmos de síntesis** que descomponen una relación en 3FN garantizando que se **preservan las dependencias**.
 
-> **[DATO CLAVE EXAMEN]** El **cierre `X⁺`** es la herramienta universal: con él se comprueba si una DF se cumple y se hallan las **claves candidatas** (`X` superclave ⟺ `X⁺` = todos los atributos). El **recubrimiento mínimo** elimina DF y atributos redundantes y es la base de la descomposición en 3FN.
+> **[DATO CLAVE]** El **cierre `X⁺`** es la herramienta universal: con él se comprueba si una DF se cumple y se hallan las **claves candidatas** (`X` superclave ⟺ `X⁺` = todos los atributos). El **recubrimiento mínimo** elimina DF y atributos redundantes y es la base de la descomposición en 3FN.
 
 ### 4.3. Primera Forma Normal (1FN)
 
@@ -535,7 +535,7 @@ Solución: extraer los valores multivaluados a una **tabla aparte** relacionada 
 > **[EJERCICIO RESUELTO]** *Normalizar a 1FN: `HABITANTE(dni, nombre, telefonos)` donde `telefonos` guarda varios números.*
 > Solución: `HABITANTE(dni PK, nombre)` y `TELEFONO(dni, numero, PK(dni, numero))` con `dni` como clave ajena. Ahora cada celda es atómica y un habitante puede tener N teléfonos sin columnas fijas ni listas dentro de una celda.
 
-> **[DATO CLAVE EXAMEN]** **1FN = valores atómicos**, una sola valor por celda, sin grupos repetitivos. Es el requisito mínimo para ser una relación «verdadera» en el modelo de Codd.
+> **[DATO CLAVE]** **1FN = valores atómicos**, una sola valor por celda, sin grupos repetitivos. Es el requisito mínimo para ser una relación «verdadera» en el modelo de Codd.
 
 ### 4.4. Segunda Forma Normal (2FN)
 
@@ -547,7 +547,7 @@ La 2FN **solo tiene riesgo cuando la clave primaria es compuesta** (formada por 
 > Análisis: `nombre_habitante` depende solo de `dni` (parte de la clave) → **dependencia parcial**. `titulo_curso` depende solo de `cod_curso` → **dependencia parcial**. `nota` depende de **toda** la clave `{dni, cod_curso}` → correcto.
 > Solución 2FN: separar en `HABITANTE(dni PK, nombre_habitante)`, `CURSO(cod_curso PK, titulo_curso)` y `MATRICULA(dni, cod_curso, nota, PK(dni, cod_curso))`. Cada atributo no clave depende ya de su clave completa.
 
-> **[DATO CLAVE EXAMEN]** **2FN = 1FN + sin dependencias parciales** de la clave. Solo aplica si la **clave es compuesta**. Si la clave primaria es un solo atributo, 1FN ⟹ 2FN automáticamente.
+> **[DATO CLAVE]** **2FN = 1FN + sin dependencias parciales** de la clave. Solo aplica si la **clave es compuesta**. Si la clave primaria es un solo atributo, 1FN ⟹ 2FN automáticamente.
 
 ### 4.5. Tercera Forma Normal (3FN)
 
@@ -559,7 +559,7 @@ Formulación clásica: para toda DF `X → A` no trivial, o bien **X es supercla
 > Análisis: `dni → cod_distrito` y `cod_distrito → nombre_distrito`, luego por transitividad `dni → nombre_distrito` a través de un atributo **no clave** (`cod_distrito`) → **dependencia transitiva** → viola 3FN.
 > Solución 3FN: `HABITANTE(dni PK, nombre, cod_distrito)` y `DISTRITO(cod_distrito PK, nombre_distrito)`. El nombre del distrito se guarda **una sola vez**; desaparecen las anomalías de §4.1.
 
-> **[DATO CLAVE EXAMEN]** **3FN = 2FN + sin dependencias transitivas** entre atributos no clave. Mnemotecnia (Kent): cada atributo no clave depende de *«la clave, toda la clave y nada más que la clave»*. La 3FN es el **objetivo práctico habitual** del diseño relacional.
+> **[DATO CLAVE]** **3FN = 2FN + sin dependencias transitivas** entre atributos no clave. Mnemotecnia (Kent): cada atributo no clave depende de *«la clave, toda la clave y nada más que la clave»*. La 3FN es el **objetivo práctico habitual** del diseño relacional.
 
 ### 4.6. Forma Normal de Boyce-Codd (BCNF)
 
@@ -570,7 +570,7 @@ La diferencia con la 3FN aparece solo cuando hay **varias claves candidatas sola
 > **[EJERCICIO RESUELTO]** *Relación `CITA(habitante, oficina, funcionario)` donde cada funcionario trabaja en una sola oficina (`funcionario → oficina`) y un habitante en una oficina es atendido por un funcionario (`{habitante, oficina} → funcionario`).*
 > Claves candidatas: `{habitante, oficina}` y `{habitante, funcionario}`. La DF `funcionario → oficina` tiene como determinante `funcionario`, que **no es superclave** → **viola BCNF** (aunque puede estar en 3FN, porque `oficina` es atributo primo). Solución: descomponer en `FUNCIONARIO(funcionario PK, oficina)` y `CITA(habitante, funcionario)`.
 
-> **[DATO CLAVE EXAMEN]** **BCNF: todo determinante es clave candidata.** Es 3FN reforzada. Toda relación en BCNF está en 3FN, pero no al revés. La descomposición a BCNF siempre garantiza **ausencia de redundancia por DF**, aunque a veces **no preserva todas las dependencias** (compromiso de diseño).
+> **[DATO CLAVE]** **BCNF: todo determinante es clave candidata.** Es 3FN reforzada. Toda relación en BCNF está en 3FN, pero no al revés. La descomposición a BCNF siempre garantiza **ausencia de redundancia por DF**, aunque a veces **no preserva todas las dependencias** (compromiso de diseño).
 
 **Propiedades de una buena descomposición.** Al partir una relación en varias para normalizarla, la descomposición debe cumplir dos propiedades [SILBER, cap. 7; ELMASRI, cap. 15]:
 
@@ -579,7 +579,7 @@ La diferencia con la 3FN aparece solo cuando hay **varias claves candidatas sola
 
 El compromiso clásico: la descomposición en **3FN** siempre puede lograr **ambas** propiedades (algoritmo de síntesis sobre el recubrimiento mínimo); la descomposición en **BCNF** garantiza siempre la primera (sin pérdida) pero a veces **sacrifica** la segunda (no preserva todas las dependencias). Por eso, en la práctica, muchos diseños se quedan en **3FN** cuando llegar a BCNF rompería la preservación.
 
-> **[DATO CLAVE EXAMEN]** Una descomposición **sin pérdida** es obligatoria (se garantiza si el atributo común es clave de una tabla); la **preservación de dependencias** es deseable. **3FN** consigue ambas; **BCNF** garantiza la ausencia de pérdida pero puede no preservar dependencias.
+> **[DATO CLAVE]** Una descomposición **sin pérdida** es obligatoria (se garantiza si el atributo común es clave de una tabla); la **preservación de dependencias** es deseable. **3FN** consigue ambas; **BCNF** garantiza la ausencia de pérdida pero puede no preservar dependencias.
 
 ### 4.7. Formas normales superiores (4FN y 5FN)
 
@@ -588,9 +588,9 @@ Más allá de la BCNF existen formas normales que tratan dependencias distintas 
 - **Cuarta Forma Normal (4FN)**: elimina las **dependencias multivaluadas** (`X ↠ Y`) no triviales que no sean por superclave. Aparece cuando una tabla mezcla dos relaciones N:M independientes (p. ej., un funcionario con varios **idiomas** y varias **titulaciones**, sin relación entre sí: guardarlos juntos genera el producto cartesiano de ambos).
 - **Quinta Forma Normal (5FN o PJ/NF)**: elimina las **dependencias de reunión (join)** que no se derivan de las claves candidatas; trata casos de descomposición y recomposición sin pérdida en tres o más tablas.
 
-En la práctica administrativa, **llegar a 3FN o BCNF es suficiente** en la inmensa mayoría de los diseños; 4FN y 5FN son situaciones poco frecuentes pero conviene **conocer su existencia y propósito** de cara al examen.
+En la práctica administrativa, **llegar a 3FN o BCNF es suficiente** en la inmensa mayoría de los diseños; 4FN y 5FN son situaciones poco frecuentes pero conviene **conocer su existencia y propósito**.
 
-> **[DATO CLAVE EXAMEN]** Orden completo de las formas normales: **1FN → 2FN → 3FN → BCNF → 4FN → 5FN**. 4FN ataca **dependencias multivaluadas**; 5FN, **dependencias de reunión (join)**. El objetivo de diseño habitual es **3FN/BCNF**.
+> **[DATO CLAVE]** Orden completo de las formas normales: **1FN → 2FN → 3FN → BCNF → 4FN → 5FN**. 4FN ataca **dependencias multivaluadas**; 5FN, **dependencias de reunión (join)**. El objetivo de diseño habitual es **3FN/BCNF**.
 
 **Cuadro-resumen de las formas normales** (memorización directa para el test):
 
@@ -628,11 +628,11 @@ Técnicas habituales:
 
 El precio es la **gestión de la consistencia**: cada dato redundante debe actualizarse (disparadores, procesos batch, vistas materializadas refrescadas), o se reintroducen las anomalías que la normalización había eliminado. Por eso se aplica **al final**, sobre cuellos de botella **medidos**, y solo cuando la normalización penaliza de forma real el rendimiento.
 
-> **[DATO CLAVE EXAMEN]** Primero **normalizar** (corrección e integridad), después **medir** y, solo si hace falta, **desnormalizar** puntos concretos (rendimiento). La desnormalización es un **compromiso**: gana velocidad de lectura a costa de redundancia y de complejidad de actualización. Es típica en entornos **analíticos (OLAP)** y poco recomendable en **transaccionales (OLTP)** con muchas escrituras.
+> **[DATO CLAVE]** Primero **normalizar** (corrección e integridad), después **medir** y, solo si hace falta, **desnormalizar** puntos concretos (rendimiento). La desnormalización es un **compromiso**: gana velocidad de lectura a costa de redundancia y de complejidad de actualización. Es típica en entornos **analíticos (OLAP)** y poco recomendable en **transaccionales (OLTP)** con muchas escrituras.
 
-> **[EJEMPLO AYTO MADRID]** El sistema transaccional del Padrón se mantiene **normalizado (3FN)** para garantizar la integridad de las altas y bajas diarias. Pero el **data warehouse** que alimenta los cuadros de mando demográficos (población por distrito, edad y sexo) se **desnormaliza** en un esquema en estrella con tablas de hechos y dimensiones, porque ahí prima la velocidad de las consultas analíticas sobre la ausencia de redundancia.
+> **[EJEMPLO DE APLICACIÓN EN EL AYTO]** El sistema transaccional del Padrón se mantiene **normalizado (3FN)** para garantizar la integridad de las altas y bajas diarias. Pero el **data warehouse** que alimenta los cuadros de mando demográficos (población por distrito, edad y sexo) se **desnormaliza** en un esquema en estrella con tablas de hechos y dimensiones, porque ahí prima la velocidad de las consultas analíticas sobre la ausencia de redundancia.
 
-> **[REFERENCIA CRUZADA]** Los modelos OLTP frente a OLAP, los almacenes de datos y NoSQL se tratan en el **Tema 15** (SGBD y administración). La seguridad y la protección de los datos diseñados, en los **Temas 32 y 39**.
+> **[RELACIÓN CON OTROS TEMAS]** Los modelos OLTP frente a OLAP, los almacenes de datos y NoSQL se tratan en el **Tema 15** (SGBD y administración). La seguridad y la protección de los datos diseñados, en los **Temas 32 y 39**.
 
 ### 4.9. Buenas prácticas y errores típicos de diseño
 
@@ -646,9 +646,9 @@ Cierre práctico que reúne los criterios del tema [DATE, cap. 14; ELMASRI, cap.
 - **Indexa lo que se consulta, no todo**: cada índice acelera lecturas pero penaliza escrituras y ocupa espacio.
 - **Cuida la frontera del temario**: aquí va el diseño y la normalización; el modelo conceptual al T16, el SQL al T19 y la administración del SGBD al T15.
 
-Errores frecuentes de examen y de práctica: resolver una relación N:M sin tabla intermedia; confundir selección (filas) con proyección (columnas); creer que la 2FN aplica con clave simple; meter varios valores en una celda (rompe 1FN); olvidar que la clave primaria no admite nulos; y pensar que «más índices = más rápido siempre».
+Errores frecuentes: resolver una relación N:M sin tabla intermedia; confundir selección (filas) con proyección (columnas); creer que la 2FN aplica con clave simple; meter varios valores en una celda (rompe 1FN); olvidar que la clave primaria no admite nulos; y pensar que «más índices = más rápido siempre».
 
-> **[DATO CLAVE EXAMEN]** El flujo mental del diseño relacional: **requisitos → modelo E-R (conceptual) → tablas + claves (lógico) → normalización a 3FN/BCNF → diseño físico (índices, particiones) → desnormalización medida si hace falta**. Memorizar esta secuencia ayuda a ordenar cualquier pregunta del tema.
+> **[DATO CLAVE]** El flujo mental del diseño relacional: **requisitos → modelo E-R (conceptual) → tablas + claves (lógico) → normalización a 3FN/BCNF → diseño físico (índices, particiones) → desnormalización medida si hace falta**. Memorizar esta secuencia ayuda a ordenar cualquier pregunta del tema.
 
 ---
 
